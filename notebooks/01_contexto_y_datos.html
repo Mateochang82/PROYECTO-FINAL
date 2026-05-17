@@ -1,0 +1,573 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1. Contexto del problema y dataset &#8212; INTC-Vol-ML</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/01_contexto_y_datos';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="2. ETL y análisis exploratorio (EDA)" href="02_etl_eda.html" />
+    <link rel="prev" title="1. PROYECTO FINAL. PREDICCIÓN DE VOLATILIDAD DE INTEL (INTC)" href="../intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">INTC-Vol-ML</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Contexto y dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_etl_eda.html">3. ETL y Análisis Exploratorio de Datos (EDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_features_targets.html">4. Features causales y targets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_benchmarks_econometricos.html">5. Benchmarks econométricos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_modelos_regresion.html">6. Modelos base de regresión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modelos_clasificacion.html">7. Modelos base de clasificación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_balanceo_clases.html">8. Balanceo de clases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_optimizacion_hiperparametros.html">9. Optimización de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_optimizacion_computacional.html">10. Optimización computacional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_residuos_diagnosticos.html">11. Análisis de residuos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_comparacion_estadistica.html">12. Comparación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_interpretabilidad.html">13. Interpretabilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_modelo_original_hvrf.html">14. Modelo original — HVRF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_conclusiones_sustentacion.html">15. Conclusiones y sustentación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">16. Referencias bibliográficas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_setup.html">Apéndice. Verificación del entorno</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/01_contexto_y_datos.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1. Contexto del problema y dataset</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivacion">1.1 Motivación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eleccion-del-activo">1.2 Elección del activo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problema">1.3 Problema</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-horizonte-de-un-dia">1.4 Por qué horizonte de un día</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-del-dataset">1.5 Variables del dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conexion-con-el-capitulo-2">1.6 Conexión con el capítulo 2</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="contexto-del-problema-y-dataset">
+<h1>1. Contexto del problema y dataset<a class="headerlink" href="#contexto-del-problema-y-dataset" title="Link to this heading">#</a></h1>
+<section id="motivacion">
+<h2>1.1 Motivación<a class="headerlink" href="#motivacion" title="Link to this heading">#</a></h2>
+<p>La <strong>volatilidad</strong> de un activo financiero — la magnitud típica de sus
+fluctuaciones de precio — es una de las variables más importantes en
+finanzas cuantitativas. Modelarla bien permite calibrar precios de
+opciones, dimensionar posiciones, calcular <em>Value-at-Risk</em> y diseñar
+estrategias de cobertura. A diferencia del retorno medio, que en
+mercados eficientes es difícil de pronosticar, la volatilidad exhibe
+<strong>clustering</strong>: períodos de alta volatilidad tienden a ser seguidos
+por más alta volatilidad, y lo mismo en regímenes de calma. Este hecho
+estilizado, documentado desde <span id="id1">[<a class="reference internal" href="../references.html#id4" title="Robert F. Engle. Autoregressive conditional heteroscedasticity with estimates of the variance of United Kingdom inflation. Econometrica, 50(4):987–1007, 1982. doi:10.2307/1912773.">Engle, 1982</a>]</span> y
+formalizado en <span id="id2">[<a class="reference internal" href="../references.html#id2" title="Tim Bollerslev. Generalized autoregressive conditional heteroskedasticity. Journal of Econometrics, 31(3):307–327, 1986. doi:10.1016/0304-4076(86)90063-1.">Bollerslev, 1986</a>]</span>, da base predictiva
+al problema.</p>
+</section>
+<section id="eleccion-del-activo">
+<h2>1.2 Elección del activo<a class="headerlink" href="#eleccion-del-activo" title="Link to this heading">#</a></h2>
+<p>Trabajamos sobre <strong>Intel Corporation (INTC)</strong>, listado en NASDAQ. La
+elección se justifica por tres razones:</p>
+<ol class="arabic simple">
+<li><p><strong>Cobertura temporal larga.</strong> El histórico OHLCV disponible cubre
+más de 30 años, ofreciendo regímenes diversos (burbuja .com,
+crisis 2008, COVID-19, ciclo del semiconductor).</p></li>
+<li><p><strong>Liquidez alta.</strong> Reduce el ruido idiosincrático y hace que la
+volatilidad observada sea genuina y no producto de microestructura.</p></li>
+<li><p><strong>Sector relevante.</strong> El sector tecnológico tiene episodios de
+estrés y cambios estructurales claramente identificables, útiles
+para evaluar robustez de modelos a cambios de régimen.</p></li>
+</ol>
+</section>
+<section id="problema">
+<h2>1.3 Problema<a class="headerlink" href="#problema" title="Link to this heading">#</a></h2>
+<p>Para cada día de trading <span class="math notranslate nohighlight">\(t\)</span> disponemos del estado del mercado hasta
+ese momento (precios apertura, máximo, mínimo, cierre y volumen, más
+todas las transformaciones causales que de ahí se deriven). Queremos
+predecir, para el día siguiente <span class="math notranslate nohighlight">\(t+1\)</span>:</p>
+<ul class="simple">
+<li><p><strong>Tarea de regresión:</strong> la volatilidad realizada
+<span class="math notranslate nohighlight">\(\sigma_{t+1} = \mathrm{std}(\{r_{t-w+2}, \dots, r_{t+1}\})\)</span>,
+donde <span class="math notranslate nohighlight">\(r_s = \log(p_s / p_{s-1})\)</span> y <span class="math notranslate nohighlight">\(w\)</span> es la ventana causal
+(configuración: <span class="math notranslate nohighlight">\(w=5\)</span>).</p></li>
+<li><p><strong>Tarea de clasificación binaria:</strong> el régimen
+<span class="math notranslate nohighlight">\(\rho_{t+1} \in \{0, 1\}\)</span> — bajo o alto — definido por
+<span class="math notranslate nohighlight">\(\rho_{t+1} = \mathbb{1}\{\sigma_{t+1} &gt; \tau\}\)</span>, donde <span class="math notranslate nohighlight">\(\tau\)</span>
+es la <strong>mediana de <span class="math notranslate nohighlight">\(\sigma\)</span> calculada únicamente sobre el conjunto
+de entrenamiento</strong>.</p></li>
+</ul>
+</section>
+<section id="por-que-horizonte-de-un-dia">
+<h2>1.4 Por qué horizonte de un día<a class="headerlink" href="#por-que-horizonte-de-un-dia" title="Link to this heading">#</a></h2>
+<p>El proyecto académico original de este equipo trabajó con horizontes
+de 7, 14 y 21 días. En esa configuración el <span class="math notranslate nohighlight">\(R^2\)</span> sobre test fue
+negativo en todos los modelos evaluados — desde regresión lineal
+hasta LSTM — síntoma de que la varianza condicional de la volatilidad
+agregada a esos horizontes es tan baja en el período de prueba que
+predecir la media histórica gana sistemáticamente.</p>
+<p>Al fijar el horizonte en un día, recuperamos el efecto de clustering
+de corto plazo, donde la dependencia serial de la volatilidad es
+fuerte y predecible. Esta es la corrección metodológica central del
+nuevo planteamiento.</p>
+</section>
+<section id="variables-del-dataset">
+<h2>1.5 Variables del dataset<a class="headerlink" href="#variables-del-dataset" title="Link to this heading">#</a></h2>
+<p>El dataset crudo es la serie diaria OHLCV de INTC:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Columna</p></th>
+<th class="head"><p>Descripción</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">date</span></code></p></td>
+<td><p>Fecha de la sesión</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">open</span></code></p></td>
+<td><p>Precio de apertura</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">high</span></code></p></td>
+<td><p>Máximo intradiario</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">low</span></code></p></td>
+<td><p>Mínimo intradiario</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">close</span></code></p></td>
+<td><p>Precio de cierre</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">volume</span></code></p></td>
+<td><p>Volumen negociado (acciones)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A partir de estas seis variables construimos, en el capítulo 3, ~30
+features causales que capturan retornos rezagados, volatilidad
+rolling, componentes HAR-RV (Corsi 2009), momentum, rangos de precio,
+indicadores técnicos y variables de calendario.</p>
+</section>
+<section id="conexion-con-el-capitulo-2">
+<h2>1.6 Conexión con el capítulo 2<a class="headerlink" href="#conexion-con-el-capitulo-2" title="Link to this heading">#</a></h2>
+<p>En el siguiente capítulo descargamos los datos (con <code class="docutils literal notranslate"><span class="pre">yfinance</span></code> como
+fallback automático), aplicamos limpieza básica, verificamos integridad
+y producimos el primer análisis exploratorio orientado a justificar
+la elección del problema y a documentar los hechos estilizados de
+INTC en los que descansará todo el modelado posterior.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../intro.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">1. PROYECTO FINAL. PREDICCIÓN DE VOLATILIDAD DE INTEL (INTC)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_etl_eda.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">2. ETL y análisis exploratorio (EDA)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivacion">1.1 Motivación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eleccion-del-activo">1.2 Elección del activo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problema">1.3 Problema</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-horizonte-de-un-dia">1.4 Por qué horizonte de un día</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-del-dataset">1.5 Variables del dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conexion-con-el-capitulo-2">1.6 Conexión con el capítulo 2</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Juan Camilo Conrado · Sergio Cadavid · Mateo Chang
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

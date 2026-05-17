@@ -1,0 +1,1213 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>5. Modelos base de regresión &#8212; INTC-Vol-ML</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/05_modelos_regresion';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="6. Modelos base de clasificación" href="06_modelos_clasificacion.html" />
+    <link rel="prev" title="4. Benchmarks econométricos" href="04_benchmarks_econometricos.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">INTC-Vol-ML</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_contexto_y_datos.html">2. Contexto y dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_etl_eda.html">3. ETL y Análisis Exploratorio de Datos (EDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_features_targets.html">4. Features causales y targets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_benchmarks_econometricos.html">5. Benchmarks econométricos</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Modelos base de regresión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modelos_clasificacion.html">7. Modelos base de clasificación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_balanceo_clases.html">8. Balanceo de clases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_optimizacion_hiperparametros.html">9. Optimización de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_optimizacion_computacional.html">10. Optimización computacional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_residuos_diagnosticos.html">11. Análisis de residuos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_comparacion_estadistica.html">12. Comparación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_interpretabilidad.html">13. Interpretabilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_modelo_original_hvrf.html">14. Modelo original — HVRF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_conclusiones_sustentacion.html">15. Conclusiones y sustentación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">16. Referencias bibliográficas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_setup.html">Apéndice. Verificación del entorno</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/05_modelos_regresion.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>5. Modelos base de regresión</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filosofia-del-capitulo">5.1 Filosofía del capítulo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-y-criterios">5.2 Métricas y criterios</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xgboost-con-tree-method-hist-early-stopping">5.3 XGBoost con <code class="docutils literal notranslate"><span class="pre">tree_method="hist"</span></code> + early stopping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-y-carga-de-datos">5.4 Setup y carga de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-helper-para-evaluacion-uniforme">5.5 Función helper para evaluación uniforme</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-y-lasso">5.6 Ridge y Lasso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-regressor">5.7 K-Nearest Neighbors Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree-y-random-forest">5.8 Decision Tree y Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#support-vector-regression">5.9 Support Vector Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xgboost-tree-method-hist-early-stopping">5.10 XGBoost — <code class="docutils literal notranslate"><span class="pre">tree_method="hist"</span></code> + early stopping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-los-7-modelos-base">5.11 Comparación de los 7 modelos base</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-1-rmse-comparativo-en-val-vs-test">Visualización 1 — RMSE comparativo en val vs test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-2-real-vs-predicho-para-los-modelos-top">Visualización 2 — real vs predicho para los modelos top</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-3-gap-valtest-signo-de-overfitting">Visualización 3 — gap val→test (signo de overfitting)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">5.12 Interpretación</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="modelos-base-de-regresion">
+<h1>5. Modelos base de regresión<a class="headerlink" href="#modelos-base-de-regresion" title="Link to this heading">#</a></h1>
+<p>Tras fijar los benchmarks econométricos del Capítulo 4, este capítulo
+entrena los <strong>siete modelos base de regresión</strong> exigidos por la
+rúbrica:</p>
+<ol class="arabic simple">
+<li><p>Ridge <span id="id1">[<a class="reference internal" href="../references.html#id6" title="Arthur E. Hoerl and Robert W. Kennard. Ridge regression: biased estimation for nonorthogonal problems. Technometrics, 12(1):55–67, 1970. doi:10.1080/00401706.1970.10488634.">Hoerl and Kennard, 1970</a>]</span></p></li>
+<li><p>Lasso <span id="id2">[<a class="reference internal" href="../references.html#id7" title="Robert Tibshirani. Regression shrinkage and selection via the lasso. Journal of the Royal Statistical Society, Series B, 58(1):267–288, 1996. URL: https://www.jstor.org/stable/2346178.">Tibshirani, 1996</a>]</span></p></li>
+<li><p>K-Nearest Neighbors Regressor</p></li>
+<li><p>Decision Tree Regressor</p></li>
+<li><p>Random Forest Regressor <span id="id3">[<a class="reference internal" href="../references.html#id8" title="Leo Breiman. Random forests. Machine Learning, 45(1):5–32, 2001. doi:10.1023/A:1010933404324.">Breiman, 2001</a>]</span></p></li>
+<li><p>Support Vector Regression</p></li>
+<li><p>XGBoost <span id="id4">[<a class="reference internal" href="../references.html#id9" title="Tianqi Chen and Carlos Guestrin. XGBoost: a scalable tree boosting system. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 785–794. 2016. doi:10.1145/2939672.2939785.">Chen and Guestrin, 2016</a>]</span></p></li>
+</ol>
+<section id="filosofia-del-capitulo">
+<h2>5.1 Filosofía del capítulo<a class="headerlink" href="#filosofia-del-capitulo" title="Link to this heading">#</a></h2>
+<p>Tres reglas no negociables que dictan toda la implementación:</p>
+<p><strong>Pipeline o no existe.</strong> Cada modelo se entrena dentro de un
+<code class="docutils literal notranslate"><span class="pre">sklearn.pipeline.Pipeline</span></code> que encapsula imputación de valores
+faltantes (mediana, robusta a outliers) y escalado estándar
+(necesario para Ridge, Lasso, KNN, SVR, irrelevante para árboles
+pero inocuo). El imputador y el scaler <strong>se ajustan solo con train</strong>
+y se aplican a val y test. Esto descarta el leakage de medias y
+desviaciones.</p>
+<p><strong>Hiperparámetros baseline, no optimizados.</strong> En este capítulo cada
+modelo se entrena con una configuración por defecto razonable —
+defaults de scikit-learn ajustados para evitar sobreajuste obvio
+(por ejemplo, <code class="docutils literal notranslate"><span class="pre">max_depth=8</span></code> en el Decision Tree). La optimización
+sistemática de hiperparámetros se hace en el Capítulo 8 con
+Grid/Random Search, Optuna y DEAP.</p>
+<p><strong>Validation + test ambas.</strong> Reportamos las dos métricas para que
+quede transparente si el modelo overfittea (gap grande val→test) o
+generaliza (gap pequeño). El test se usa solo aquí como «métrica
+final»; las decisiones de arquitectura del modelo original (NB 13)
+se tomarán solo con validation.</p>
+</section>
+<section id="metricas-y-criterios">
+<h2>5.2 Métricas y criterios<a class="headerlink" href="#metricas-y-criterios" title="Link to this heading">#</a></h2>
+<p>Tres métricas:</p>
+<ul class="simple">
+<li><p><strong>RMSE</strong> — métrica principal de la rúbrica. Penaliza errores grandes.</p></li>
+<li><p><strong>MAE</strong> — más interpretable en la escala de la volatilidad.</p></li>
+<li><p><strong>R²</strong> — métrica complementaria. Compara el modelo contra predecir
+la media histórica. <strong>Un R² negativo en test significa que el modelo
+hace peor que la línea horizontal</strong> — algo que ya nos pasó en
+el proyecto anterior con horizonte 7 días y que aquí esperamos
+evitar gracias al horizonte 1.</p></li>
+</ul>
+<p><strong>Línea a batir:</strong> Naive del Capítulo 4 con RMSE 0.00425 / MAE 0.00232
+en test. Si un modelo no supera a Naive, debe declararse honestamente
+y discutirse por qué.</p>
+</section>
+<section id="xgboost-con-tree-method-hist-early-stopping">
+<h2>5.3 XGBoost con <code class="docutils literal notranslate"><span class="pre">tree_method=&quot;hist&quot;</span></code> + early stopping<a class="headerlink" href="#xgboost-con-tree-method-hist-early-stopping" title="Link to this heading">#</a></h2>
+<p>XGBoost se evalúa con dos optimizaciones computacionales habilitadas
+desde el inicio:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tree_method=&quot;hist&quot;</span></code> — discretiza features en histogramas, reduce
+complejidad por nodo de <span class="math notranslate nohighlight">\(O(n_{\text{features}} \cdot n_{\text{samples}})\)</span>
+a <span class="math notranslate nohighlight">\(O(n_{\text{bins}})\)</span> y acelera significativamente sin pérdida de
+precisión <span id="id5">[<a class="reference internal" href="../references.html#id9" title="Tianqi Chen and Carlos Guestrin. XGBoost: a scalable tree boosting system. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 785–794. 2016. doi:10.1145/2939672.2939785.">Chen and Guestrin, 2016</a>]</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">early_stopping_rounds=20</span></code> con <code class="docutils literal notranslate"><span class="pre">eval_set=val</span></code> — detiene la
+construcción de árboles cuando el RMSE en validation deja de
+mejorar por 20 iteraciones consecutivas. Funciona como
+regularización implícita y evita sobreajuste.</p></li>
+</ul>
+<p>Estas técnicas se vuelven a discutir aisladamente en el Capítulo 9
+(optimización computacional) comparando «estándar vs. hist+early».</p>
+</section>
+<section id="setup-y-carga-de-datos">
+<h2>5.4 Setup y carga de datos<a class="headerlink" href="#setup-y-carga-de-datos" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.impute</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimpleImputer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ridge</span><span class="p">,</span> <span class="n">Lasso</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVR</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">mean_absolute_error</span><span class="p">,</span> <span class="n">r2_score</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xgboost</span><span class="w"> </span><span class="kn">import</span> <span class="n">XGBRegressor</span>
+
+<span class="n">PROJECT_ROOT</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">PROJECT_ROOT</span><span class="p">))</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.config</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">RANDOM_STATE</span><span class="p">,</span> <span class="n">METRICS_DIR</span><span class="p">,</span> <span class="n">PREDICTIONS_DIR</span><span class="p">,</span> <span class="n">MODELS_DIR</span><span class="p">,</span>
+    <span class="n">FIGURES_DIR</span><span class="p">,</span> <span class="n">TABLES_DIR</span><span class="p">,</span> <span class="n">ensure_dirs</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_style</span><span class="p">,</span> <span class="n">savefig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.io_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">save_json</span><span class="p">,</span> <span class="n">save_model</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">benchmarks</span>  <span class="c1"># para comparar con Naive del NB 04</span>
+
+<span class="n">ensure_dirs</span><span class="p">()</span>
+<span class="n">set_style</span><span class="p">()</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">RANDOM_STATE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cargar splits y reconstruir full_df</span>
+<span class="n">tr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">PROJECT_ROOT</span> <span class="o">/</span> <span class="s2">&quot;data/processed/train.parquet&quot;</span><span class="p">)</span>
+<span class="n">va</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">PROJECT_ROOT</span> <span class="o">/</span> <span class="s2">&quot;data/processed/val.parquet&quot;</span><span class="p">)</span>
+<span class="n">te</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">PROJECT_ROOT</span> <span class="o">/</span> <span class="s2">&quot;data/processed/test.parquet&quot;</span><span class="p">)</span>
+
+<span class="c1"># Cargar lista de features causales</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">PROJECT_ROOT</span> <span class="o">/</span> <span class="s2">&quot;data/processed/metadata.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">meta</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">feature_cols</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">&quot;feature_columns&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Número de features causales: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">feature_cols</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Filtrar filas sin target (las últimas de cada split por el shift(-1))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">split_xy</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;target_vol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="s2">&quot;target_vol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">split_xy</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">feature_cols</span><span class="p">)</span>
+<span class="n">X_val</span><span class="p">,</span>   <span class="n">y_val</span>   <span class="o">=</span> <span class="n">split_xy</span><span class="p">(</span><span class="n">va</span><span class="p">,</span> <span class="n">feature_cols</span><span class="p">)</span>
+<span class="n">X_test</span><span class="p">,</span>  <span class="n">y_test</span>  <span class="o">=</span> <span class="n">split_xy</span><span class="p">(</span><span class="n">te</span><span class="p">,</span> <span class="n">feature_cols</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;X_train: </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;X_val:   </span><span class="si">{</span><span class="n">X_val</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;X_test:  </span><span class="si">{</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Número de features causales: 31
+X_train: (4873, 31)
+X_val:   (1044, 31)
+X_test:  (1045, 31)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="funcion-helper-para-evaluacion-uniforme">
+<h2>5.5 Función helper para evaluación uniforme<a class="headerlink" href="#funcion-helper-para-evaluacion-uniforme" title="Link to this heading">#</a></h2>
+<p>Esta función entrena un pipeline, predice sobre val y test, calcula
+las tres métricas en ambos conjuntos y persiste el modelo y las
+predicciones a disco. Esto garantiza consistencia en cómo se evalúa
+cada modelo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">evaluate_model</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pipeline</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">):</span>
+    <span class="c1"># Entrena `pipeline` con (X_train, y_train) y evalúa en val y test.</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">fit_s</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+    <span class="n">pred_val</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">)</span>
+    <span class="n">pred_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">)</span>
+
+    <span class="n">rmse_val</span>  <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span>  <span class="n">pred_val</span><span class="p">)))</span>
+    <span class="n">mae_val</span>   <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span>  <span class="n">pred_val</span><span class="p">))</span>
+    <span class="n">r2_val</span>    <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span>  <span class="n">pred_val</span><span class="p">))</span>
+    <span class="n">rmse_test</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">)))</span>
+    <span class="n">mae_test</span>  <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">))</span>
+    <span class="n">r2_test</span>   <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">))</span>
+
+    <span class="n">save_model</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">MODELS_DIR</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;05_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.joblib&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&gt;10s</span><span class="si">}</span><span class="s2"> | &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;val:  RMSE=</span><span class="si">{</span><span class="n">rmse_val</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> MAE=</span><span class="si">{</span><span class="n">mae_val</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> R²=</span><span class="si">{</span><span class="n">r2_val</span><span class="si">:</span><span class="s2">+.4f</span><span class="si">}</span><span class="s2">  |  &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;test: RMSE=</span><span class="si">{</span><span class="n">rmse_test</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> MAE=</span><span class="si">{</span><span class="n">mae_test</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> R²=</span><span class="si">{</span><span class="n">r2_test</span><span class="si">:</span><span class="s2">+.4f</span><span class="si">}</span><span class="s2">  |  &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;fit=</span><span class="si">{</span><span class="n">fit_s</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+        <span class="s2">&quot;rmse_val&quot;</span><span class="p">:</span> <span class="n">rmse_val</span><span class="p">,</span> <span class="s2">&quot;mae_val&quot;</span><span class="p">:</span> <span class="n">mae_val</span><span class="p">,</span> <span class="s2">&quot;r2_val&quot;</span><span class="p">:</span> <span class="n">r2_val</span><span class="p">,</span>
+        <span class="s2">&quot;rmse_test&quot;</span><span class="p">:</span> <span class="n">rmse_test</span><span class="p">,</span> <span class="s2">&quot;mae_test&quot;</span><span class="p">:</span> <span class="n">mae_test</span><span class="p">,</span> <span class="s2">&quot;r2_test&quot;</span><span class="p">:</span> <span class="n">r2_test</span><span class="p">,</span>
+        <span class="s2">&quot;fit_s&quot;</span><span class="p">:</span> <span class="n">fit_s</span><span class="p">,</span>
+        <span class="s2">&quot;pred_val&quot;</span><span class="p">:</span> <span class="n">pred_val</span><span class="p">,</span>
+        <span class="s2">&quot;pred_test&quot;</span><span class="p">:</span> <span class="n">pred_test</span><span class="p">,</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ridge-y-lasso">
+<h2>5.6 Ridge y Lasso<a class="headerlink" href="#ridge-y-lasso" title="Link to this heading">#</a></h2>
+<p>Regresión lineal regularizada. Mientras Ridge <span id="id6">[<a class="reference internal" href="../references.html#id6" title="Arthur E. Hoerl and Robert W. Kennard. Ridge regression: biased estimation for nonorthogonal problems. Technometrics, 12(1):55–67, 1970. doi:10.1080/00401706.1970.10488634.">Hoerl and Kennard, 1970</a>]</span>
+penaliza el cuadrado de los coeficientes (<span class="math notranslate nohighlight">\(L_2\)</span>), Lasso
+<span id="id7">[<a class="reference internal" href="../references.html#id7" title="Robert Tibshirani. Regression shrinkage and selection via the lasso. Journal of the Royal Statistical Society, Series B, 58(1):267–288, 1996. URL: https://www.jstor.org/stable/2346178.">Tibshirani, 1996</a>]</span> penaliza el valor absoluto (<span class="math notranslate nohighlight">\(L_1\)</span>)
+e induce esparsidad — algunos coeficientes se vuelven exactamente
+cero.</p>
+<p>En nuestro problema:</p>
+<ul class="simple">
+<li><p><strong>Ridge</strong> sirve como benchmark lineal «todo incluido»: usa
+todos los features con coeficientes pequeños. Es resistente a la
+multicolinealidad (por ejemplo, entre <code class="docutils literal notranslate"><span class="pre">vol_d</span></code>, <code class="docutils literal notranslate"><span class="pre">vol_w</span></code>, <code class="docutils literal notranslate"><span class="pre">vol_m</span></code>
+del modelo HAR-RV).</p></li>
+<li><p><strong>Lasso</strong> revela cuáles features merecen sobrevivir. Si después de
+Lasso, las features dominantes son las componentes HAR, eso es
+evidencia adicional de que Corsi (2009) capturó la dinámica
+esencial.</p></li>
+</ul>
+<p>Hiperparámetros baseline:</p>
+<ul class="simple">
+<li><p>Ridge: <span class="math notranslate nohighlight">\(\alpha = 1.0\)</span> (default scikit-learn).</p></li>
+<li><p>Lasso: <span class="math notranslate nohighlight">\(\alpha = 10^{-3}\)</span>, <code class="docutils literal notranslate"><span class="pre">max_iter=20000</span></code>. El valor pequeño de
+<span class="math notranslate nohighlight">\(\alpha\)</span> refleja la escala de las features escaladas (post-standard);
+el <code class="docutils literal notranslate"><span class="pre">max_iter</span></code> elevado asegura convergencia.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">results</span><span class="p">[</span><span class="s2">&quot;ridge&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">evaluate_model</span><span class="p">(</span>
+    <span class="s2">&quot;ridge&quot;</span><span class="p">,</span>
+    <span class="n">Pipeline</span><span class="p">([</span>
+        <span class="p">(</span><span class="s2">&quot;imputer&quot;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">)),</span>
+        <span class="p">(</span><span class="s2">&quot;scaler&quot;</span><span class="p">,</span>  <span class="n">StandardScaler</span><span class="p">()),</span>
+        <span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span>   <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">RANDOM_STATE</span><span class="p">)),</span>
+    <span class="p">]),</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">results</span><span class="p">[</span><span class="s2">&quot;lasso&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">evaluate_model</span><span class="p">(</span>
+    <span class="s2">&quot;lasso&quot;</span><span class="p">,</span>
+    <span class="n">Pipeline</span><span class="p">([</span>
+        <span class="p">(</span><span class="s2">&quot;imputer&quot;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">)),</span>
+        <span class="p">(</span><span class="s2">&quot;scaler&quot;</span><span class="p">,</span>  <span class="n">StandardScaler</span><span class="p">()),</span>
+        <span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span>   <span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">RANDOM_STATE</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">20000</span><span class="p">)),</span>
+    <span class="p">]),</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     ridge | val:  RMSE=0.00358 MAE=0.00264 R²=+0.6774  |  test: RMSE=0.00384 MAE=0.00257 R²=+0.7155  |  fit=0.04s
+     lasso | val:  RMSE=0.00388 MAE=0.00292 R²=+0.6199  |  test: RMSE=0.00426 MAE=0.00301 R²=+0.6492  |  fit=0.01s
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="k-nearest-neighbors-regressor">
+<h2>5.7 K-Nearest Neighbors Regressor<a class="headerlink" href="#k-nearest-neighbors-regressor" title="Link to this heading">#</a></h2>
+<p>KNN no asume forma funcional: predice promediando los <span class="math notranslate nohighlight">\(k\)</span> vecinos
+más cercanos en el espacio de features. Captura interacciones no
+lineales sin modelarlas explícitamente, a costa de pérdida de
+información si la métrica de distancia no es la adecuada.</p>
+<p>Hiperparámetros baseline: <span class="math notranslate nohighlight">\(k = 15\)</span>, métrica euclidiana, ponderación
+uniforme. Un <span class="math notranslate nohighlight">\(k\)</span> moderadamente alto reduce ruido por outliers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;knn&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">evaluate_model</span><span class="p">(</span>
+    <span class="s2">&quot;knn&quot;</span><span class="p">,</span>
+    <span class="n">Pipeline</span><span class="p">([</span>
+        <span class="p">(</span><span class="s2">&quot;imputer&quot;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">)),</span>
+        <span class="p">(</span><span class="s2">&quot;scaler&quot;</span><span class="p">,</span>  <span class="n">StandardScaler</span><span class="p">()),</span>
+        <span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span>   <span class="n">KNeighborsRegressor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)),</span>
+    <span class="p">]),</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       knn | val:  RMSE=0.00468 MAE=0.00368 R²=+0.4476  |  test: RMSE=0.00625 MAE=0.00507 R²=+0.2454  |  fit=0.01s
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="decision-tree-y-random-forest">
+<h2>5.8 Decision Tree y Random Forest<a class="headerlink" href="#decision-tree-y-random-forest" title="Link to this heading">#</a></h2>
+<p>Los árboles particionan recursivamente el espacio de features
+maximizando la reducción de varianza en el target. Random Forest
+<span id="id8">[<a class="reference internal" href="../references.html#id8" title="Leo Breiman. Random forests. Machine Learning, 45(1):5–32, 2001. doi:10.1023/A:1010933404324.">Breiman, 2001</a>]</span> agrega muchos árboles entrenados con
+bootstrap + subsampling de features, reduciendo varianza a cambio de
+una pequeña pérdida de interpretabilidad.</p>
+<p>En finanzas, los ensambles de árboles son resistentes a outliers,
+captan no-linealidades, y manejan bien features correlacionados — todos
+ventajas para datos OHLCV.</p>
+<p>Hiperparámetros baseline:</p>
+<ul class="simple">
+<li><p>Decision Tree: <code class="docutils literal notranslate"><span class="pre">max_depth=8</span></code>, <code class="docutils literal notranslate"><span class="pre">min_samples_leaf=10</span></code>. Limita
+capacidad para no memorizar.</p></li>
+<li><p>Random Forest: <code class="docutils literal notranslate"><span class="pre">n_estimators=200</span></code>, <code class="docutils literal notranslate"><span class="pre">max_depth=10</span></code>,
+<code class="docutils literal notranslate"><span class="pre">min_samples_leaf=5</span></code>, <code class="docutils literal notranslate"><span class="pre">max_features=&quot;sqrt&quot;</span></code>. El árbol individual
+es más profundo (la diversidad del ensamble compensa).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;tree&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">evaluate_model</span><span class="p">(</span>
+    <span class="s2">&quot;tree&quot;</span><span class="p">,</span>
+    <span class="n">Pipeline</span><span class="p">([</span>
+        <span class="p">(</span><span class="s2">&quot;imputer&quot;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">)),</span>
+        <span class="p">(</span><span class="s2">&quot;scaler&quot;</span><span class="p">,</span>  <span class="n">StandardScaler</span><span class="p">()),</span>
+        <span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span>   <span class="n">DecisionTreeRegressor</span><span class="p">(</span>
+            <span class="n">max_depth</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">RANDOM_STATE</span>
+        <span class="p">)),</span>
+    <span class="p">]),</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">results</span><span class="p">[</span><span class="s2">&quot;rf&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">evaluate_model</span><span class="p">(</span>
+    <span class="s2">&quot;rf&quot;</span><span class="p">,</span>
+    <span class="n">Pipeline</span><span class="p">([</span>
+        <span class="p">(</span><span class="s2">&quot;imputer&quot;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">)),</span>
+        <span class="p">(</span><span class="s2">&quot;scaler&quot;</span><span class="p">,</span>  <span class="n">StandardScaler</span><span class="p">()),</span>
+        <span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span>   <span class="n">RandomForestRegressor</span><span class="p">(</span>
+            <span class="n">n_estimators</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">max_features</span><span class="o">=</span><span class="s2">&quot;sqrt&quot;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">RANDOM_STATE</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)),</span>
+    <span class="p">]),</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      tree | val:  RMSE=0.00413 MAE=0.00292 R²=+0.5687  |  test: RMSE=0.00429 MAE=0.00287 R²=+0.6444  |  fit=0.11s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        rf | val:  RMSE=0.00387 MAE=0.00290 R²=+0.6223  |  test: RMSE=0.00451 MAE=0.00336 R²=+0.6082  |  fit=2.51s
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="support-vector-regression">
+<h2>5.9 Support Vector Regression<a class="headerlink" href="#support-vector-regression" title="Link to this heading">#</a></h2>
+<p>SVR ajusta una función <span class="math notranslate nohighlight">\(f(x)\)</span> que cabe dentro de un tubo de ancho
+<span class="math notranslate nohighlight">\(\epsilon\)</span> alrededor de los datos, minimizando la complejidad del
+modelo (norma del vector de pesos) salvo las violaciones
+(<span class="math notranslate nohighlight">\(C\)</span>). Con kernel RBF captura no-linealidades suaves.</p>
+<p>Limitación práctica: el entrenamiento de SVR escala como
+<span class="math notranslate nohighlight">\(O(n^2) \sim O(n^3)\)</span> con el tamaño del dataset. Para nuestros 4 870
+puntos de train, el ajuste es razonablemente rápido (segundos),
+pero hace inviable la búsqueda exhaustiva de hiperparámetros — eso
+se aborda en el Capítulo 9.</p>
+<p>Hiperparámetros baseline: kernel RBF, <span class="math notranslate nohighlight">\(C = 1.0\)</span>, <span class="math notranslate nohighlight">\(\gamma = \)</span><code class="docutils literal notranslate"><span class="pre">scale</span></code>,
+<span class="math notranslate nohighlight">\(\epsilon = 0.001\)</span> (escala de la volatilidad).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;svr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">evaluate_model</span><span class="p">(</span>
+    <span class="s2">&quot;svr&quot;</span><span class="p">,</span>
+    <span class="n">Pipeline</span><span class="p">([</span>
+        <span class="p">(</span><span class="s2">&quot;imputer&quot;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">)),</span>
+        <span class="p">(</span><span class="s2">&quot;scaler&quot;</span><span class="p">,</span>  <span class="n">StandardScaler</span><span class="p">()),</span>
+        <span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span>   <span class="n">SVR</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;rbf&quot;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="s2">&quot;scale&quot;</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)),</span>
+    <span class="p">]),</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       svr | val:  RMSE=0.00623 MAE=0.00454 R²=+0.0198  |  test: RMSE=0.02286 MAE=0.02021 R²=-9.0880  |  fit=5.54s
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="xgboost-tree-method-hist-early-stopping">
+<h2>5.10 XGBoost — <code class="docutils literal notranslate"><span class="pre">tree_method=&quot;hist&quot;</span></code> + early stopping<a class="headerlink" href="#xgboost-tree-method-hist-early-stopping" title="Link to this heading">#</a></h2>
+<p>XGBoost <span id="id9">[<a class="reference internal" href="../references.html#id9" title="Tianqi Chen and Carlos Guestrin. XGBoost: a scalable tree boosting system. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 785–794. 2016. doi:10.1145/2939672.2939785.">Chen and Guestrin, 2016</a>]</span> es el algoritmo dominante en
+competencias de Machine Learning sobre datos tabulares. Combina
+boosting con regularización <span class="math notranslate nohighlight">\(L_1, L_2\)</span> y aprendizaje del gradiente
+de segundo orden.</p>
+<p>Para que el early stopping funcione bien, <strong>necesitamos que el
+modelo vea X_val transformado por el imputador y el scaler que se
+ajustaron en train</strong>. Como un <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> estándar no expone una API
+limpia para <code class="docutils literal notranslate"><span class="pre">eval_set</span></code> en <code class="docutils literal notranslate"><span class="pre">.fit()</span></code>, hacemos el preprocesamiento
+explícito:</p>
+<ol class="arabic simple">
+<li><p>Ajustar <code class="docutils literal notranslate"><span class="pre">SimpleImputer</span></code> y <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> sobre train.</p></li>
+<li><p>Transformar X_train, X_val y X_test.</p></li>
+<li><p>Pasar X_val transformado como <code class="docutils literal notranslate"><span class="pre">eval_set</span></code> al XGBRegressor.</p></li>
+<li><p>Persistir el pipeline reconstruido a posteriori.</p></li>
+</ol>
+<p>Este es el único modelo donde el flujo se hace manual, y se documenta
+explícitamente por qué.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paso 1: ajustar preprocesamiento solo en train</span>
+<span class="n">imputer</span> <span class="o">=</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">scaler</span>  <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">imputer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">))</span>
+
+<span class="c1"># Paso 2: transformar todos los splits</span>
+<span class="n">X_train_s</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">imputer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">))</span>
+<span class="n">X_val_s</span>   <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">imputer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_val</span><span class="p">))</span>
+<span class="n">X_test_s</span>  <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">imputer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+
+<span class="c1"># Paso 3: XGBoost con hist + early stopping</span>
+<span class="n">xgb_estimator</span> <span class="o">=</span> <span class="n">XGBRegressor</span><span class="p">(</span>
+    <span class="n">n_estimators</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">tree_method</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span>
+    <span class="n">early_stopping_rounds</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+    <span class="n">max_depth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">min_child_weight</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">reg_lambda</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">subsample</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span>
+    <span class="n">colsample_bytree</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="n">RANDOM_STATE</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">verbosity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">xgb_estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_s</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">eval_set</span><span class="o">=</span><span class="p">[(</span><span class="n">X_val_s</span><span class="p">,</span> <span class="n">y_val</span><span class="p">)],</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">fit_s</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="n">pred_val</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">xgb_estimator</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val_s</span><span class="p">),</span>  <span class="mf">0.0</span><span class="p">)</span>
+<span class="n">pred_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">xgb_estimator</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_s</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">)</span>
+
+<span class="n">rmse_val</span>  <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span>  <span class="n">pred_val</span><span class="p">)))</span>
+<span class="n">mae_val</span>   <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span>  <span class="n">pred_val</span><span class="p">))</span>
+<span class="n">r2_val</span>    <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span>  <span class="n">pred_val</span><span class="p">))</span>
+<span class="n">rmse_test</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">)))</span>
+<span class="n">mae_test</span>  <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">))</span>
+<span class="n">r2_test</span>   <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">))</span>
+
+<span class="c1"># Persistir el pipeline equivalente (para uso uniforme posterior)</span>
+<span class="n">xgb_pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s2">&quot;imputer&quot;</span><span class="p">,</span> <span class="n">imputer</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;scaler&quot;</span><span class="p">,</span> <span class="n">scaler</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="n">xgb_estimator</span><span class="p">)])</span>
+<span class="n">save_model</span><span class="p">(</span><span class="n">xgb_pipeline</span><span class="p">,</span> <span class="n">MODELS_DIR</span> <span class="o">/</span> <span class="s2">&quot;05_xgb.joblib&quot;</span><span class="p">)</span>
+
+<span class="n">results</span><span class="p">[</span><span class="s2">&quot;xgb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;xgb&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rmse_val&quot;</span><span class="p">:</span> <span class="n">rmse_val</span><span class="p">,</span> <span class="s2">&quot;mae_val&quot;</span><span class="p">:</span> <span class="n">mae_val</span><span class="p">,</span> <span class="s2">&quot;r2_val&quot;</span><span class="p">:</span> <span class="n">r2_val</span><span class="p">,</span>
+    <span class="s2">&quot;rmse_test&quot;</span><span class="p">:</span> <span class="n">rmse_test</span><span class="p">,</span> <span class="s2">&quot;mae_test&quot;</span><span class="p">:</span> <span class="n">mae_test</span><span class="p">,</span> <span class="s2">&quot;r2_test&quot;</span><span class="p">:</span> <span class="n">r2_test</span><span class="p">,</span>
+    <span class="s2">&quot;fit_s&quot;</span><span class="p">:</span> <span class="n">fit_s</span><span class="p">,</span>
+    <span class="s2">&quot;best_iteration&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">xgb_estimator</span><span class="o">.</span><span class="n">best_iteration</span><span class="p">),</span>
+    <span class="s2">&quot;pred_val&quot;</span><span class="p">:</span> <span class="n">pred_val</span><span class="p">,</span>
+    <span class="s2">&quot;pred_test&quot;</span><span class="p">:</span> <span class="n">pred_test</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;xgb&#39;</span><span class="si">:</span><span class="s2">&gt;10s</span><span class="si">}</span><span class="s2"> | val:  RMSE=</span><span class="si">{</span><span class="n">rmse_val</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> MAE=</span><span class="si">{</span><span class="n">mae_val</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> R²=</span><span class="si">{</span><span class="n">r2_val</span><span class="si">:</span><span class="s2">+.4f</span><span class="si">}</span><span class="s2">  |  &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;test: RMSE=</span><span class="si">{</span><span class="n">rmse_test</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> MAE=</span><span class="si">{</span><span class="n">mae_test</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> R²=</span><span class="si">{</span><span class="n">r2_test</span><span class="si">:</span><span class="s2">+.4f</span><span class="si">}</span><span class="s2">  |  &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;fit=</span><span class="si">{</span><span class="n">fit_s</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s  |  best_iter=</span><span class="si">{</span><span class="n">xgb_estimator</span><span class="o">.</span><span class="n">best_iteration</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       xgb | val:  RMSE=0.00353 MAE=0.00256 R²=+0.6853  |  test: RMSE=0.00396 MAE=0.00291 R²=+0.6974  |  fit=0.57s  |  best_iter=275
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="comparacion-de-los-7-modelos-base">
+<h2>5.11 Comparación de los 7 modelos base<a class="headerlink" href="#comparacion-de-los-7-modelos-base" title="Link to this heading">#</a></h2>
+<p>Reunimos todas las métricas en una tabla, agregamos Naive (mejor
+benchmark del Capítulo 4) como referencia, y ordenamos por RMSE en
+test.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcular Naive sobre val y test para tener la línea de comparación</span>
+<span class="n">full_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">tr</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">te</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">train_idx</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">)))</span>
+<span class="n">val_idx</span>   <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">va</span><span class="p">)))</span>
+<span class="n">test_idx</span>  <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">va</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">full_df</span><span class="p">)))</span>
+
+<span class="n">naive_val_pred</span>  <span class="o">=</span> <span class="n">benchmarks</span><span class="o">.</span><span class="n">naive_forecast</span><span class="p">(</span><span class="n">full_df</span><span class="p">,</span> <span class="n">val_idx</span><span class="p">)</span>
+<span class="n">naive_test_pred</span> <span class="o">=</span> <span class="n">benchmarks</span><span class="o">.</span><span class="n">naive_forecast</span><span class="p">(</span><span class="n">full_df</span><span class="p">,</span> <span class="n">test_idx</span><span class="p">)</span>
+<span class="n">y_val_full</span>  <span class="o">=</span> <span class="n">full_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">val_idx</span><span class="p">,</span>  <span class="s2">&quot;target_vol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">y_test_full</span> <span class="o">=</span> <span class="n">full_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">,</span> <span class="s2">&quot;target_vol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="n">mask_val</span>  <span class="o">=</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">y_val_full</span><span class="p">)</span>
+<span class="n">mask_test</span> <span class="o">=</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">y_test_full</span><span class="p">)</span>
+
+<span class="n">naive_rmse_val</span>  <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">naive_val_pred</span><span class="p">[</span><span class="n">mask_val</span><span class="p">]</span>   <span class="o">-</span> <span class="n">y_val_full</span><span class="p">[</span><span class="n">mask_val</span><span class="p">])</span>  <span class="o">**</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="n">naive_mae_val</span>   <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">naive_val_pred</span><span class="p">[</span><span class="n">mask_val</span><span class="p">]</span>    <span class="o">-</span> <span class="n">y_val_full</span><span class="p">[</span><span class="n">mask_val</span><span class="p">])))</span>
+<span class="n">naive_r2_val</span>    <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y_val_full</span><span class="p">[</span><span class="n">mask_val</span><span class="p">],</span>   <span class="n">naive_val_pred</span><span class="p">[</span><span class="n">mask_val</span><span class="p">]))</span>
+<span class="n">naive_rmse_test</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">naive_test_pred</span><span class="p">[</span><span class="n">mask_test</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_test_full</span><span class="p">[</span><span class="n">mask_test</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="n">naive_mae_test</span>  <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">naive_test_pred</span><span class="p">[</span><span class="n">mask_test</span><span class="p">]</span>  <span class="o">-</span> <span class="n">y_test_full</span><span class="p">[</span><span class="n">mask_test</span><span class="p">])))</span>
+<span class="n">naive_r2_test</span>   <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y_test_full</span><span class="p">[</span><span class="n">mask_test</span><span class="p">],</span> <span class="n">naive_test_pred</span><span class="p">[</span><span class="n">mask_test</span><span class="p">]))</span>
+
+<span class="n">results</span><span class="p">[</span><span class="s2">&quot;naive_benchmark&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;naive (NB 04)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rmse_val&quot;</span><span class="p">:</span> <span class="n">naive_rmse_val</span><span class="p">,</span> <span class="s2">&quot;mae_val&quot;</span><span class="p">:</span> <span class="n">naive_mae_val</span><span class="p">,</span> <span class="s2">&quot;r2_val&quot;</span><span class="p">:</span> <span class="n">naive_r2_val</span><span class="p">,</span>
+    <span class="s2">&quot;rmse_test&quot;</span><span class="p">:</span> <span class="n">naive_rmse_test</span><span class="p">,</span> <span class="s2">&quot;mae_test&quot;</span><span class="p">:</span> <span class="n">naive_mae_test</span><span class="p">,</span> <span class="s2">&quot;r2_test&quot;</span><span class="p">:</span> <span class="n">naive_r2_test</span><span class="p">,</span>
+    <span class="s2">&quot;fit_s&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">table_rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">table_rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;rmse_val&quot;</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;rmse_val&quot;</span><span class="p">],</span> <span class="s2">&quot;mae_val&quot;</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;mae_val&quot;</span><span class="p">],</span> <span class="s2">&quot;r2_val&quot;</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;r2_val&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;rmse_test&quot;</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;rmse_test&quot;</span><span class="p">],</span> <span class="s2">&quot;mae_test&quot;</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;mae_test&quot;</span><span class="p">],</span> <span class="s2">&quot;r2_test&quot;</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;r2_test&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;fit_s&quot;</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fit_s&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+    <span class="p">})</span>
+
+<span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">table_rows</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;rmse_test&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">table_display</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">round</span><span class="p">({</span><span class="s2">&quot;rmse_val&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;mae_val&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;r2_val&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                              <span class="s2">&quot;rmse_test&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;mae_test&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;r2_test&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                              <span class="s2">&quot;fit_s&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table_display</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        model  rmse_val  mae_val  r2_val  rmse_test  mae_test  r2_test  fit_s
+        ridge  0.003575 0.002643  0.6774   0.003840  0.002569   0.7155   0.04
+          xgb  0.003531 0.002563  0.6853   0.003959  0.002908   0.6974   0.57
+naive (NB 04)  0.003903 0.002522  0.6155   0.004253  0.002315   0.6509   0.00
+        lasso  0.003881 0.002916  0.6199   0.004263  0.003014   0.6492   0.01
+         tree  0.004134 0.002915  0.5687   0.004292  0.002874   0.6444   0.11
+           rf  0.003869 0.002905  0.6223   0.004506  0.003362   0.6082   2.51
+          knn  0.004678 0.003681  0.4476   0.006253  0.005067   0.2454   0.01
+          svr  0.006232 0.004544  0.0198   0.022862  0.020215  -9.0880   5.54
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Persistir métricas, tabla y predicciones</span>
+<span class="n">metrics_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">r</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]:</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;pred_val&quot;</span><span class="p">,</span> <span class="s2">&quot;pred_test&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)}</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="n">save_json</span><span class="p">(</span><span class="n">metrics_dict</span><span class="p">,</span> <span class="n">METRICS_DIR</span> <span class="o">/</span> <span class="s2">&quot;05_regression.json&quot;</span><span class="p">)</span>
+
+<span class="c1"># Predicciones (alineadas con val y test después de filtrar NaN)</span>
+<span class="n">y_test_mask</span> <span class="o">=</span> <span class="n">te</span><span class="p">[</span><span class="s2">&quot;target_vol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span>
+<span class="n">y_val_mask</span>  <span class="o">=</span> <span class="n">va</span><span class="p">[</span><span class="s2">&quot;target_vol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span>
+
+<span class="n">pred_df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="n">te</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">y_test_mask</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+                              <span class="s2">&quot;target_vol&quot;</span><span class="p">:</span> <span class="n">y_test</span><span class="p">})</span>
+<span class="n">pred_df_val</span>  <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="n">va</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">y_val_mask</span><span class="p">,</span>  <span class="s2">&quot;date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+                              <span class="s2">&quot;target_vol&quot;</span><span class="p">:</span> <span class="n">y_val</span><span class="p">})</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="s2">&quot;pred_test&quot;</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
+        <span class="n">pred_df_test</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;pred_test&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="s2">&quot;pred_val&quot;</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
+        <span class="n">pred_df_val</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>  <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;pred_val&quot;</span><span class="p">]</span>
+
+<span class="n">pred_df_test</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">PREDICTIONS_DIR</span> <span class="o">/</span> <span class="s2">&quot;05_regression_test.parquet&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pred_df_val</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">PREDICTIONS_DIR</span> <span class="o">/</span> <span class="s2">&quot;05_regression_val.parquet&quot;</span><span class="p">,</span>  <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">table</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">TABLES_DIR</span> <span class="o">/</span> <span class="s2">&quot;05_regression_summary.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Outputs persistidos correctamente.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Outputs persistidos correctamente.
+</pre></div>
+</div>
+</div>
+</div>
+<section id="visualizacion-1-rmse-comparativo-en-val-vs-test">
+<h3>Visualización 1 — RMSE comparativo en val vs test<a class="headerlink" href="#visualizacion-1-rmse-comparativo-en-val-vs-test" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">t_sorted</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;rmse_test&quot;</span><span class="p">)</span>
+
+<span class="n">bar_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;#1f4e79&quot;</span> <span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="s2">&quot;naive (NB 04)&quot;</span> <span class="k">else</span> <span class="s2">&quot;#c00000&quot;</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">t_sorted</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]]</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">t_sorted</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">],</span> <span class="n">t_sorted</span><span class="p">[</span><span class="s2">&quot;rmse_val&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">bar_colors</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;RMSE&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;RMSE en validación&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">naive_rmse_val</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#c00000&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
+             <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Naive val=</span><span class="si">{</span><span class="n">naive_rmse_val</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">t_sorted</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">],</span> <span class="n">t_sorted</span><span class="p">[</span><span class="s2">&quot;rmse_test&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">bar_colors</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;RMSE&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;RMSE en test&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">naive_rmse_test</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#c00000&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
+             <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Naive test=</span><span class="si">{</span><span class="n">naive_rmse_test</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">savefig</span><span class="p">(</span><span class="n">FIGURES_DIR</span> <span class="o">/</span> <span class="s2">&quot;05_regression_rmse_val_test.png&quot;</span><span class="p">,</span> <span class="n">fig</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/20c2d702607a544d7dc0b71a23a656bd370ee93708ff9488e0350817ebef70e3.png" src="../_images/20c2d702607a544d7dc0b71a23a656bd370ee93708ff9488e0350817ebef70e3.png" />
+</div>
+</div>
+</section>
+<section id="visualizacion-2-real-vs-predicho-para-los-modelos-top">
+<h3>Visualización 2 — real vs predicho para los modelos top<a class="headerlink" href="#visualizacion-2-real-vs-predicho-para-los-modelos-top" title="Link to this heading">#</a></h3>
+<p>Para no saturar, mostramos los tres modelos con mejor RMSE test.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top3</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="c1"># Aseguramos no tomar el naive como &quot;modelo ML&quot;</span>
+<span class="n">top3_ml</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">top3</span> <span class="k">if</span> <span class="n">m</span> <span class="o">!=</span> <span class="s2">&quot;naive (NB 04)&quot;</span><span class="p">][:</span><span class="mi">3</span><span class="p">]</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">top3_ml</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="n">rest</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">table</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">m</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">top3_ml</span> <span class="ow">and</span> <span class="n">m</span> <span class="o">!=</span> <span class="s2">&quot;naive (NB 04)&quot;</span><span class="p">]</span>
+    <span class="n">top3_ml</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">rest</span><span class="p">[:</span><span class="mi">3</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">top3_ml</span><span class="p">)])</span>
+
+<span class="n">dates_test</span> <span class="o">=</span> <span class="n">te</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">y_test_mask</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">model_name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">top3_ml</span><span class="p">):</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">model_name</span><span class="p">][</span><span class="s2">&quot;pred_test&quot;</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;target_vol (real)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#1f4e79&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">model_name</span><span class="p">)</span>
+    <span class="n">rmse_t</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">model_name</span><span class="p">][</span><span class="s2">&quot;rmse_test&quot;</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> — RMSE test = </span><span class="si">{</span><span class="n">rmse_t</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Volatilidad&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Fecha&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">savefig</span><span class="p">(</span><span class="n">FIGURES_DIR</span> <span class="o">/</span> <span class="s2">&quot;05_top3_pred_vs_real.png&quot;</span><span class="p">,</span> <span class="n">fig</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6b297ee51d0c9848a4dad5b0f2908212e2b2b5623dfbeba1f6139c7f03fb7125.png" src="../_images/6b297ee51d0c9848a4dad5b0f2908212e2b2b5623dfbeba1f6139c7f03fb7125.png" />
+</div>
+</div>
+</section>
+<section id="visualizacion-3-gap-valtest-signo-de-overfitting">
+<h3>Visualización 3 — gap val→test (signo de overfitting)<a class="headerlink" href="#visualizacion-3-gap-valtest-signo-de-overfitting" title="Link to this heading">#</a></h3>
+<p>Una diferencia grande entre RMSE en val y RMSE en test sugiere
+overfitting. Para nuestro problema, además, val y test son periodos
+distintos (val: 2009-2013 post-crisis; test: 2013-2017 Gran Calma),
+así que parte de la diferencia es <strong>distribution shift, no
+overfitting</strong>. Esto se discute en la interpretación.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">t_for_gap</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">table</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;naive (NB 04)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t_for_gap</span><span class="p">))</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mf">0.35</span>
+
+<span class="n">bars1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">t_for_gap</span><span class="p">[</span><span class="s2">&quot;rmse_val&quot;</span><span class="p">],</span>  <span class="n">width</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;val&quot;</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#4c72b0&quot;</span><span class="p">)</span>
+<span class="n">bars2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">t_for_gap</span><span class="p">[</span><span class="s2">&quot;rmse_test&quot;</span><span class="p">],</span> <span class="n">width</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#dd8452&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">naive_rmse_val</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#4c72b0&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Naive val&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">naive_rmse_test</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#dd8452&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Naive test&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">t_for_gap</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;RMSE&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;RMSE en validación y test por modelo (líneas: Naive)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">savefig</span><span class="p">(</span><span class="n">FIGURES_DIR</span> <span class="o">/</span> <span class="s2">&quot;05_val_test_gap.png&quot;</span><span class="p">,</span> <span class="n">fig</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/7111f25570238ff992540eda537b6cfd8184c66a8d8cefa3378f606c272ef547.png" src="../_images/7111f25570238ff992540eda537b6cfd8184c66a8d8cefa3378f606c272ef547.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="interpretacion">
+<h2>5.12 Interpretación<a class="headerlink" href="#interpretacion" title="Link to this heading">#</a></h2>
+<p>Las decisiones de modelado y los resultados anteriores admiten varias
+lecturas. Las analizamos en orden de importancia.</p>
+<p><strong>¿Algún modelo supera a Naive en test?</strong> Esa es la pregunta central
+del capítulo. La tabla de comparación lo dice de manera explícita:
+cualquier modelo cuyo RMSE en test sea menor al 0.00425 de Naive
+estaría aportando valor; cualquier modelo por encima debería
+justificarse por otra razón (interpretabilidad, robustez,
+diversificación de un ensamble posterior).</p>
+<p><strong>Gap entre validation y test.</strong> La validación corre sobre 2009-2013
+(post-crisis, vol moderada) y el test sobre 2013-2017 (Gran Calma,
+vol muy baja). Cualquier modelo cuyo RMSE en test sea mayor al de
+validation muestra un comportamiento doble: o el modelo está
+sobreajustando a los patrones de train, o (más probable) el shift de
+distribución penaliza a modelos que confían demasiado en señales
+históricas. Los modelos lineales regularizados (Ridge, Lasso) y los
+métodos basados en vecindad (KNN) suelen ser más robustos a este
+tipo de shift que los ensambles profundos.</p>
+<p><strong>XGBoost con early stopping.</strong> El mecanismo de early stopping ha
+detenido la construcción de árboles antes de las 1.000 iteraciones
+máximas configuradas. Esto se interpreta como evidencia de que la
+señal extraíble de los features se agotó: añadir más complejidad solo
+ajusta ruido. La regularización implícita es valiosa y será
+contrastada en el Capítulo 9 con la versión sin early stopping.</p>
+<p><strong>Una limitación honesta sobre R² en test.</strong> Si el R² en test es
+negativo para algún modelo, significa que predecir la media histórica
+ganaría. Esto NO es necesariamente un defecto del modelo: refleja
+que la varianza condicional de la volatilidad en el test es baja, lo
+que comprime el espacio donde un predictor informativo puede ganar
+contra la media. Lo que importa son los diferenciales relativos
+RMSE entre modelos, evaluados estadísticamente con Diebold-Mariano en
+el Capítulo 11.</p>
+<p><strong>Implicaciones para los capítulos siguientes.</strong></p>
+<ul class="simple">
+<li><p>El Capítulo 6 hace el ejercicio análogo con clasificación binaria
+(<code class="docutils literal notranslate"><span class="pre">target_regime</span></code>). Veremos si la tarea de identificar régimen alto
+es más fácil que predecir el nivel exacto.</p></li>
+<li><p>El Capítulo 7 evalúa balanceo con SMOTE/ADASYN/class_weight sobre
+los modelos del Capítulo 6, donde el desbalance 10/90 del test
+hace este capítulo metodológicamente necesario.</p></li>
+<li><p>El Capítulo 8 hace búsqueda de hiperparámetros con cuatro métodos
+sobre los dos o tres modelos top de los Capítulos 5 y 6.</p></li>
+<li><p>El Capítulo 13 diseña el modelo original con el objetivo explícito
+de superar al mejor de los anteriores en validation.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="04_benchmarks_econometricos.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">4. Benchmarks econométricos</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="06_modelos_clasificacion.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">6. Modelos base de clasificación</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filosofia-del-capitulo">5.1 Filosofía del capítulo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-y-criterios">5.2 Métricas y criterios</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xgboost-con-tree-method-hist-early-stopping">5.3 XGBoost con <code class="docutils literal notranslate"><span class="pre">tree_method="hist"</span></code> + early stopping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-y-carga-de-datos">5.4 Setup y carga de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-helper-para-evaluacion-uniforme">5.5 Función helper para evaluación uniforme</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-y-lasso">5.6 Ridge y Lasso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-regressor">5.7 K-Nearest Neighbors Regressor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree-y-random-forest">5.8 Decision Tree y Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#support-vector-regression">5.9 Support Vector Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xgboost-tree-method-hist-early-stopping">5.10 XGBoost — <code class="docutils literal notranslate"><span class="pre">tree_method="hist"</span></code> + early stopping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-los-7-modelos-base">5.11 Comparación de los 7 modelos base</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-1-rmse-comparativo-en-val-vs-test">Visualización 1 — RMSE comparativo en val vs test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-2-real-vs-predicho-para-los-modelos-top">Visualización 2 — real vs predicho para los modelos top</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-3-gap-valtest-signo-de-overfitting">Visualización 3 — gap val→test (signo de overfitting)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">5.12 Interpretación</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Juan Camilo Conrado · Sergio Cadavid · Mateo Chang
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

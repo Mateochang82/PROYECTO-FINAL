@@ -1,0 +1,906 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>10. Análisis de residuos &#8212; INTC-Vol-ML</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/10_residuos_diagnosticos';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="11. Comparación estadística entre modelos" href="11_comparacion_estadistica.html" />
+    <link rel="prev" title="9. Optimización computacional" href="09_optimizacion_computacional.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">INTC-Vol-ML</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_contexto_y_datos.html">2. Contexto y dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_etl_eda.html">3. ETL y Análisis Exploratorio de Datos (EDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_features_targets.html">4. Features causales y targets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_benchmarks_econometricos.html">5. Benchmarks econométricos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_modelos_regresion.html">6. Modelos base de regresión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modelos_clasificacion.html">7. Modelos base de clasificación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_balanceo_clases.html">8. Balanceo de clases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_optimizacion_hiperparametros.html">9. Optimización de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_optimizacion_computacional.html">10. Optimización computacional</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">11. Análisis de residuos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_comparacion_estadistica.html">12. Comparación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_interpretabilidad.html">13. Interpretabilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_modelo_original_hvrf.html">14. Modelo original — HVRF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_conclusiones_sustentacion.html">15. Conclusiones y sustentación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">16. Referencias bibliográficas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_setup.html">Apéndice. Verificación del entorno</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/10_residuos_diagnosticos.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>10. Análisis de residuos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-leer-los-p-valores">10.1 Cómo leer los p-valores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion">10.2 Implementación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-y-carga-de-predicciones">10.3 Setup y carga de predicciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-formales">10.4 Pruebas formales</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-1-histograma-q-q-plot-por-modelo">Visualización 1 — Histograma + Q-Q plot por modelo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-2-acf-de-residuos-por-modelo">Visualización 2 — ACF de residuos por modelo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-3-residuos-vs-prediccion">Visualización 3 — Residuos vs. predicción</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">10.5 Interpretación</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analisis-de-residuos">
+<h1>10. Análisis de residuos<a class="headerlink" href="#analisis-de-residuos" title="Link to this heading">#</a></h1>
+<p>El análisis de residuos es la herramienta clásica para auditar
+los <strong>supuestos</strong> de un modelo de regresión. Si los residuos de un
+modelo bien especificado deberían ser, idealmente:</p>
+<ol class="arabic simple">
+<li><p><strong>Centrados en cero</strong> (sin sesgo sistemático).</p></li>
+<li><p><strong>Homocedásticos</strong> (varianza constante a lo largo del rango).</p></li>
+<li><p><strong>Sin autocorrelación serial</strong> (independientes entre sí).</p></li>
+<li><p><strong>Independientes</strong> de las variables (sin estructura no lineal
+residual).</p></li>
+<li><p><strong>Aproximadamente normales</strong> (al menos para inferencia
+paramétrica).</p></li>
+</ol>
+<p>La rúbrica solicita aplicar cinco pruebas formales: <strong>White</strong>,
+<strong>BDS</strong>, <strong>Ljung-Box</strong>, <strong>Jarque-Bera</strong>, e inspección visual de la
+<strong>ACF</strong> y del <strong>histograma</strong>. Lo hacemos sobre los residuos del
+test de los tres modelos clave:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>Justificación</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Naive</strong></p></td>
+<td><p>Mejor benchmark econométrico del Cap. 4. Sus «residuos» son la diferencia entre la volatilidad realizada de <span class="math notranslate nohighlight">\(t\)</span> y la de <span class="math notranslate nohighlight">\(t+1\)</span> — útil como referencia mínima.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Ridge baseline</strong></p></td>
+<td><p>Mejor modelo lineal del Cap. 5 (RMSE test 0.00384). Esperamos residuos relativamente «limpios» por la estructura lineal.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>XGBoost optimizado (Optuna)</strong></p></td>
+<td><p>Mejor modelo no lineal del Cap. 8 (RMSE test 0.00382). Como captura no-linealidades, debería dejar residuos <em>más</em> aleatorios que un modelo lineal.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="como-leer-los-p-valores">
+<h2>10.1 Cómo leer los p-valores<a class="headerlink" href="#como-leer-los-p-valores" title="Link to this heading">#</a></h2>
+<p>Para todas las pruebas, <strong>un p-valor bajo (&lt; 0.05) rechaza la
+hipótesis nula</strong>, que en cada caso es:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Test</p></th>
+<th class="head"><p>H₀</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>White</p></td>
+<td><p>Homocedasticidad — varianza constante</p></td>
+</tr>
+<tr class="row-odd"><td><p>Breusch-Pagan</p></td>
+<td><p>Homocedasticidad (versión alternativa)</p></td>
+</tr>
+<tr class="row-even"><td><p>BDS</p></td>
+<td><p>Independencia (i.i.d.)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ljung-Box</p></td>
+<td><p>No autocorrelación hasta el lag especificado</p></td>
+</tr>
+<tr class="row-even"><td><p>Jarque-Bera</p></td>
+<td><p>Normalidad</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>En finanzas es <strong>muy común</strong> rechazar todas las hipótesis nulas:
+los retornos y la volatilidad presentan clusterización,
+heteroscedasticidad y colas pesadas. Lo importante en este contexto
+no es si rechazamos H₀ (probablemente sí), sino <strong>comparar
+relativamente</strong> los modelos: si Ridge deja residuos mucho más
+correlacionados que XGBoost, eso es una señal de mejora del modelo
+no lineal sobre el lineal.</p>
+</section>
+<section id="implementacion">
+<h2>10.2 Implementación<a class="headerlink" href="#implementacion" title="Link to this heading">#</a></h2>
+<p>Todas las pruebas viven en <code class="docutils literal notranslate"><span class="pre">src/stats_tests.py</span></code>. Devuelven objetos
+<code class="docutils literal notranslate"><span class="pre">TestResult</span></code> con campos <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">statistic</span></code>, <code class="docutils literal notranslate"><span class="pre">p_value</span></code>, <code class="docutils literal notranslate"><span class="pre">extra</span></code>.
+La función <code class="docutils literal notranslate"><span class="pre">residual_summary()</span></code> corre las cinco a la vez sobre
+un vector de residuos.</p>
+</section>
+<section id="setup-y-carga-de-predicciones">
+<h2>10.3 Setup y carga de predicciones<a class="headerlink" href="#setup-y-carga-de-predicciones" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gc</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span> <span class="k">as</span> <span class="n">sps</span>
+
+<span class="n">PROJECT_ROOT</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">PROJECT_ROOT</span><span class="p">))</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.config</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">RANDOM_STATE</span><span class="p">,</span> <span class="n">METRICS_DIR</span><span class="p">,</span> <span class="n">PREDICTIONS_DIR</span><span class="p">,</span> <span class="n">MODELS_DIR</span><span class="p">,</span>
+    <span class="n">FIGURES_DIR</span><span class="p">,</span> <span class="n">TABLES_DIR</span><span class="p">,</span> <span class="n">ensure_dirs</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_style</span><span class="p">,</span> <span class="n">savefig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.io_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">save_json</span><span class="p">,</span> <span class="n">load_model</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.stats_tests</span><span class="w"> </span><span class="kn">import</span> <span class="n">residual_summary</span><span class="p">,</span> <span class="n">acf_values</span>
+
+<span class="n">ensure_dirs</span><span class="p">()</span>
+<span class="n">set_style</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;savefig.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>  <span class="c1"># reducido para memoria</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">RANDOM_STATE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cargar predicciones de NB 04 y NB 05</span>
+<span class="n">preds_bench</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">PROJECT_ROOT</span> <span class="o">/</span> <span class="s2">&quot;outputs/predictions/04_benchmarks_predictions.parquet&quot;</span><span class="p">)</span>
+<span class="n">preds_reg</span>   <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">PROJECT_ROOT</span> <span class="o">/</span> <span class="s2">&quot;outputs/predictions/05_regression_test.parquet&quot;</span><span class="p">)</span>
+
+<span class="c1"># Cargar el modelo XGBoost optimizado por Optuna (NB 08) y predecir</span>
+<span class="n">xgb_optuna</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="n">MODELS_DIR</span> <span class="o">/</span> <span class="s2">&quot;08_xgb_optuna.joblib&quot;</span><span class="p">)</span>
+
+<span class="c1"># Necesitamos los X_test originales para que xgb prediga</span>
+<span class="n">te</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">PROJECT_ROOT</span> <span class="o">/</span> <span class="s2">&quot;data/processed/test.parquet&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">PROJECT_ROOT</span> <span class="o">/</span> <span class="s2">&quot;data/processed/metadata.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">meta</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">feature_cols</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">&quot;feature_columns&quot;</span><span class="p">]</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">te</span><span class="p">[</span><span class="s2">&quot;target_regime&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">te</span><span class="p">[</span><span class="s2">&quot;target_vol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">te</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="n">feature_cols</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">te</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="s2">&quot;target_vol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">dates_test</span> <span class="o">=</span> <span class="n">te</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="n">pred_xgb_optuna</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">xgb_optuna</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;XGBoost Optuna predicciones generadas: shape </span><span class="si">{</span><span class="n">pred_xgb_optuna</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGBoost Optuna predicciones generadas: shape (1045,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Alinear todas las predicciones con y_test (longitudes mínimas)</span>
+<span class="c1"># Para naive y ridge usamos las predicciones ya persistidas</span>
+<span class="n">pred_naive</span> <span class="o">=</span> <span class="n">preds_bench</span><span class="p">[</span><span class="s2">&quot;naive&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">y_bench</span>    <span class="o">=</span> <span class="n">preds_bench</span><span class="p">[</span><span class="s2">&quot;target_vol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">pred_ridge</span> <span class="o">=</span> <span class="n">preds_reg</span><span class="p">[</span><span class="s2">&quot;ridge&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">y_reg</span>      <span class="o">=</span> <span class="n">preds_reg</span><span class="p">[</span><span class="s2">&quot;target_vol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;len y_test (XGB)  = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;len y_bench       = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">y_bench</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;len y_reg (Ridge) = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">y_reg</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># Si difieren, recortamos a la longitud mínima común</span>
+<span class="n">n_common</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_bench</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_reg</span><span class="p">))</span>
+<span class="n">y_test_c</span> <span class="o">=</span> <span class="n">y_test</span><span class="p">[:</span><span class="n">n_common</span><span class="p">]</span>
+<span class="n">pred_naive_c</span> <span class="o">=</span> <span class="n">pred_naive</span><span class="p">[:</span><span class="n">n_common</span><span class="p">]</span>
+<span class="n">pred_ridge_c</span> <span class="o">=</span> <span class="n">pred_ridge</span><span class="p">[:</span><span class="n">n_common</span><span class="p">]</span>
+<span class="n">pred_xgb_c</span>   <span class="o">=</span> <span class="n">pred_xgb_optuna</span><span class="p">[:</span><span class="n">n_common</span><span class="p">]</span>
+<span class="n">dates_c</span>      <span class="o">=</span> <span class="n">dates_test</span><span class="p">[:</span><span class="n">n_common</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Aligned a </span><span class="si">{</span><span class="n">n_common</span><span class="si">}</span><span class="s2"> puntos&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>len y_test (XGB)  = 1045
+len y_bench       = 1045
+len y_reg (Ridge) = 1045
+Aligned a 1045 puntos
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cálculo de residuos</span>
+<span class="n">res_naive</span> <span class="o">=</span> <span class="n">y_test_c</span> <span class="o">-</span> <span class="n">pred_naive_c</span>
+<span class="n">res_ridge</span> <span class="o">=</span> <span class="n">y_test_c</span> <span class="o">-</span> <span class="n">pred_ridge_c</span>
+<span class="n">res_xgb</span>   <span class="o">=</span> <span class="n">y_test_c</span> <span class="o">-</span> <span class="n">pred_xgb_c</span>
+
+<span class="n">residuals</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;naive&quot;</span><span class="p">:</span>      <span class="n">res_naive</span><span class="p">,</span>
+    <span class="s2">&quot;ridge&quot;</span><span class="p">:</span>      <span class="n">res_ridge</span><span class="p">,</span>
+    <span class="s2">&quot;xgb_optuna&quot;</span><span class="p">:</span> <span class="n">res_xgb</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">predictions_used</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;naive&quot;</span><span class="p">:</span>      <span class="n">pred_naive_c</span><span class="p">,</span>
+    <span class="s2">&quot;ridge&quot;</span><span class="p">:</span>      <span class="n">pred_ridge_c</span><span class="p">,</span>
+    <span class="s2">&quot;xgb_optuna&quot;</span><span class="p">:</span> <span class="n">pred_xgb_c</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">residuals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&gt;12s</span><span class="si">}</span><span class="s2"> | mean=</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">+.5f</span><span class="si">}</span><span class="s2">  std=</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">  &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;skew=</span><span class="si">{</span><span class="n">sps</span><span class="o">.</span><span class="n">skew</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="si">:</span><span class="s2">+.2f</span><span class="si">}</span><span class="s2">  kurt=</span><span class="si">{</span><span class="n">sps</span><span class="o">.</span><span class="n">kurtosis</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="si">:</span><span class="s2">+.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       naive | mean=-0.00000  std=0.00425  skew=+0.05  kurt=+17.51
+       ridge | mean=-0.00071  std=0.00377  skew=+1.73  kurt=+13.19
+  xgb_optuna | mean=-0.00163  std=0.00345  skew=+1.98  kurt=+13.19
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="pruebas-formales">
+<h2>10.4 Pruebas formales<a class="headerlink" href="#pruebas-formales" title="Link to this heading">#</a></h2>
+<p>Aplicamos las cinco pruebas (White, Breusch-Pagan, BDS, Ljung-Box,
+Jarque-Bera) a los residuos de los tres modelos y consolidamos en
+una tabla.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">residuals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">summ</span> <span class="o">=</span> <span class="n">residual_summary</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n_lags_lb</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_dim_bds</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">test_key</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="s2">&quot;breusch_pagan&quot;</span><span class="p">,</span> <span class="s2">&quot;ljung_box(lag=10)&quot;</span><span class="p">,</span>
+                      <span class="s2">&quot;bds(dim=3)&quot;</span><span class="p">,</span> <span class="s2">&quot;jarque_bera&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">test_key</span> <span class="ow">in</span> <span class="n">summ</span> <span class="ow">and</span> <span class="s2">&quot;p_value&quot;</span> <span class="ow">in</span> <span class="n">summ</span><span class="p">[</span><span class="n">test_key</span><span class="p">]:</span>
+            <span class="n">row</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">test_key</span><span class="si">}</span><span class="s2">_stat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">summ</span><span class="p">[</span><span class="n">test_key</span><span class="p">][</span><span class="s2">&quot;statistic&quot;</span><span class="p">]</span>
+            <span class="n">row</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">test_key</span><span class="si">}</span><span class="s2">_p&quot;</span><span class="p">]</span>    <span class="o">=</span> <span class="n">summ</span><span class="p">[</span><span class="n">test_key</span><span class="p">][</span><span class="s2">&quot;p_value&quot;</span><span class="p">]</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">summ</span><span class="p">[</span><span class="s2">&quot;descriptive&quot;</span><span class="p">][</span><span class="s2">&quot;mean&quot;</span><span class="p">]</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;std&quot;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">summ</span><span class="p">[</span><span class="s2">&quot;descriptive&quot;</span><span class="p">][</span><span class="s2">&quot;std&quot;</span><span class="p">]</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;skew&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">summ</span><span class="p">[</span><span class="s2">&quot;descriptive&quot;</span><span class="p">][</span><span class="s2">&quot;skew&quot;</span><span class="p">]</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;kurt&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">summ</span><span class="p">[</span><span class="s2">&quot;descriptive&quot;</span><span class="p">][</span><span class="s2">&quot;kurtosis&quot;</span><span class="p">]</span>
+    <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+<span class="n">table_res</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table_res</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     model  white_stat  white_p  breusch_pagan_stat  breusch_pagan_p  ljung_box(lag=10)_stat  ljung_box(lag=10)_p  bds(dim=3)_stat  bds(dim=3)_p  jarque_bera_stat  jarque_bera_p     mean     std    skew     kurt
+     naive     2.90924  0.23349             0.86681          0.35184               197.57509                  0.0         -0.48754       0.62588       13356.35888            0.0 -0.00000 0.00425 0.04737 17.51399
+     ridge     3.26656  0.19529             0.84631          0.35760               119.54633                  0.0          7.31678       0.00000        8101.63523            0.0 -0.00071 0.00378 1.73173 13.19358
+xgb_optuna     0.63791  0.72691             0.03664          0.84820                76.82576                  0.0          5.03411       0.00000        8253.80713            0.0 -0.00163 0.00345 1.97679 13.18826
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Persistir tabla y métricas crudas</span>
+<span class="n">table_res</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">TABLES_DIR</span> <span class="o">/</span> <span class="s2">&quot;10_residuals_tests.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># JSON completo con todas las pruebas</span>
+<span class="n">all_results</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">residual_summary</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n_lags_lb</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_dim_bds</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+               <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">residuals</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+<span class="n">save_json</span><span class="p">(</span><span class="n">all_results</span><span class="p">,</span> <span class="n">METRICS_DIR</span> <span class="o">/</span> <span class="s2">&quot;10_residuals.json&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Outputs persistidos.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Outputs persistidos.
+</pre></div>
+</div>
+</div>
+</div>
+<section id="visualizacion-1-histograma-q-q-plot-por-modelo">
+<h3>Visualización 1 — Histograma + Q-Q plot por modelo<a class="headerlink" href="#visualizacion-1-histograma-q-q-plot-por-modelo" title="Link to this heading">#</a></h3>
+<p>El histograma con curva normal superpuesta permite ver visualmente
+la asimetría y kurtosis de los residuos. El Q-Q plot pone los
+cuantiles muestrales contra los teóricos de una Normal: si la nube
+de puntos se aleja de la línea diagonal, hay desviación de
+normalidad.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">residuals</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="c1"># Histograma</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#4c72b0&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+    <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span> <span class="nb">float</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">r</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">200</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">sps</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#c00000&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;N(</span><span class="si">{</span><span class="n">mu</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">sigma</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> — histograma de residuos&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;residual&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="c1"># Q-Q plot</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">sps</span><span class="o">.</span><span class="n">probplot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="s2">&quot;norm&quot;</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> — Q-Q plot normal&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">savefig</span><span class="p">(</span><span class="n">FIGURES_DIR</span> <span class="o">/</span> <span class="s2">&quot;10_residual_distribution.png&quot;</span><span class="p">,</span> <span class="n">fig</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/649507cae91297a4b10dd3ef474965c3d39fa09c60552f7527bf206369fdb0f5.png" src="../_images/649507cae91297a4b10dd3ef474965c3d39fa09c60552f7527bf206369fdb0f5.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizacion-2-acf-de-residuos-por-modelo">
+<h3>Visualización 2 — ACF de residuos por modelo<a class="headerlink" href="#visualizacion-2-acf-de-residuos-por-modelo" title="Link to this heading">#</a></h3>
+<p>Si la ACF tiene barras significativas (fuera de las bandas de
+confianza), hay autocorrelación serial residual. En un modelo bien
+especificado todas las barras deberían estar dentro de las bandas
+<span class="math notranslate nohighlight">\(\pm 1.96 / \sqrt{n}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">n_lags</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">residuals</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="n">acf</span> <span class="o">=</span> <span class="n">acf_values</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n_lags</span><span class="o">=</span><span class="n">n_lags</span><span class="p">)</span>
+    <span class="n">lags</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">acf</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">lags</span><span class="p">,</span> <span class="n">acf</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#1f4e79&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.85</span><span class="p">)</span>
+    <span class="n">ci</span> <span class="o">=</span> <span class="mf">1.96</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span> <span class="n">ci</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#c00000&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;95% CI = ±</span><span class="si">{</span><span class="n">ci</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="o">-</span><span class="n">ci</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#c00000&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> — ACF de residuos&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;ACF&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Lag&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">savefig</span><span class="p">(</span><span class="n">FIGURES_DIR</span> <span class="o">/</span> <span class="s2">&quot;10_residual_acf.png&quot;</span><span class="p">,</span> <span class="n">fig</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e7e48c23430d4fc600f736f3efd383de5361b00a96ae0637991bbb865d00c633.png" src="../_images/e7e48c23430d4fc600f736f3efd383de5361b00a96ae0637991bbb865d00c633.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24839
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizacion-3-residuos-vs-prediccion">
+<h3>Visualización 3 — Residuos vs. predicción<a class="headerlink" href="#visualizacion-3-residuos-vs-prediccion" title="Link to this heading">#</a></h3>
+<p>Si los residuos forman un patrón estructurado al graficarlos contra
+la predicción, hay no-linealidad residual o heteroscedasticidad.
+Un patrón en forma de «embudo» indica varianza no constante; una
+curvatura indica forma funcional mal especificada.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">residuals</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">predictions_used</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#1f4e79&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#c00000&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> — residuo vs predicción&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;predicción&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;residuo&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">savefig</span><span class="p">(</span><span class="n">FIGURES_DIR</span> <span class="o">/</span> <span class="s2">&quot;10_residual_vs_pred.png&quot;</span><span class="p">,</span> <span class="n">fig</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5258385808d242d7ff640434b79d52bf75357a7b1827410ebf8a60ca178c1081.png" src="../_images/5258385808d242d7ff640434b79d52bf75357a7b1827410ebf8a60ca178c1081.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15306
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="interpretacion">
+<h2>10.5 Interpretación<a class="headerlink" href="#interpretacion" title="Link to this heading">#</a></h2>
+<p><strong>Lectura general de los p-valores.</strong> Es esperable y normal en
+forecasting financiero que las pruebas rechacen H₀ — la volatilidad
+es heteroscedástica, presenta clusterización y tiene colas pesadas.
+Por eso este análisis se interpreta <strong>comparativamente</strong> entre los
+tres modelos, no en absoluto.</p>
+<p><strong>Naive vs. Ridge vs. XGBoost.</strong> El modelo a «vencer» en el sentido
+de dejar residuos más limpios depende de cuál capture más estructura:</p>
+<ul class="simple">
+<li><p>Si los <strong>residuos del Naive</strong> rechazan Ljung-Box con valores
+extremos del estadístico, indica autocorrelación fuerte en el
+proceso original — es decir, hay señal aprovechable que un
+predictor más sofisticado puede capturar. <strong>Ridge y XGBoost
+deberían tener Ljung-Box menos extremos</strong> (residuos más cercanos
+a ruido blanco).</p></li>
+<li><p>Si los <strong>residuos del Ridge</strong> muestran no-linealidad residual
+detectable por BDS, eso es evidencia de que XGBoost (no lineal)
+puede mejorar.</p></li>
+<li><p>Si los <strong>residuos del XGBoost</strong> son los más cercanos a ruido
+blanco (BDS y Ljung-Box con p-valores más altos), eso confirma
+que el modelo no lineal capturó estructura que Ridge no podía.</p></li>
+</ul>
+<p><strong>Normalidad (Jarque-Bera).</strong> Los residuos de modelos sobre datos
+financieros casi nunca son normales: presentan colas pesadas
+(kurtosis &gt; 3) y, a veces, asimetría. El Q-Q plot lo muestra: las
+colas se separan de la diagonal. Esto <strong>no invalida los modelos</strong>,
+solo nos dice que la inferencia paramétrica clásica (intervalos
+basados en t-Student de los coeficientes) está mal calibrada — para
+eso usamos bootstrap en el Capítulo 11.</p>
+<p><strong>Homocedasticidad (White, Breusch-Pagan).</strong> Si los residuos
+muestran heteroscedasticidad significativa, los errores estándar
+clásicos están sesgados. En modelos como Ridge, esto puede
+significar que los coeficientes son insesgados pero los IC clásicos
+son demasiado estrechos. La solución es el bootstrap (Capítulo 11).</p>
+<p><strong>Implicación práctica.</strong> Los resultados de este capítulo no nos
+hacen rechazar ningún modelo, pero <strong>calibran nuestra interpretación
+estadística para el Capítulo 11</strong>: dado que los residuos no son
+normales ni homocedásticos, las comparaciones de modelos no se
+hacen con tests t paramétricos sino con:</p>
+<ul class="simple">
+<li><p><strong>Diebold-Mariano</strong> (que no requiere normalidad, solo
+estacionariedad de las diferencias de pérdida).</p></li>
+<li><p><strong>Bootstrap</strong> percentil (no paramétrico, robusto a las desviaciones
+observadas aquí).</p></li>
+</ul>
+<p>Estos serán nuestros instrumentos para el siguiente capítulo.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="09_optimizacion_computacional.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">9. Optimización computacional</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="11_comparacion_estadistica.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">11. Comparación estadística entre modelos</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-leer-los-p-valores">10.1 Cómo leer los p-valores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion">10.2 Implementación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-y-carga-de-predicciones">10.3 Setup y carga de predicciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-formales">10.4 Pruebas formales</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-1-histograma-q-q-plot-por-modelo">Visualización 1 — Histograma + Q-Q plot por modelo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-2-acf-de-residuos-por-modelo">Visualización 2 — ACF de residuos por modelo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-3-residuos-vs-prediccion">Visualización 3 — Residuos vs. predicción</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">10.5 Interpretación</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Juan Camilo Conrado · Sergio Cadavid · Mateo Chang
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

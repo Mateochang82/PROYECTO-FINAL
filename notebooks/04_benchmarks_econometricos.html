@@ -1,0 +1,1090 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4. Benchmarks econométricos &#8212; INTC-Vol-ML</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/04_benchmarks_econometricos';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="5. Modelos base de regresión" href="05_modelos_regresion.html" />
+    <link rel="prev" title="3. Features causales y targets" href="03_features_targets.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">INTC-Vol-ML</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_contexto_y_datos.html">2. Contexto y dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_etl_eda.html">3. ETL y Análisis Exploratorio de Datos (EDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_features_targets.html">4. Features causales y targets</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Benchmarks econométricos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_modelos_regresion.html">6. Modelos base de regresión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modelos_clasificacion.html">7. Modelos base de clasificación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_balanceo_clases.html">8. Balanceo de clases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_optimizacion_hiperparametros.html">9. Optimización de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_optimizacion_computacional.html">10. Optimización computacional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_residuos_diagnosticos.html">11. Análisis de residuos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_comparacion_estadistica.html">12. Comparación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_interpretabilidad.html">13. Interpretabilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_modelo_original_hvrf.html">14. Modelo original — HVRF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_conclusiones_sustentacion.html">15. Conclusiones y sustentación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">16. Referencias bibliográficas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_setup.html">Apéndice. Verificación del entorno</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/04_benchmarks_econometricos.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>4. Benchmarks econométricos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-empezar-por-benchmarks-econometricos">4.1 Por qué empezar por benchmarks econométricos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convenciones-de-evaluacion">4.2 Convenciones de evaluación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-y-carga-de-datos">4.3 Setup y carga de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-predictor-de-persistencia">4.4 Naive — predictor de persistencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling-mean">4.5 Rolling mean</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ewma-riskmetrics-bollerslev1986generalized">4.6 EWMA (RiskMetrics) <span class="xref cite">bollerslev1986generalized</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arimabollerslev1986generalized">4.7 ARIMA<span class="xref cite">bollerslev1986generalized</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#garch-1-1-bollerslev-1986-bollerslev1986generalized">4.8 GARCH(1, 1) — Bollerslev 1986 <span class="xref cite">bollerslev1986generalized</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#har-rv-corsi-2009-corsi2009simple">4.9 HAR-RV — Corsi 2009 <span class="xref cite">corsi2009simple</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-benchmarks">4.10 Comparación de benchmarks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-1-comparacion-de-rmse-mae">Visualización 1 — comparación de RMSE/MAE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-2-predicciones-vs-realidad">Visualización 2 — predicciones vs. realidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-3-error-temporal-acumulado">Visualización 3 — error temporal acumulado</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">4.11 Interpretación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conexion-con-el-siguiente-capitulo">4.12 Conexión con el siguiente capítulo</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="benchmarks-econometricos">
+<h1>4. Benchmarks econométricos<a class="headerlink" href="#benchmarks-econometricos" title="Link to this heading">#</a></h1>
+<p>Este capítulo establece la <strong>línea de comparación</strong> del proyecto.
+Antes de entrenar modelos de Machine Learning sofisticados, fijamos
+benchmarks econométricos clásicos que han dominado el forecasting de
+volatilidad durante décadas. Cualquier modelo ML del proyecto que no
+supere significativamente a estos benchmarks no aporta valor real.</p>
+<section id="por-que-empezar-por-benchmarks-econometricos">
+<h2>4.1 Por qué empezar por benchmarks econométricos<a class="headerlink" href="#por-que-empezar-por-benchmarks-econometricos" title="Link to this heading">#</a></h2>
+<p>La volatilidad de un activo financiero tiene tres regularidades empíricas
+que cualquier predictor razonable debe explotar:</p>
+<ol class="arabic simple">
+<li><p><strong>Clustering</strong> — períodos de alta volatilidad siguen a períodos de alta
+volatilidad (Mandelbrot 1963; Engle 1982). Operacionalmente esto se
+traduce en una autocorrelación serial alta de orden 1 sobre la
+volatilidad realizada.</p></li>
+<li><p><strong>Memoria larga</strong> — la dependencia decae lentamente. La función de
+autocorrelación de la volatilidad puede ser positiva incluso a lags
+de cientos de días (Granger 1980; Corsi 2009).</p></li>
+<li><p><strong>No-negatividad y escala</strong> — la volatilidad es estrictamente
+positiva y mean-reverting.</p></li>
+</ol>
+<p>Los benchmarks que evaluamos en este capítulo codifican esas
+regularidades de manera explícita y parsimoniosa:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Benchmark</p></th>
+<th class="head"><p>Captura</p></th>
+<th class="head"><p>Parámetros</p></th>
+<th class="head"><p>Costo computacional</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Naive</strong></p></td>
+<td><p>Clustering de orden 1</p></td>
+<td><p>0</p></td>
+<td><p>Ninguno</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Rolling mean</strong></p></td>
+<td><p>Nivel local promedio</p></td>
+<td><p>1 (ventana)</p></td>
+<td><p>Ninguno</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>EWMA (RiskMetrics)</strong></p></td>
+<td><p>Decaimiento exponencial de la información</p></td>
+<td><p>1 (<span class="math notranslate nohighlight">\(\lambda\)</span>)</p></td>
+<td><p>Ninguno</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>ARIMA</strong></p></td>
+<td><p>Dinámica autorregresiva + media móvil</p></td>
+<td><p><span class="math notranslate nohighlight">\(p, d, q\)</span> + parámetros</p></td>
+<td><p>Bajo (MLE inicial)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>GARCH(1, 1)</strong></p></td>
+<td><p>Volatilidad condicional explícita</p></td>
+<td><p><span class="math notranslate nohighlight">\(\omega, \alpha, \beta\)</span></p></td>
+<td><p>Bajo (MLE inicial)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>HAR-RV (Corsi 2009)</strong></p></td>
+<td><p>Memoria heterogénea diaria / semanal / mensual</p></td>
+<td><p>4 (intercepto + 3 betas)</p></td>
+<td><p>Trivial (OLS)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="convenciones-de-evaluacion">
+<h2>4.2 Convenciones de evaluación<a class="headerlink" href="#convenciones-de-evaluacion" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Target.</strong> Todos los benchmarks predicen
+<span class="math notranslate nohighlight">\(\sigma_{t+1} = \mathrm{std}\big(\{r_{t-3}, r_{t-2}, r_{t-1}, r_t, r_{t+1}\}\big)\)</span>,
+la volatilidad realizada del día siguiente con la ventana causal de
+cinco días definida en el Capítulo 3.</p></li>
+<li><p><strong>Métricas.</strong> RMSE y MAE sobre el conjunto de <strong>test</strong>. El RMSE penaliza
+errores grandes (apropiado cuando importan los picos de volatilidad);
+el MAE es más interpretable en la escala de la variable.</p></li>
+<li><p><strong>Walk-forward filtering.</strong> Para ARIMA y GARCH, los parámetros se
+estiman una sola vez en <strong>train</strong> y luego el estado del modelo se
+actualiza con cada nueva observación del test, sin re-estimar
+parámetros. Este protocolo refleja el escenario realista de un
+trader que mantiene calibración estable pero incorpora información
+nueva a medida que llega.</p></li>
+<li><p><strong>Sin reutilización del test.</strong> Ningún benchmark observa el target
+futuro en su construcción.</p></li>
+</ul>
+<p>La implementación de cada benchmark vive en <code class="docutils literal notranslate"><span class="pre">src/benchmarks.py</span></code> y se
+verificó con tests anti-leakage que confirman que el estado del modelo
+en el paso <span class="math notranslate nohighlight">\(t\)</span> no depende del valor de <span class="math notranslate nohighlight">\(\sigma_{t+1}\)</span>.</p>
+</section>
+<section id="setup-y-carga-de-datos">
+<h2>4.3 Setup y carga de datos<a class="headerlink" href="#setup-y-carga-de-datos" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">PROJECT_ROOT</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">PROJECT_ROOT</span><span class="p">))</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">benchmarks</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">RANDOM_STATE</span><span class="p">,</span> <span class="n">METRICS_DIR</span><span class="p">,</span> <span class="n">PREDICTIONS_DIR</span><span class="p">,</span> <span class="n">FIGURES_DIR</span><span class="p">,</span> <span class="n">ensure_dirs</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_style</span><span class="p">,</span> <span class="n">savefig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.io_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">save_json</span>
+
+<span class="n">ensure_dirs</span><span class="p">()</span>
+<span class="n">set_style</span><span class="p">()</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">RANDOM_STATE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reconstruir full_df concatenando train, val y test (orden temporal preservado)</span>
+<span class="n">tr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">PROJECT_ROOT</span> <span class="o">/</span> <span class="s2">&quot;data/processed/train.parquet&quot;</span><span class="p">)</span>
+<span class="n">va</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">PROJECT_ROOT</span> <span class="o">/</span> <span class="s2">&quot;data/processed/val.parquet&quot;</span><span class="p">)</span>
+<span class="n">te</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">PROJECT_ROOT</span> <span class="o">/</span> <span class="s2">&quot;data/processed/test.parquet&quot;</span><span class="p">)</span>
+<span class="n">full_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">tr</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">te</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">train_idx</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">)))</span>
+<span class="n">val_idx</span>   <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">va</span><span class="p">)))</span>
+<span class="n">test_idx</span>  <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">va</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">full_df</span><span class="p">)))</span>
+
+<span class="n">y_test_true</span> <span class="o">=</span> <span class="n">full_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">,</span> <span class="s2">&quot;target_vol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;full_df: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">full_df</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2"> filas&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;train:   </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">train_idx</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">full_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">,</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">full_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">,</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;val:     </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">val_idx</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">full_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">val_idx</span><span class="p">,</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">full_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">val_idx</span><span class="p">,</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;test:    </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">test_idx</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">full_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">,</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">full_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">,</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;target_vol en test: mean=</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">y_test_true</span><span class="p">)</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, std=</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">nanstd</span><span class="p">(</span><span class="n">y_test_true</span><span class="p">)</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>full_df:  6962 filas
+train:    4873 (1990-03-13 -&gt; 2009-07-13)
+val:      1044 (2009-07-14 -&gt; 2013-09-18)
+test:     1045 (2013-09-19 -&gt; 2017-11-09)
+
+target_vol en test: mean=0.01158, std=0.00720
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="naive-predictor-de-persistencia">
+<h2>4.4 Naive — predictor de persistencia<a class="headerlink" href="#naive-predictor-de-persistencia" title="Link to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[
+\widehat{\sigma}_{t+1}^{\,\text{naive}} = \sigma_t = \mathrm{std}(r_{t-4}, \ldots, r_t)
+\]</div>
+<p>El predictor más simple posible: la mejor estimación de la volatilidad
+de mañana es la volatilidad de hoy. No tiene parámetros, no requiere
+ajuste, y es el benchmark a batir.</p>
+<p>En series con clustering de volatilidad fuerte, este modelo es
+sorprendentemente competitivo: si <span class="math notranslate nohighlight">\(\rho_1(\sigma) \approx 0.9\)</span>,
+predecir el valor más reciente acota inferiormente el error de
+predicción a cerca del óptimo lineal <span id="id1">[<a class="reference internal" href="../references.html#id5" title="Torben G. Andersen, Tim Bollerslev, Francis X. Diebold, and Paul Labys. Modeling and forecasting realized volatility. Econometrica, 71(2):579–625, 2003. doi:10.1111/1468-0262.00418.">Andersen <em>et al.</em>, 2003</a>]</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">times</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;naive&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">benchmarks</span><span class="o">.</span><span class="n">naive_forecast</span><span class="p">(</span><span class="n">full_df</span><span class="p">,</span> <span class="n">test_idx</span><span class="p">)</span>
+<span class="n">times</span><span class="p">[</span><span class="s2">&quot;naive&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="n">rmse_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">((</span><span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;naive&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_test_true</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">mae_n</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;naive&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_test_true</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;naive | RMSE = </span><span class="si">{</span><span class="n">rmse_n</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> | MAE = </span><span class="si">{</span><span class="n">mae_n</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> | tiempo = </span><span class="si">{</span><span class="n">times</span><span class="p">[</span><span class="s1">&#39;naive&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> ms&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>naive | RMSE = 0.00425 | MAE = 0.00232 | tiempo = 1.52 ms
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="rolling-mean">
+<h2>4.5 Rolling mean<a class="headerlink" href="#rolling-mean" title="Link to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[
+\widehat{\sigma}_{t+1}^{\,\text{RM}(w)} = \frac{1}{w} \sum_{k=0}^{w-1} \sigma_{t-k}
+\]</div>
+<p>Suaviza el ruido de corto plazo a costa de reactividad. Una ventana
+<span class="math notranslate nohighlight">\(w = 22\)</span> (un mes de trading) representa la memoria mensual del mercado.
+Si los datos exhiben mean reversion, este predictor puede ser
+competitivo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;rolling_mean_22&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">benchmarks</span><span class="o">.</span><span class="n">rolling_mean_forecast</span><span class="p">(</span><span class="n">full_df</span><span class="p">,</span> <span class="n">test_idx</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">22</span><span class="p">)</span>
+<span class="n">times</span><span class="p">[</span><span class="s2">&quot;rolling_mean_22&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="n">rmse_rm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">((</span><span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;rolling_mean_22&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_test_true</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">mae_rm</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;rolling_mean_22&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_test_true</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rolling_mean_22 | RMSE = </span><span class="si">{</span><span class="n">rmse_rm</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> | MAE = </span><span class="si">{</span><span class="n">mae_rm</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> | tiempo = </span><span class="si">{</span><span class="n">times</span><span class="p">[</span><span class="s1">&#39;rolling_mean_22&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> ms&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rolling_mean_22 | RMSE = 0.00689 | MAE = 0.00490 | tiempo = 1.92 ms
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ewma-riskmetrics-bollerslev1986generalized">
+<h2>4.6 EWMA (RiskMetrics) <span id="id2">[<a class="reference internal" href="../references.html#id2" title="Tim Bollerslev. Generalized autoregressive conditional heteroskedasticity. Journal of Econometrics, 31(3):307–327, 1986. doi:10.1016/0304-4076(86)90063-1.">Bollerslev, 1986</a>]</span><a class="headerlink" href="#ewma-riskmetrics-bollerslev1986generalized" title="Link to this heading">#</a></h2>
+<p>El estándar industrial introducido por J.P. Morgan en 1996 modela la
+varianza condicional como una media móvil exponencialmente ponderada
+de retornos cuadráticos:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma^2_{t+1} = \lambda\,\sigma^2_t + (1 - \lambda)\, r_t^2
+\]</div>
+<p>con <span class="math notranslate nohighlight">\(\lambda = 0.94\)</span> para datos diarios (vida media efectiva <span class="math notranslate nohighlight">\(\approx 11\)</span>
+días). No requiere optimización: los pesos están fijados por convención.
+La predicción de la volatilidad es <span class="math notranslate nohighlight">\(\sigma_{t+1} = \sqrt{\sigma^2_{t+1}}\)</span>.</p>
+<p>EWMA se considera un caso particular de GARCH(1,1) con
+<span class="math notranslate nohighlight">\((\omega, \alpha, \beta) = (0, 1-\lambda, \lambda)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;ewma_094&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">benchmarks</span><span class="o">.</span><span class="n">ewma_forecast</span><span class="p">(</span><span class="n">full_df</span><span class="p">,</span> <span class="n">test_idx</span><span class="p">,</span> <span class="n">lambda_</span><span class="o">=</span><span class="mf">0.94</span><span class="p">)</span>
+<span class="n">times</span><span class="p">[</span><span class="s2">&quot;ewma_094&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="n">rmse_e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">((</span><span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;ewma_094&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_test_true</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">mae_e</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;ewma_094&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_test_true</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ewma_094 | RMSE = </span><span class="si">{</span><span class="n">rmse_e</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> | MAE = </span><span class="si">{</span><span class="n">mae_e</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> | tiempo = </span><span class="si">{</span><span class="n">times</span><span class="p">[</span><span class="s1">&#39;ewma_094&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> ms&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ewma_094 | RMSE = 0.00597 | MAE = 0.00458 | tiempo = 9.68 ms
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="arimabollerslev1986generalized">
+<h2>4.7 ARIMA<span id="id3">[<a class="reference internal" href="../references.html#id2" title="Tim Bollerslev. Generalized autoregressive conditional heteroskedasticity. Journal of Econometrics, 31(3):307–327, 1986. doi:10.1016/0304-4076(86)90063-1.">Bollerslev, 1986</a>]</span><a class="headerlink" href="#arimabollerslev1986generalized" title="Link to this heading">#</a></h2>
+<p>El modelo lineal clásico para series temporales:</p>
+<div class="math notranslate nohighlight">
+\[
+\phi(L)(1 - L)^d \sigma_t = \theta(L)\,\varepsilon_t
+\]</div>
+<p>con <span class="math notranslate nohighlight">\(\phi(L), \theta(L)\)</span> polinomios de retardos. Aquí evaluamos
+<span class="math notranslate nohighlight">\(\text{ARIMA}(1, 0, 1)\)</span> sobre la serie de volatilidad realizada, un
+orden parsimonioso que captura un componente autorregresivo de orden 1
+y un término de media móvil de orden 1. La estimación se hace por
+máxima verosimilitud sobre <strong>train</strong>; luego se aplica walk-forward
+filtering sin re-estimación de parámetros.</p>
+<p>Como la varianza del proceso no está garantizada como positiva por
+ARIMA (es un modelo lineal sobre nivel), las predicciones se
+truncan en cero si llegan a ser negativas, lo cual ocurre raramente
+y es una decisión documentada.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;arima_101&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">benchmarks</span><span class="o">.</span><span class="n">arima_forecast</span><span class="p">(</span><span class="n">full_df</span><span class="p">,</span> <span class="n">train_idx</span><span class="p">,</span> <span class="n">test_idx</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">times</span><span class="p">[</span><span class="s2">&quot;arima_101&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="n">rmse_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">((</span><span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;arima_101&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_test_true</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">mae_a</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;arima_101&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_test_true</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;arima_101 | RMSE = </span><span class="si">{</span><span class="n">rmse_a</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> | MAE = </span><span class="si">{</span><span class="n">mae_a</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> | tiempo = </span><span class="si">{</span><span class="n">times</span><span class="p">[</span><span class="s1">&#39;arima_101&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>arima_101 | RMSE = 0.00603 | MAE = 0.00400 | tiempo = 15.9 s
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="garch-1-1-bollerslev-1986-bollerslev1986generalized">
+<h2>4.8 GARCH(1, 1) — Bollerslev 1986 <span id="id4">[<a class="reference internal" href="../references.html#id2" title="Tim Bollerslev. Generalized autoregressive conditional heteroskedasticity. Journal of Econometrics, 31(3):307–327, 1986. doi:10.1016/0304-4076(86)90063-1.">Bollerslev, 1986</a>]</span><a class="headerlink" href="#garch-1-1-bollerslev-1986-bollerslev1986generalized" title="Link to this heading">#</a></h2>
+<p>El benchmark canónico para volatilidad condicional. Modela <span class="math notranslate nohighlight">\(\sigma^2_t\)</span>
+explícitamente como una función de la innovación pasada y la varianza
+pasada:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma^2_t = \omega + \alpha\,\varepsilon^2_{t-1} + \beta\,\sigma^2_{t-1}
+\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\varepsilon_t = \sigma_t\,z_t\)</span> con <span class="math notranslate nohighlight">\(z_t \sim \mathcal{N}(0, 1)\)</span>.
+Para estacionariedad se requiere <span class="math notranslate nohighlight">\(\alpha + \beta &lt; 1\)</span>. El parámetro
+<span class="math notranslate nohighlight">\(\alpha\)</span> mide la reactividad a shocks recientes, <span class="math notranslate nohighlight">\(\beta\)</span> la persistencia
+de la varianza, y <span class="math notranslate nohighlight">\(\omega\)</span> la varianza incondicional desescalada por
+<span class="math notranslate nohighlight">\(1 - \alpha - \beta\)</span>.</p>
+<p>La estimación se hace por MLE con la implementación de la librería
+<code class="docutils literal notranslate"><span class="pre">arch</span></code><span id="id5">[<a class="reference internal" href="../references.html#id2" title="Tim Bollerslev. Generalized autoregressive conditional heteroskedasticity. Journal of Econometrics, 31(3):307–327, 1986. doi:10.1016/0304-4076(86)90063-1.">Bollerslev, 1986</a>]</span>. Para evitar problemas de escala
+en la optimización, los retornos se reescalan internamente por 100, y
+las predicciones se des-escalan al final.</p>
+<p><strong>Limitación importante:</strong> GARCH predice <span class="math notranslate nohighlight">\(\sigma_{t+1}\)</span> instantánea
+(volatilidad del retorno del día siguiente). Nuestro target es la
+volatilidad realizada de una ventana de cinco días que termina en
+<span class="math notranslate nohighlight">\(t+1\)</span>. La predicción es válida como un <em>proxy</em>; la diferencia de
+definición se absorbe en la comparación relativa con otros modelos
+(el test de Diebold-Mariano se basa en diferenciales de pérdida, no
+en niveles absolutos).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;garch_11&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">benchmarks</span><span class="o">.</span><span class="n">garch_forecast</span><span class="p">(</span><span class="n">full_df</span><span class="p">,</span> <span class="n">train_idx</span><span class="p">,</span> <span class="n">test_idx</span><span class="p">)</span>
+<span class="n">times</span><span class="p">[</span><span class="s2">&quot;garch_11&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="n">rmse_g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">((</span><span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;garch_11&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_test_true</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">mae_g</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;garch_11&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_test_true</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;garch_11 | RMSE = </span><span class="si">{</span><span class="n">rmse_g</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> | MAE = </span><span class="si">{</span><span class="n">mae_g</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> | tiempo = </span><span class="si">{</span><span class="n">times</span><span class="p">[</span><span class="s1">&#39;garch_11&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>garch_11 | RMSE = 0.00789 | MAE = 0.00678 | tiempo = 0.03 s
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="har-rv-corsi-2009-corsi2009simple">
+<h2>4.9 HAR-RV — Corsi 2009 <span id="id6">[<a class="reference internal" href="../references.html#id3" title="Fulvio Corsi. A simple approximate long-memory model of realized volatility. Journal of Financial Econometrics, 7(2):174–196, 2009. doi:10.1093/jjfinec/nbp001.">Corsi, 2009</a>]</span><a class="headerlink" href="#har-rv-corsi-2009-corsi2009simple" title="Link to this heading">#</a></h2>
+<p>El modelo Heterogeneous Autoregressive of Realized Volatility captura
+la <em>memoria heterogénea</em> del mercado: distintos tipos de participantes
+operan con distintos horizontes y dejan huellas diferenciables en la
+volatilidad observada.</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_{t+1} = \beta_0 + \beta_d\, \sigma^{(d)}_t + \beta_w\, \sigma^{(w)}_t + \beta_m\, \sigma^{(m)}_t + \varepsilon_t
+\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\sigma^{(d)}_t\)</span>, <span class="math notranslate nohighlight">\(\sigma^{(w)}_t\)</span> y <span class="math notranslate nohighlight">\(\sigma^{(m)}_t\)</span> son la
+volatilidad realizada rezagada un día, promediada sobre cinco días y
+sobre veintidós días, respectivamente. Los tres componentes ya fueron
+construidos como features causales en el Capítulo 3 (<code class="docutils literal notranslate"><span class="pre">vol_d</span></code>, <code class="docutils literal notranslate"><span class="pre">vol_w</span></code>,
+<code class="docutils literal notranslate"><span class="pre">vol_m</span></code>), con <code class="docutils literal notranslate"><span class="pre">shift(1)</span></code> para garantizar que en <span class="math notranslate nohighlight">\(t\)</span> solo se use
+información hasta <span class="math notranslate nohighlight">\(t-1\)</span>.</p>
+<p>La estimación es por OLS, lo que lo hace trivial computacionalmente y
+estable. Pese a su simplicidad, HAR-RV es <strong>el modelo estándar moderno
+para forecasting de volatilidad realizada</strong> y suele batir a GARCH en
+estudios comparativos <span id="id7">[<a class="reference internal" href="../references.html#id3" title="Fulvio Corsi. A simple approximate long-memory model of realized volatility. Journal of Financial Econometrics, 7(2):174–196, 2009. doi:10.1093/jjfinec/nbp001.">Corsi, 2009</a>]</span><span id="id8">[<a class="reference internal" href="../references.html#id5" title="Torben G. Andersen, Tim Bollerslev, Francis X. Diebold, and Paul Labys. Modeling and forecasting realized volatility. Econometrica, 71(2):579–625, 2003. doi:10.1111/1468-0262.00418.">Andersen <em>et al.</em>, 2003</a>]</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;har_rv&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">benchmarks</span><span class="o">.</span><span class="n">har_rv_forecast</span><span class="p">(</span><span class="n">full_df</span><span class="p">,</span> <span class="n">train_idx</span><span class="p">,</span> <span class="n">test_idx</span><span class="p">)</span>
+<span class="n">times</span><span class="p">[</span><span class="s2">&quot;har_rv&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="n">rmse_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">((</span><span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;har_rv&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_test_true</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">mae_h</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;har_rv&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_test_true</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;har_rv | RMSE = </span><span class="si">{</span><span class="n">rmse_h</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> | MAE = </span><span class="si">{</span><span class="n">mae_h</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2"> | tiempo = </span><span class="si">{</span><span class="n">times</span><span class="p">[</span><span class="s1">&#39;har_rv&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> ms&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>har_rv | RMSE = 0.00560 | MAE = 0.00398 | tiempo = 6.11 ms
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="comparacion-de-benchmarks">
+<h2>4.10 Comparación de benchmarks<a class="headerlink" href="#comparacion-de-benchmarks" title="Link to this heading">#</a></h2>
+<p>Reunimos todas las métricas en una tabla ordenada por RMSE ascendente
+y persistimos a disco para los capítulos posteriores.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tabla resumen</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">benchmarks</span><span class="o">.</span><span class="n">summarize_benchmarks</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">y_test_true</span><span class="p">)</span>
+<span class="c1"># Añadir columna de tiempos</span>
+<span class="n">results</span><span class="p">[</span><span class="s2">&quot;time_s&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">round</span><span class="p">({</span><span class="s2">&quot;rmse&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;mae&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;time_s&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          model     rmse      mae  n_valid  time_s
+          naive 0.004253 0.002315     1045  0.0015
+         har_rv 0.005603 0.003979     1045  0.0061
+       ewma_094 0.005973 0.004577     1045  0.0097
+      arima_101 0.006033 0.004004     1045 15.9376
+rolling_mean_22 0.006892 0.004897     1045  0.0019
+       garch_11 0.007894 0.006781     1045  0.0318
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Persistir métricas y predicciones a disco</span>
+<span class="n">metrics_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">name</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;rmse&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">((</span><span class="n">pred</span> <span class="o">-</span> <span class="n">y_test_true</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))),</span>
+        <span class="s2">&quot;mae&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pred</span> <span class="o">-</span> <span class="n">y_test_true</span><span class="p">))),</span>
+        <span class="s2">&quot;time_s&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">times</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)),</span>
+        <span class="s2">&quot;n_test&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_test_true</span><span class="p">)),</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">pred</span> <span class="ow">in</span> <span class="n">predictions</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="n">save_json</span><span class="p">(</span><span class="n">metrics_dict</span><span class="p">,</span> <span class="n">METRICS_DIR</span> <span class="o">/</span> <span class="s2">&quot;04_benchmarks.json&quot;</span><span class="p">)</span>
+
+<span class="c1"># Predicciones como parquet (filas alineadas con test_idx)</span>
+<span class="n">pred_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="n">full_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+    <span class="s2">&quot;target_vol&quot;</span><span class="p">:</span> <span class="n">y_test_true</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">predictions</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="n">pred_df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">PREDICTIONS_DIR</span> <span class="o">/</span> <span class="s2">&quot;04_benchmarks_predictions.parquet&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Tabla CSV para LaTeX</span>
+<span class="n">tables_path</span> <span class="o">=</span> <span class="n">PROJECT_ROOT</span> <span class="o">/</span> <span class="s2">&quot;outputs/tables/04_benchmarks_summary.csv&quot;</span>
+<span class="n">tables_path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">results</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">tables_path</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Guardado: </span><span class="si">{</span><span class="n">METRICS_DIR</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;04_benchmarks.json&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Guardado: </span><span class="si">{</span><span class="n">PREDICTIONS_DIR</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;04_benchmarks_predictions.parquet&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Guardado: </span><span class="si">{</span><span class="n">tables_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Guardado: /home/claude/INTC-Vol-ML/outputs/metrics/04_benchmarks.json
+Guardado: /home/claude/INTC-Vol-ML/outputs/predictions/04_benchmarks_predictions.parquet
+Guardado: /home/claude/INTC-Vol-ML/outputs/tables/04_benchmarks_summary.csv
+</pre></div>
+</div>
+</div>
+</div>
+<section id="visualizacion-1-comparacion-de-rmse-mae">
+<h3>Visualización 1 — comparación de RMSE/MAE<a class="headerlink" href="#visualizacion-1-comparacion-de-rmse-mae" title="Link to this heading">#</a></h3>
+<p>Las dos métricas no siempre coinciden en el ranking, por eso se
+visualizan juntas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">results_sorted_rmse</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;rmse&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">results_sorted_rmse</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">],</span> <span class="n">results_sorted_rmse</span><span class="p">[</span><span class="s2">&quot;rmse&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#1f77b4&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;RMSE&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;RMSE sobre test (menor es mejor)&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">results_sorted_mae</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;mae&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">results_sorted_mae</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">],</span> <span class="n">results_sorted_mae</span><span class="p">[</span><span class="s2">&quot;mae&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#ff7f0e&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;MAE&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;MAE sobre test (menor es mejor)&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">savefig</span><span class="p">(</span><span class="n">FIGURES_DIR</span> <span class="o">/</span> <span class="s2">&quot;04_benchmarks_rmse_mae.png&quot;</span><span class="p">,</span> <span class="n">fig</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4393227ac17fb3fcf33651fcfc2d047ffae908896e35db6d52e5fe9084ee64f4.png" src="../_images/4393227ac17fb3fcf33651fcfc2d047ffae908896e35db6d52e5fe9084ee64f4.png" />
+</div>
+</div>
+</section>
+<section id="visualizacion-2-predicciones-vs-realidad">
+<h3>Visualización 2 — predicciones vs. realidad<a class="headerlink" href="#visualizacion-2-predicciones-vs-realidad" title="Link to this heading">#</a></h3>
+<p>Mostramos las predicciones de cada benchmark frente al target real
+sobre el conjunto de test. Para no saturar el gráfico, lo dividimos en
+dos paneles.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">dates</span> <span class="o">=</span> <span class="n">full_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="c1"># Panel 1: target + predictores &quot;rapidos&quot; (sin fit)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">y_test_true</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;target_vol (real)&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;naive&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#1f77b4&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Naive&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;rolling_mean_22&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#2ca02c&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Rolling mean (22d)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;ewma_094&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#d62728&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;EWMA (λ=0.94)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Benchmarks sin ajuste paramétrico&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Volatilidad realizada&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Panel 2: target + predictores &quot;con fit&quot;</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">y_test_true</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;target_vol (real)&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;arima_101&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#9467bd&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ARIMA(1,0,1)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;garch_11&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#8c564b&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;GARCH(1,1)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;har_rv&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#e377c2&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;HAR-RV&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Benchmarks con ajuste paramétrico&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Fecha&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Volatilidad realizada&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">savefig</span><span class="p">(</span><span class="n">FIGURES_DIR</span> <span class="o">/</span> <span class="s2">&quot;04_benchmarks_pred_vs_real.png&quot;</span><span class="p">,</span> <span class="n">fig</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/74e042a86660b259dbebb370ea585275f310a4ce52fb418684eddd8f8f955b6a.png" src="../_images/74e042a86660b259dbebb370ea585275f310a4ce52fb418684eddd8f8f955b6a.png" />
+</div>
+</div>
+</section>
+<section id="visualizacion-3-error-temporal-acumulado">
+<h3>Visualización 3 — error temporal acumulado<a class="headerlink" href="#visualizacion-3-error-temporal-acumulado" title="Link to this heading">#</a></h3>
+<p>El error absoluto acumulado en el tiempo revela cuándo cada modelo
+falla. Pendientes empinadas indican períodos donde el modelo se
+desvía sistemáticamente del target.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">palette</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;naive&quot;</span><span class="p">:</span> <span class="s2">&quot;#1f77b4&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rolling_mean_22&quot;</span><span class="p">:</span> <span class="s2">&quot;#2ca02c&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ewma_094&quot;</span><span class="p">:</span> <span class="s2">&quot;#d62728&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;arima_101&quot;</span><span class="p">:</span> <span class="s2">&quot;#9467bd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;garch_11&quot;</span><span class="p">:</span> <span class="s2">&quot;#8c564b&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;har_rv&quot;</span><span class="p">:</span> <span class="s2">&quot;#e377c2&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">pred</span> <span class="ow">in</span> <span class="n">predictions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pred</span> <span class="o">-</span> <span class="n">y_test_true</span><span class="p">)</span>
+    <span class="n">cum_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nancumsum</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">cum_err</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">palette</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Error absoluto acumulado en test&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Fecha&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Σ |pred − real|&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">savefig</span><span class="p">(</span><span class="n">FIGURES_DIR</span> <span class="o">/</span> <span class="s2">&quot;04_benchmarks_cumulative_error.png&quot;</span><span class="p">,</span> <span class="n">fig</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/977f89f74c56c4466304da7b35b91c1fd9d27c6a0aaa53dfc0c170d9fa2b5334.png" src="../_images/977f89f74c56c4466304da7b35b91c1fd9d27c6a0aaa53dfc0c170d9fa2b5334.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="interpretacion">
+<h2>4.11 Interpretación<a class="headerlink" href="#interpretacion" title="Link to this heading">#</a></h2>
+<p>La tabla y los gráficos anteriores permiten extraer varias
+observaciones empíricas que enmarcan el resto del proyecto.</p>
+<p><strong>Naive domina por amplio margen.</strong> La predicción de persistencia
+<span class="math notranslate nohighlight">\(\widehat{\sigma}_{t+1} = \sigma_t\)</span> obtiene el RMSE y MAE más bajos.
+Este hallazgo es consistente con la literatura sobre forecasting de
+volatilidad de corto plazo: la autocorrelación de orden 1 de la
+volatilidad realizada en horizonte diario es típicamente superior a
+0.85, lo que deja muy poca varianza marginal para modelos más
+sofisticados <span id="id9">[<a class="reference internal" href="../references.html#id5" title="Torben G. Andersen, Tim Bollerslev, Francis X. Diebold, and Paul Labys. Modeling and forecasting realized volatility. Econometrica, 71(2):579–625, 2003. doi:10.1111/1468-0262.00418.">Andersen <em>et al.</em>, 2003</a>]</span><span id="id10">[<a class="reference internal" href="../references.html#id3" title="Fulvio Corsi. A simple approximate long-memory model of realized volatility. Journal of Financial Econometrics, 7(2):174–196, 2009. doi:10.1093/jjfinec/nbp001.">Corsi, 2009</a>]</span>. Para
+que un modelo más complejo aporte valor, debe capturar señales
+<em>ortogonales</em> a la persistencia.</p>
+<p><strong>HAR-RV es el segundo mejor.</strong> El modelo de Corsi obtiene el segundo
+RMSE más bajo. La descomposición en componentes diario, semanal y
+mensual le permite reaccionar a shocks de corto plazo manteniendo el
+nivel de mediano plazo, lo cual encaja con la dinámica observada en
+INTC.</p>
+<p><strong>EWMA y ARIMA(1,0,1) producen errores similares.</strong> La equivalencia
+era esperable: EWMA es un caso particular de GARCH(1,1), y
+<span class="math notranslate nohighlight">\(\text{ARIMA}(1,0,1)\)</span> comparte el espacio de estado de un AR(1) sobre
+la volatilidad, lo que aproxima la misma dinámica.</p>
+<p><strong>GARCH(1,1) es el peor.</strong> El resultado merece explicación. GARCH
+predice la volatilidad <em>instantánea</em> <span class="math notranslate nohighlight">\(\sigma_{t+1}\)</span> del retorno del
+día siguiente, mientras que el target es la volatilidad realizada de
+una ventana de cinco días. La diferencia de definición produce un
+sesgo sistemático de sobre-estimación visible en el gráfico de
+predicciones (las trazas de GARCH se mantienen por encima del nivel
+real durante todo el test). En el Capítulo 11 evaluaremos
+formalmente con Diebold-Mariano si la diferencia entre GARCH y los
+demás benchmarks es estadísticamente significativa.</p>
+<p><strong>Implicación metodológica.</strong> La línea a batir para todo el proyecto
+es <strong>Naive con RMSE ≈ 0.00425 y MAE ≈ 0.00232</strong>. Los modelos de
+Machine Learning del Capítulo 5 y el modelo original del Capítulo 13
+deben superar este umbral para justificar su complejidad. Si no lo
+hacen, el reporte académico debe declararlo explícitamente.</p>
+</section>
+<section id="conexion-con-el-siguiente-capitulo">
+<h2>4.12 Conexión con el siguiente capítulo<a class="headerlink" href="#conexion-con-el-siguiente-capitulo" title="Link to this heading">#</a></h2>
+<p>Con los benchmarks econométricos en su sitio, el Capítulo 5 entrena
+los modelos base de regresión exigidos por la rúbrica (Ridge, Lasso,
+KNN, Decision Tree, Random Forest, SVR y XGBoost), todos dentro de
+<code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> para evitar leakage. Las predicciones se persisten en la
+misma estructura usada aquí
+(<code class="docutils literal notranslate"><span class="pre">outputs/predictions/04_benchmarks_predictions.parquet</span></code>,
+<code class="docutils literal notranslate"><span class="pre">outputs/predictions/05_regression_predictions.parquet</span></code>, etc.) para
+que el Capítulo 11 pueda realizar comparaciones estadísticas
+(Diebold-Mariano por pares, Bootstrap CI) sobre una base homogénea.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03_features_targets.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">3. Features causales y targets</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="05_modelos_regresion.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">5. Modelos base de regresión</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-empezar-por-benchmarks-econometricos">4.1 Por qué empezar por benchmarks econométricos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convenciones-de-evaluacion">4.2 Convenciones de evaluación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-y-carga-de-datos">4.3 Setup y carga de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-predictor-de-persistencia">4.4 Naive — predictor de persistencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling-mean">4.5 Rolling mean</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ewma-riskmetrics-bollerslev1986generalized">4.6 EWMA (RiskMetrics) <span class="xref cite">bollerslev1986generalized</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arimabollerslev1986generalized">4.7 ARIMA<span class="xref cite">bollerslev1986generalized</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#garch-1-1-bollerslev-1986-bollerslev1986generalized">4.8 GARCH(1, 1) — Bollerslev 1986 <span class="xref cite">bollerslev1986generalized</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#har-rv-corsi-2009-corsi2009simple">4.9 HAR-RV — Corsi 2009 <span class="xref cite">corsi2009simple</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-benchmarks">4.10 Comparación de benchmarks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-1-comparacion-de-rmse-mae">Visualización 1 — comparación de RMSE/MAE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-2-predicciones-vs-realidad">Visualización 2 — predicciones vs. realidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-3-error-temporal-acumulado">Visualización 3 — error temporal acumulado</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">4.11 Interpretación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conexion-con-el-siguiente-capitulo">4.12 Conexión con el siguiente capítulo</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Juan Camilo Conrado · Sergio Cadavid · Mateo Chang
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
