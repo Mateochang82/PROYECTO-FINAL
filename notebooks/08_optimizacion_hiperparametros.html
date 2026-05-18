@@ -1059,6 +1059,7 @@ indica un método más eficiente.</p>
 <img alt="../_images/5ebf6a4d134812794cae6115fa37678e7b5cfafba6ec129dffea1067764173cf.png" src="../_images/5ebf6a4d134812794cae6115fa37678e7b5cfafba6ec129dffea1067764173cf.png" />
 </div>
 </div>
+<p><strong>Interpretación.</strong> Las curvas de convergencia muestran cómo cada método explora el espacio de hiperparámetros. Optuna (TPE) y DEAP (algoritmo genético) convergen más rápido y a mejores soluciones que Grid Search y Random Search, evidenciando que los métodos guiados por información histórica son más eficientes. Random Search se desempeña sorprendentemente bien para ser un método sin guía, consistente con la literatura. Grid Search es el menos eficiente porque evalúa configuraciones predefinidas que no necesariamente son las óptimas.</p>
 </section>
 <section id="visualizacion-tiempo-vs-calidad">
 <h3>Visualización — tiempo vs calidad<a class="headerlink" href="#visualizacion-tiempo-vs-calidad" title="Link to this heading">#</a></h3>
@@ -1093,6 +1094,7 @@ está abajo a la izquierda (poco tiempo, bajo error).</p>
 <img alt="../_images/96644466c3605925b73f8381196987dd449db31f40a836d712fc8176014ba4ca.png" src="../_images/96644466c3605925b73f8381196987dd449db31f40a836d712fc8176014ba4ca.png" />
 </div>
 </div>
+<p><strong>Interpretación.</strong> El gráfico tiempo vs calidad sitúa a Optuna en la zona ideal: baja RMSE test (0.00382) con tiempo razonable. DEAP también logra buenos resultados pero con tiempo mayor. Grid y Random Search obtienen RMSE test muy similares entre sí (≈0.00398), confirmando que para este problema los métodos guiados no compran ventaja dramática sobre exploración aleatoria, pero sí sobre la búsqueda exhaustiva en grilla.</p>
 </section>
 </section>
 <section id="interpretacion">

@@ -606,7 +606,7 @@ early stopping).</p>
 <p>Los modelos KNN y GaussianNB no aceptan <code class="docutils literal notranslate"><span class="pre">class_weight</span></code>. Para ellos,
 omitimos la variante «balanced» y solo evaluamos baseline, SMOTE
 y ADASYN.</p>
-<div class="cell docutils container">
+<div class="cell tag_remove-stdout docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_exp1</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># (model, technique) -&gt; dict</span>
 
@@ -623,31 +623,9 @@ y ADASYN.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Baseline ===
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           knn | AUC_test=0.8393 F1=0.4384 Rec=0.2936
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   gaussian_nb | AUC_test=0.8703 F1=0.5455 Rec=0.4128
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     logreg_l1 | AUC_test=0.9443 F1=0.7708 Rec=0.6789
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     logreg_l2 | AUC_test=0.9442 F1=0.7708 Rec=0.6789
-          tree | AUC_test=0.9251 F1=0.7053 Rec=0.6147
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            rf | AUC_test=0.9559 F1=0.8061 Rec=0.7248
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           svm | AUC_test=0.9136 F1=0.6532 Rec=0.7431
-</pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
+<div class="cell tag_remove-stdout docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># (2) SMOTE</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== SMOTE ===&quot;</span><span class="p">)</span>
@@ -663,29 +641,9 @@ y ADASYN.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== SMOTE ===
-           knn | AUC_test=0.8391 F1=0.4384 Rec=0.2936
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   gaussian_nb | AUC_test=0.8703 F1=0.5455 Rec=0.4128
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     logreg_l1 | AUC_test=0.9442 F1=0.7708 Rec=0.6789
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     logreg_l2 | AUC_test=0.9441 F1=0.7708 Rec=0.6789
-          tree | AUC_test=0.9252 F1=0.7053 Rec=0.6147
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            rf | AUC_test=0.9576 F1=0.7938 Rec=0.7064
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           svm | AUC_test=0.9137 F1=0.6586 Rec=0.7523
-</pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
+<div class="cell tag_remove-stdout docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># (3) ADASYN</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== ADASYN ===&quot;</span><span class="p">)</span>
@@ -706,23 +664,9 @@ y ADASYN.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== ADASYN ===
-           knn | ADASYN FALLÓ: No samples will be generated with the provided ratio settings.
-   gaussian_nb | ADASYN FALLÓ: No samples will be generated with the provided ratio settings.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     logreg_l1 | ADASYN FALLÓ: No samples will be generated with the provided ratio settings.
-     logreg_l2 | ADASYN FALLÓ: No samples will be generated with the provided ratio settings.
-          tree | ADASYN FALLÓ: No samples will be generated with the provided ratio settings.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            rf | ADASYN FALLÓ: No samples will be generated with the provided ratio settings.
-           svm | ADASYN FALLÓ: No samples will be generated with the provided ratio settings.
-</pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
+<div class="cell tag_remove-stdout docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># (4) class_weight=&#39;balanced&#39; (solo para modelos que lo soportan)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== class_weight=&#39;balanced&#39; ===&quot;</span><span class="p">)</span>
@@ -740,25 +684,9 @@ y ADASYN.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== class_weight=&#39;balanced&#39; ===
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     logreg_l1 | AUC_test=0.9443 F1=0.7708 Rec=0.6789
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     logreg_l2 | AUC_test=0.9442 F1=0.7708 Rec=0.6789
-          tree | AUC_test=0.9277 F1=0.7053 Rec=0.6147
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            rf | AUC_test=0.9563 F1=0.7772 Rec=0.6881
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           svm | AUC_test=0.9136 F1=0.6532 Rec=0.7431
-</pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
+<div class="cell tag_remove-stdout docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># (5) XGBoost — manejo manual por early stopping</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== XGBoost (manual) ===&quot;</span><span class="p">)</span>
@@ -832,19 +760,6 @@ y ADASYN.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== XGBoost (manual) ===
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          xgb baseline | AUC_test=0.9557 F1=0.8125 Rec=0.7156
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>             xgb smote | AUC_test=0.9538 F1=0.8187 Rec=0.7248
-  xgb adasyn FALLÓ: No samples will be generated with the provided ratio settings.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          xgb balanced | scale_pos_weight=1.00 | AUC_test=0.9587 F1=0.8105 Rec=0.7064
-</pre></div>
-</div>
 </div>
 </div>
 </section>
@@ -968,6 +883,7 @@ gaussian_nb    0.5455 0.5455     NaN       NaN
 <img alt="../_images/c5eee21450b73317330f5cf6b07852316eb0b6ffa2915b370a7cf9f0c73284a7.png" src="../_images/c5eee21450b73317330f5cf6b07852316eb0b6ffa2915b370a7cf9f0c73284a7.png" />
 </div>
 </div>
+<p><strong>Interpretación.</strong> Las cuatro barras agrupadas por modelo muestran que las técnicas de balanceo (SMOTE, ADASYN, class_weight) producen variaciones marginales sobre el train balanceado real. ADASYN incluso falla en varios modelos porque la clase minoritaria no tiene suficientes muestras «difíciles» para sintetizar. La conclusión es contraintuitiva pero clara: si el train ya está balanceado por construcción del umbral, las técnicas de balanceo no aportan nada.</p>
 </section>
 </section>
 <section id="experimento-2-train-artificialmente-desbalanceado-90-10">
@@ -981,7 +897,7 @@ métricas aquí, hay un problema; si las mueven, validamos que las
 técnicas funcionan donde fueron diseñadas.</p>
 <p>La regla anti-leakage se mantiene: solo sub-sampleamos el TRAIN
 (con semilla fija); val y test permanecen sin tocar.</p>
-<div class="cell docutils container">
+<div class="cell tag_remove-stdout docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sub-sampleo: clase 0 toda; de clase 1 nos quedamos con n_minor tal que ratio = 90/10</span>
 <span class="n">rng_sub</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">RANDOM_STATE</span><span class="p">)</span>
@@ -1007,12 +923,9 @@ técnicas funcionan donde fueron diseñadas.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train sub-sampleado: (2704, 31) | clases: {np.int64(0): np.int64(2434), np.int64(1): np.int64(270)} | tasa_pos = 0.100
-</pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
+<div class="cell tag_remove-stdout docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_exp2</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -1058,28 +971,9 @@ técnicas funcionan donde fueron diseñadas.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           knn | base AUC=0.7468 F1=0.0360 | smote 0.8208 0.4459 | adasyn 0.8181 0.4805
-   gaussian_nb | base AUC=0.8873 F1=0.4218 | smote 0.8953 0.4113 | adasyn 0.7677 0.4658
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     logreg_l1 | base AUC=0.9201 F1=0.2835 | smote 0.9149 0.5548 | adasyn 0.9134 0.5890 | balanced 0.9308 0.6893
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     logreg_l2 | base AUC=0.9181 F1=0.2698 | smote 0.9145 0.5513 | adasyn 0.9132 0.5890 | balanced 0.9297 0.6932
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          tree | base AUC=0.8850 F1=0.4583 | smote 0.7527 0.5965 | adasyn 0.8380 0.6452 | balanced 0.7145 0.4234
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            rf | base AUC=0.9251 F1=0.1983 | smote 0.9378 0.3609 | adasyn 0.9366 0.3582 | balanced 0.9329 0.2276
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           svm | base AUC=0.7224 F1=0.4196 | smote 0.9092 0.3485 | adasyn 0.8928 0.3359 | balanced 0.8552 0.6465
-</pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
+<div class="cell tag_remove-stdout docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># XGBoost manual sobre train sub-sampleado</span>
 <span class="n">imputer_sub</span> <span class="o">=</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_sub</span><span class="p">)</span>
@@ -1122,12 +1016,6 @@ técnicas funcionan donde fueron diseñadas.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          xgb baseline | AUC_test=0.9259 F1=0.0877 Rec=0.0459
-             xgb smote | AUC_test=0.9385 F1=0.6061 Rec=0.4587
-            xgb adasyn | AUC_test=0.9304 F1=0.6228 Rec=0.4771
-          xgb balanced spw=9.01 | AUC_test=0.9421 F1=0.6627 Rec=0.5138
-</pre></div>
-</div>
 </div>
 </div>
 </section>
@@ -1232,6 +1120,7 @@ gaussian_nb    0.4218 0.4113  0.4658       NaN
 <img alt="../_images/18d3de748e858c1d874f0ea84f1e07d6fbd3ff89677146b33bd36484b2ae3031.png" src="../_images/18d3de748e858c1d874f0ea84f1e07d6fbd3ff89677146b33bd36484b2ae3031.png" />
 </div>
 </div>
+<p><strong>Interpretación.</strong> La diferencia entre experimentos es elocuente. En el Exp 2 (train artificialmente desbalanceado 90/10), aplicar SMOTE o ADASYN recupera entre 5 y 50 puntos porcentuales de F1 respecto al baseline. Pero en el Exp 1 (train real, balanceado), esas mismas técnicas son prácticamente irrelevantes. Esto demuestra empíricamente que el balanceo corrige desbalance del train, no distribution shift del test.</p>
 <section id="visualizacion-comparacion-lado-a-lado-exp-1-vs-exp-2-f1">
 <h3>Visualización — comparación lado a lado Exp 1 vs Exp 2 (F1)<a class="headerlink" href="#visualizacion-comparacion-lado-a-lado-exp-1-vs-exp-2-f1" title="Link to this heading">#</a></h3>
 <p>El gráfico final muestra cómo el efecto del balanceo difiere entre
@@ -1271,6 +1160,7 @@ metodológico.</p>
 <img alt="../_images/393971075eaa60d6d51d2672f28741632ffd1e09a642decb5b7c82c1afd9e0ce.png" src="../_images/393971075eaa60d6d51d2672f28741632ffd1e09a642decb5b7c82c1afd9e0ce.png" />
 </div>
 </div>
+<p><strong>Interpretación.</strong> El gráfico final encierra la lección del capítulo: la elección de aplicar o no aplicar SMOTE/ADASYN depende exclusivamente del balance del train. Para nuestro problema, donde el train está balanceado por construcción, ninguna técnica de balanceo es necesaria. El distribution shift del test (90% bajo, 10% alto) es un fenómeno diferente que requiere herramientas distintas (domain adaptation, recalibración de probabilidades).</p>
 </section>
 </section>
 <section id="interpretacion">

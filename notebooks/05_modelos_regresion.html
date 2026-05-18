@@ -946,6 +946,7 @@ naive (NB 04)  0.003903 0.002522  0.6155   0.004253  0.002315   0.6509   0.00
 <img alt="../_images/20c2d702607a544d7dc0b71a23a656bd370ee93708ff9488e0350817ebef70e3.png" src="../_images/20c2d702607a544d7dc0b71a23a656bd370ee93708ff9488e0350817ebef70e3.png" />
 </div>
 </div>
+<p><strong>Interpretación.</strong> La comparación val vs test posiciona a Ridge como el modelo más sólido del capítulo (RMSE val 0.00358, RMSE test 0.00384, R² test +0.715). XGBoost queda muy cerca (RMSE test 0.00396) y supera levemente a la referencia Naive. Lasso, Decision Tree y Random Forest quedan en una banda media. KNN se aleja notoriamente del resto y SVR colapsa con RMSE 0.0229 (R² test negativo de -9), señal de que el kernel RBF no fue capaz de calibrarse al rango de magnitud de la volatilidad sin tuning específico.</p>
 </section>
 <section id="visualizacion-2-real-vs-predicho-para-los-modelos-top">
 <h3>Visualización 2 — real vs predicho para los modelos top<a class="headerlink" href="#visualizacion-2-real-vs-predicho-para-los-modelos-top" title="Link to this heading">#</a></h3>
@@ -983,6 +984,7 @@ naive (NB 04)  0.003903 0.002522  0.6155   0.004253  0.002315   0.6509   0.00
 <img alt="../_images/6b297ee51d0c9848a4dad5b0f2908212e2b2b5623dfbeba1f6139c7f03fb7125.png" src="../_images/6b297ee51d0c9848a4dad5b0f2908212e2b2b5623dfbeba1f6139c7f03fb7125.png" />
 </div>
 </div>
+<p><strong>Interpretación.</strong> El panel «real vs predicho» muestra que Ridge y XGBoost siguen los picos del target en los momentos críticos del test, aunque ambos lo subestiman ligeramente en los máximos. Esto es esperable: ambos modelos se entrenan minimizando el error cuadrático medio, lo que les penaliza más las predicciones lejanas pero los empuja hacia la media en los extremos. Ningún modelo logra capturar los picos puntuales de mayo de 2014 ni de noviembre de 2016, donde el target subió bruscamente sin que las features lo anticiparan.</p>
 </section>
 <section id="visualizacion-3-gap-valtest-signo-de-overfitting">
 <h3>Visualización 3 — gap val→test (signo de overfitting)<a class="headerlink" href="#visualizacion-3-gap-valtest-signo-de-overfitting" title="Link to this heading">#</a></h3>
@@ -1020,6 +1022,7 @@ overfitting</strong>. Esto se discute en la interpretación.</p>
 <img alt="../_images/7111f25570238ff992540eda537b6cfd8184c66a8d8cefa3378f606c272ef547.png" src="../_images/7111f25570238ff992540eda537b6cfd8184c66a8d8cefa3378f606c272ef547.png" />
 </div>
 </div>
+<p><strong>Interpretación.</strong> El gap val→test mide cuánto degrada el desempeño cuando el modelo enfrenta el período de test (2013-2017) tras haber sido entrenado en 1990-2009. Los modelos con menor gap son Ridge (+0.00026) y XGBoost (+0.00043), lo cual sugiere que generalizan bien. Decision Tree, Random Forest y Lasso tienen gaps moderados, compatibles con un sobreajuste leve. KNN y SVR tienen gaps grandes, evidencia de overfitting estructural al train.</p>
 </section>
 </section>
 <section id="interpretacion">

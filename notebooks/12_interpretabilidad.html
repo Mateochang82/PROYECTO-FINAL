@@ -582,6 +582,7 @@ px_dist_sma_22 0.000256   112.0  840.178589
 </div>
 </div>
 </div>
+<p><strong>Interpretación.</strong> El feature importance nativo de XGBoost por gain muestra que <code class="docutils literal notranslate"><span class="pre">vol_5</span></code> (volatilidad rolling de 5 días) domina ampliamente con un gain muy superior al resto. Las siguientes features (retornos rezagados, componentes HAR-RV, ATR) aportan contribuciones moderadas. La concentración en <code class="docutils literal notranslate"><span class="pre">vol_5</span></code> sugiere que el modelo no lineal está principalmente reproduciendo la persistencia de corto plazo de la volatilidad realizada.</p>
 </section>
 <section id="permutation-importance">
 <h2>12.5 Permutation importance<a class="headerlink" href="#permutation-importance" title="Link to this heading">#</a></h2>
@@ -656,6 +657,7 @@ volume_lag_1              0.000020             0.000006
 </div>
 </div>
 </div>
+<p><strong>Interpretación.</strong> La permutation importance confirma el dominio de <code class="docutils literal notranslate"><span class="pre">vol_5</span></code>: permutar esta feature degrada el RMSE de forma drásticamente mayor que cualquier otra. El segundo grupo lo conforman las features de retornos rezagados (<code class="docutils literal notranslate"><span class="pre">ret_lag_1</span></code>, <code class="docutils literal notranslate"><span class="pre">ret_lag_2</span></code>, <code class="docutils literal notranslate"><span class="pre">ret_lag_3</span></code>) y los componentes HAR-RV (<code class="docutils literal notranslate"><span class="pre">vol_d</span></code>, <code class="docutils literal notranslate"><span class="pre">vol_w</span></code>), con contribuciones modestas pero detectables. Esta convergencia entre gain nativo y permutation importance da confianza en la jerarquía identificada.</p>
 </section>
 <section id="shap-treeexplainer-interpretacion-global">
 <h2>12.6 SHAP TreeExplainer — interpretación global<a class="headerlink" href="#shap-treeexplainer-interpretacion-global" title="Link to this heading">#</a></h2>
@@ -742,6 +744,7 @@ log_volume_ma_10       0.000265
 </div>
 </div>
 </div>
+<p><strong>Interpretación.</strong> La importancia global por SHAP refuerza el patrón: <code class="docutils literal notranslate"><span class="pre">vol_5</span></code> aporta la mayor parte de la varianza explicada del modelo. Las top features secundarias (retornos rezagados, vol_d, vol_w, atr_14) muestran contribuciones similares entre sí y mucho menores que vol_5. Esta consistencia entre las tres técnicas (gain, permutación, SHAP) reduce sustancialmente la incertidumbre sobre qué features son los verdaderos drivers del modelo.</p>
 </section>
 <section id="id3">
 <h2>12.7 Selección de instancias para LIME<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
@@ -934,6 +937,7 @@ la predicción al alza; rojo = empuja a la baja.</p>
 </div>
 </div>
 </div>
+<p><strong>Interpretación.</strong> Las cuatro instancias seleccionadas para LIME forman una secuencia narrativa instructiva del cluster de volatilidad de enero 2016. El 14 de enero (FN, sub-predicción) el modelo no anticipó el pico real de 0.0508 prediciendo solo 0.0241. Para el 19 de enero (HIT alto) el modelo ya había absorbido el cambio de régimen y predijo el pico con precisión. El 22 de enero (FP, sobre-predicción) el modelo continuó esperando alta volatilidad cuando ya había bajado a 0.008. Esta secuencia FN→HIT→FP ilustra empíricamente el efecto de retraso que tienen los modelos basados en rolling windows ante cambios de régimen.</p>
 </section>
 </section>
 <section id="comparacion-global-las-tres-metricas-senalan-los-mismos-features">
@@ -1013,6 +1017,7 @@ volume_lag_1     0.0088     0.0033     0.0225    0.0115
 </div>
 </div>
 </div>
+<p><strong>Interpretación.</strong> El heatmap comparativo confirma el consenso entre las tres técnicas: <code class="docutils literal notranslate"><span class="pre">vol_5</span></code> aparece con peso aproximado de 0.62 (gain), 0.59 (permutación) y 0.42 (SHAP). Las siguientes features quedan todas por debajo de 0.07 normalizado en cualquiera de las tres métricas. Esta convergencia interpretativa explica de forma causal el hallazgo estadístico del Capítulo 11: cuando un modelo no lineal depende fuertemente de una sola feature, una regresión lineal sobre esa feature captura prácticamente la misma señal.</p>
 </section>
 <section id="interpretacion">
 <h2>12.10 Interpretación<a class="headerlink" href="#interpretacion" title="Link to this heading">#</a></h2>

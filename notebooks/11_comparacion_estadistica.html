@@ -639,6 +639,7 @@ diferencia significativa. La diagonal es 1.0 (modelo vs sí mismo).</p>
 </div>
 </div>
 </div>
+<p><strong>Interpretación.</strong> El heatmap de Diebold-Mariano revela cuáles modelos difieren significativamente entre sí en pérdida cuadrática. De las 136 comparaciones únicas, 117 son significativas a α=0.05 y 99 sobreviven la corrección Bonferroni (α/k = 0.00037). Los XGBoost optimizados forman un bloque con DM significativo contra los benchmarks econométricos. Sin embargo, dentro del top del libro (Ridge, XGB-Optuna, XGB base) las diferencias entre sí no son significativas, lo cual confirma que el ranking puntual no implica significancia estadística.</p>
 </section>
 </section>
 <section id="bootstrap-ci-95-rmse-por-modelo">
@@ -727,6 +728,7 @@ rolling_mean_22    0.006892 0.006417 0.007407
 </div>
 </div>
 </div>
+<p><strong>Interpretación.</strong> El forest plot revela tres bandas claras de desempeño. La banda superior agrupa a XGB-Optuna (RMSE 0.00382), Ridge (0.00384) y XGB base (0.00396), todos con intervalos de confianza que se solapan ampliamente. La banda media incluye Naive, Lasso, los demás modelos de NB 05 y los benchmarks econométricos. La banda inferior contiene SVR como outlier extremo. El solapamiento de IC en la banda superior confirma estadísticamente lo que el DM ya indicaba: el ranking puntual del mejor modelo no es robusto a la incertidumbre muestral.</p>
 </section>
 <section id="delong-por-pares-clasificacion">
 <h2>11.6 DeLong por pares — clasificación<a class="headerlink" href="#delong-por-pares-clasificacion" title="Link to this heading">#</a></h2>
@@ -810,6 +812,7 @@ Significativos Bonferroni: 12
 </div>
 </div>
 </div>
+<p><strong>Interpretación.</strong> El heatmap de DeLong sobre los 8 clasificadores muestra 18 pares significativos a α=0.05 y 12 que sobreviven Bonferroni. Random Forest y XGBoost son indistinguibles entre sí (AUC 0.9559 vs 0.9557 con DeLong p&gt;0.05), confirmando un empate técnico en el liderato. Ambos sí difieren significativamente de KNN, Naive Bayes y árboles individuales. Las regresiones logísticas L1 y L2 también son indistinguibles entre sí, consistente con la marginalidad del tipo de regularización en este dataset.</p>
 </section>
 <section id="bootstrap-ci-95-auc-por-clasificador">
 <h2>11.7 Bootstrap CI 95% — AUC por clasificador<a class="headerlink" href="#bootstrap-ci-95-auc-por-clasificador" title="Link to this heading">#</a></h2>
@@ -882,6 +885,7 @@ gaussian_nb     0.8703   0.8258   0.9113
 </div>
 </div>
 </div>
+<p><strong>Interpretación.</strong> Los intervalos de confianza bootstrap para AUC confirman las distinciones del DeLong. Random Forest y XGBoost tienen IC casi idénticos en torno a [0.928, 0.980], reforzando su empate técnico. Las regresiones logísticas mantienen IC más estrechos centrados en 0.944, claramente por debajo del top pero por encima del resto. El IC de KNN (centrado en 0.84) no se solapa con el de los modelos top, evidencia visual de su desempeño inferior. Esta visualización es complementaria al test de DeLong y permite ver gráficamente qué modelos son indistinguibles entre sí.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Persistir todo</span>

@@ -954,6 +954,7 @@ El área bajo cada curva es el AUC.</p>
 <img alt="../_images/0823d9fc2980f0df841d8c9dcd96f0fa2066897e8e06f29e7dc7ee169c7086cb.png" src="../_images/0823d9fc2980f0df841d8c9dcd96f0fa2066897e8e06f29e7dc7ee169c7086cb.png" />
 </div>
 </div>
+<p><strong>Interpretación.</strong> Las curvas ROC ordenan los clasificadores de forma clara. Random Forest y XGBoost dominan en la zona de bajos falsos positivos (AUC test 0.9559 y 0.9557 respectivamente), lo cual es deseable en un problema desbalanceado donde la clase positiva es la minoritaria. Las regresiones logísticas L1 y L2 quedan muy parejas entre sí (AUC ≈ 0.944), confirmando que la diferencia entre regularizaciones es marginal para este dataset. Naive Bayes y KNN quedan claramente por debajo, con AUC del orden de 0.87 y 0.84 respectivamente.</p>
 </section>
 <section id="visualizacion-2-matriz-de-confusion-del-mejor-modelo">
 <h3>Visualización 2 — matriz de confusión del mejor modelo<a class="headerlink" href="#visualizacion-2-matriz-de-confusion-del-mejor-modelo" title="Link to this heading">#</a></h3>
@@ -990,6 +991,7 @@ el conteo de verdaderos positivos, falsos negativos y demás.</p>
 <img alt="../_images/c34d7e081898dab45eedfc4ae2fc68bbf88982205d74c6ac38ab96c791c2989e.png" src="../_images/c34d7e081898dab45eedfc4ae2fc68bbf88982205d74c6ac38ab96c791c2989e.png" />
 </div>
 </div>
+<p><strong>Interpretación.</strong> Sobre el mejor modelo (Random Forest, AUC test 0.9559), la matriz de confusión muestra que de los 109 positivos reales en test se predicen correctamente la mayoría, con tasa de recall de 0.7248. Los falsos positivos son relativamente pocos pese al desbalance, lo cual contribuye al F1 alto de 0.8061. Esta calidad permite usar el clasificador con confianza para alimentar el gate del modelo original HVRF en el capítulo 13.</p>
 </section>
 <section id="visualizacion-3-auc-comparativo-val-vs-test">
 <h3>Visualización 3 — AUC comparativo val vs test<a class="headerlink" href="#visualizacion-3-auc-comparativo-val-vs-test" title="Link to this heading">#</a></h3>
@@ -1023,6 +1025,7 @@ o si todos enfrentan el mismo distribution shift de forma proporcional.</p>
 <img alt="../_images/2794da89a813363eb094a751500160ca4278e212015220df87e52143c1eb5c38.png" src="../_images/2794da89a813363eb094a751500160ca4278e212015220df87e52143c1eb5c38.png" />
 </div>
 </div>
+<p><strong>Interpretación.</strong> Random Forest y XGBoost mantienen su ventaja tanto en val como en test, con poca variación entre los dos conjuntos. Los modelos lineales (LogReg L1/L2) muestran un pequeño aumento de AUC en test, consistente con que el régimen 2013-2017 es más estable que el de validación. KNN es el único que cae claramente del val al test, indicio de sensibilidad al cambio de distribución temporal.</p>
 </section>
 </section>
 <section id="interpretacion">

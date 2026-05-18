@@ -935,6 +935,7 @@ resto.</p>
 </div>
 </div>
 </div>
+<p><strong>Interpretación.</strong> El forest plot ubica al ensamble simple en el primer lugar (RMSE test 0.00370), seguido por XGB-Optuna (0.00382), Ridge (0.00384), HVRF (0.00390) y el resto. Los intervalos de confianza bootstrap de los modelos top se solapan parcialmente, pero el ensamble simple tiene la posición puntual más baja con IC ajustado. HVRF queda en el cuarto puesto del proyecto. Los componentes individuales (Solo R_bajo y Solo R_alto) confirman su valor solo cuando se combinan: aislados se desempeñan claramente peor.</p>
 </section>
 <section id="visualizacion-2-hvrf-vs-ridge-sobre-el-test-temporal">
 <h3>Visualización 2 — HVRF vs Ridge sobre el test temporal<a class="headerlink" href="#visualizacion-2-hvrf-vs-ridge-sobre-el-test-temporal" title="Link to this heading">#</a></h3>
@@ -967,6 +968,7 @@ resto.</p>
 </div>
 </div>
 </div>
+<p><strong>Interpretación.</strong> La serie temporal del test muestra que tanto Ridge como HVRF siguen el target con fidelidad similar durante la mayor parte del período. En los momentos de pico (mayo 2014, noviembre 2016), ambos modelos subestiman el máximo pero captan correctamente la dirección del cambio. Las trayectorias de Ridge y HVRF son prácticamente indistinguibles a simple vista, consistente con la prueba DM que arroja p=0.39 (no se rechaza igualdad).</p>
 </section>
 <section id="visualizacion-3-diagnostico-interno-del-hvrf">
 <h3>Visualización 3 — Diagnóstico interno del HVRF<a class="headerlink" href="#visualizacion-3-diagnostico-interno-del-hvrf" title="Link to this heading">#</a></h3>
@@ -1016,6 +1018,7 @@ final, para ver cómo el modelo se inclina hacia <span class="math notranslate n
 </div>
 </div>
 </div>
+<p><strong>Interpretación.</strong> El diagnóstico interno revela cómo HVRF combina sus componentes. Cuando p(régimen_alto|x) es cercano a 1, la predicción se inclina hacia R_alto; cuando es cercano a 0, hacia R_bajo. La probabilidad oscila en función de las señales que recibe el clasificador (AUC test 0.968), lo cual valida que la gate funciona correctamente. La predicción HVRF final (línea azul) se mantiene cerca del target real con suavidad, pero como muestra el forest plot, esta sofisticación no traduce en ventaja estadística sobre el promedio simple Ridge + XGB.</p>
 </section>
 </section>
 <section id="interpretacion-de-los-resultados">

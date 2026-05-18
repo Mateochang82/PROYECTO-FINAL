@@ -1092,6 +1092,7 @@ NaiveBayes 1.000000e+00               0.00    auc        fit (completo)    fit (
 </div>
 </div>
 </div>
+<p><strong>Interpretación.</strong> Los speedups son consistentes en su dirección pero modestos en magnitud. Las técnicas optimizadas más impactantes para este dataset son <code class="docutils literal notranslate"><span class="pre">hist</span></code>+early-stopping en XGBoost (8.7× más rápido manteniendo precisión) y LinearSVC sobre SVC con RBF (40× más rápido). Para modelos lineales pequeños como Ridge o Naive Bayes, los solvers default son ya óptimos en un dataset de este tamaño. La lección es priorizar las técnicas donde el speedup es real y no optimizar por optimizar.</p>
 </section>
 </section>
 <section id="interpretacion">

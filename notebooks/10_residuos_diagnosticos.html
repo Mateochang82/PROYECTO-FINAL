@@ -646,6 +646,7 @@ normalidad.</p>
 </div>
 </div>
 </div>
+<p><strong>Interpretación.</strong> Los histogramas muestran residuos centrados en cero pero con colas pesadas (kurtosis entre 13 y 17 para los tres modelos), evidencia clara de no-normalidad. Los Q-Q plots confirman visualmente la desviación: los puntos extremos se alejan sistemáticamente de la diagonal. Esta no-normalidad es esperable en residuos de modelos sobre datos financieros y descarta el uso de inferencia paramétrica clásica basada en distribución t-Student.</p>
 </section>
 <section id="visualizacion-2-acf-de-residuos-por-modelo">
 <h3>Visualización 2 — ACF de residuos por modelo<a class="headerlink" href="#visualizacion-2-acf-de-residuos-por-modelo" title="Link to this heading">#</a></h3>
@@ -686,6 +687,7 @@ especificado todas las barras deberían estar dentro de las bandas
 </div>
 </div>
 </div>
+<p><strong>Interpretación.</strong> La ACF revela un hallazgo importante: aparece una autocorrelación significativa en el lag 5 para los tres modelos (Naive, Ridge, XGBoost-Optuna), lo cual es un artefacto estructural del cálculo del target con ventana de 5 días, no una falla de los modelos. Comparativamente, XGBoost-Optuna reduce la autocorrelación residual en los lags 2-4 frente a Ridge, evidencia empírica de que captura estructura no lineal adicional.</p>
 </section>
 <section id="visualizacion-3-residuos-vs-prediccion">
 <h3>Visualización 3 — Residuos vs. predicción<a class="headerlink" href="#visualizacion-3-residuos-vs-prediccion" title="Link to this heading">#</a></h3>
@@ -719,6 +721,7 @@ curvatura indica forma funcional mal especificada.</p>
 </div>
 </div>
 </div>
+<p><strong>Interpretación.</strong> Los residuos vs predicción no muestran patrones estructurados marcados, lo cual es consistente con las pruebas formales que pasan homocedasticidad (White p=0.20 para Ridge, p=0.73 para XGBoost-Optuna). La dispersión es relativamente uniforme a lo largo del rango de predicción, sin formas de embudo ni curvaturas evidentes. Esto valida que las técnicas no paramétricas (Diebold-Mariano, Bootstrap) son apropiadas para el siguiente capítulo.</p>
 </section>
 </section>
 <section id="interpretacion">

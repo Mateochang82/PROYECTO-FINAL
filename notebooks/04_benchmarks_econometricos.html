@@ -813,6 +813,7 @@ visualizan juntas.</p>
 <img alt="../_images/4393227ac17fb3fcf33651fcfc2d047ffae908896e35db6d52e5fe9084ee64f4.png" src="../_images/4393227ac17fb3fcf33651fcfc2d047ffae908896e35db6d52e5fe9084ee64f4.png" />
 </div>
 </div>
+<p><strong>Interpretación.</strong> El gráfico revela una jerarquía clara entre los seis benchmarks econométricos. Naive (RMSE 0.00425, MAE 0.00232) domina por amplio margen frente a sus competidores: HAR-RV queda segundo (RMSE 0.00560), seguido por EWMA y ARIMA en posiciones cercanas. GARCH(1,1), pese a ser el modelo teóricamente más sofisticado, queda último con RMSE 0.00789. La explicación es directa: la autocorrelación de orden 1 de la volatilidad realizada es lo suficientemente alta como para que predecir <span class="math notranslate nohighlight">\(\hat{\sigma}_{t+1} = \sigma_t\)</span> supere a cualquier modelo que intente capturar dependencias más complejas con pocos parámetros.</p>
 </section>
 <section id="visualizacion-2-predicciones-vs-realidad">
 <h3>Visualización 2 — predicciones vs. realidad<a class="headerlink" href="#visualizacion-2-predicciones-vs-realidad" title="Link to this heading">#</a></h3>
@@ -856,6 +857,7 @@ dos paneles.</p>
 <img alt="../_images/74e042a86660b259dbebb370ea585275f310a4ce52fb418684eddd8f8f955b6a.png" src="../_images/74e042a86660b259dbebb370ea585275f310a4ce52fb418684eddd8f8f955b6a.png" />
 </div>
 </div>
+<p><strong>Interpretación.</strong> Visualmente confirmamos lo que la tabla anticipaba. Naive sigue la trayectoria real con un retraso de un día, lo cual visualmente parece «exacto» porque la volatilidad cambia poco día a día. EWMA y HAR-RV producen series más suaves pero pierden los picos. Rolling mean (ventana de 22 días) queda fuertemente subestimada en períodos de alta volatilidad como inicios de 2014 y mediados de 2016. GARCH muestra una dinámica oscilante que no logra alinearse con los movimientos reales del target.</p>
 </section>
 <section id="visualizacion-3-error-temporal-acumulado">
 <h3>Visualización 3 — error temporal acumulado<a class="headerlink" href="#visualizacion-3-error-temporal-acumulado" title="Link to this heading">#</a></h3>
@@ -895,6 +897,7 @@ desvía sistemáticamente del target.</p>
 <img alt="../_images/977f89f74c56c4466304da7b35b91c1fd9d27c6a0aaa53dfc0c170d9fa2b5334.png" src="../_images/977f89f74c56c4466304da7b35b91c1fd9d27c6a0aaa53dfc0c170d9fa2b5334.png" />
 </div>
 </div>
+<p><strong>Interpretación.</strong> Las pendientes del error acumulado muestran cuándo cada modelo falla. Naive mantiene la pendiente más plana durante todo el período de test, confirmando su superioridad sostenida. Los modelos basados en promedios (rolling mean, EWMA) tienen pendientes empinadas durante los episodios volátiles de 2014 y 2016, momentos en los que la inercia del promedio les juega en contra. GARCH acumula error de forma casi monotónica, evidencia de que su especificación no se ajusta bien a este período relativamente calmo del test.</p>
 </section>
 </section>
 <section id="interpretacion">
