@@ -158,22 +158,20 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_contexto_y_datos.html">2. Contexto y dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_etl_eda.html">3. ETL y Análisis Exploratorio de Datos (EDA)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_features_targets.html">4. Features causales y targets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_benchmarks_econometricos.html">5. Benchmarks econométricos</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_modelos_regresion.html">6. Modelos base de regresión</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_modelos_clasificacion.html">7. Modelos base de clasificación</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_balanceo_clases.html">8. Balanceo de clases</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_optimizacion_hiperparametros.html">9. Optimización de hiperparámetros</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_optimizacion_computacional.html">10. Optimización computacional</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_residuos_diagnosticos.html">11. Análisis de residuos</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_comparacion_estadistica.html">12. Comparación estadística</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">13. Interpretabilidad</a></li>
-<li class="toctree-l1"><a class="reference internal" href="13_modelo_original_hvrf.html">14. Modelo original — HVRF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="14_conclusiones_sustentacion.html">15. Conclusiones y sustentación</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../references.html">16. Referencias bibliográficas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="00_setup.html">Apéndice. Verificación del entorno</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_etl_eda.html">2. ETL y Análisis Exploratorio de Datos (EDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_features_targets.html">3. Features causales y targets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_benchmarks_econometricos.html">4. Benchmarks econométricos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_modelos_regresion.html">5. Modelos base de regresión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modelos_clasificacion.html">6. Modelos base de clasificación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_balanceo_clases.html">7. Balanceo de clases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_optimizacion_hiperparametros.html">8. Optimización de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_optimizacion_computacional.html">9. Optimización computacional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_residuos_diagnosticos.html">10. Análisis de residuos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_comparacion_estadistica.html">11. Comparación estadística</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">12. Interpretabilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_modelo_original_hvrf.html">13. Modelo original — HVRF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_conclusiones_sustentacion.html">14. Conclusiones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">15. Referencias bibliográficas</a></li>
 </ul>
 
     </div>
@@ -364,7 +362,7 @@ en contribuciones por feature, con bases matemáticas sólidas.</p></li>
 <li><p><strong>LIME</strong> <span id="id2">[<a class="reference internal" href="../references.html#id15" title="Marco Tulio Ribeiro, Sameer Singh, and Carlos Guestrin. “Why Should I Trust You?”: explaining the predictions of any classifier. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 1135–1144. 2016. doi:10.1145/2939672.2939778.">Ribeiro <em>et al.</em>, 2016</a>]</span> — entrenamiento de un modelo
 lineal local alrededor de una instancia específica, para
 explicar predicciones individuales con un proxy interpretable.
-<strong>La rúbrica exige LIME explícitamente</strong> y aquí se aplica a 4
+<strong>El proyecto incluye LIME explícitamente</strong> y aquí se aplica a 4
 instancias seleccionadas por tipo de error.</p></li>
 </ol>
 <section id="modelo-a-interpretar">
@@ -1059,7 +1057,7 @@ habían absorbido aún el cambio de régimen (es un evento
 experimentado podría haber visto en noticias macro que el modelo
 no tiene como input.</p></li>
 </ul>
-<p><strong>Implicación práctica para el modelo original.</strong> Si las top
+<p><strong>Conexión con el siguiente capítulo.</strong> Si las top
 features son <code class="docutils literal notranslate"><span class="pre">vol_d</span></code>/<code class="docutils literal notranslate"><span class="pre">vol_w</span></code>/<code class="docutils literal notranslate"><span class="pre">vol_m</span></code> (HAR-RV), entonces XGBoost
 está esencialmente reproduciendo HAR-RV con no-linealidades
 marginales. Esto sugiere dos direcciones para el Capítulo 13:</p>

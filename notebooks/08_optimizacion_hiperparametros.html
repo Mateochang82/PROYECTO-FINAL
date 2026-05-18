@@ -158,22 +158,20 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_contexto_y_datos.html">2. Contexto y dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_etl_eda.html">3. ETL y Análisis Exploratorio de Datos (EDA)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_features_targets.html">4. Features causales y targets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_benchmarks_econometricos.html">5. Benchmarks econométricos</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_modelos_regresion.html">6. Modelos base de regresión</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_modelos_clasificacion.html">7. Modelos base de clasificación</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_balanceo_clases.html">8. Balanceo de clases</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Optimización de hiperparámetros</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_optimizacion_computacional.html">10. Optimización computacional</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_residuos_diagnosticos.html">11. Análisis de residuos</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_comparacion_estadistica.html">12. Comparación estadística</a></li>
-<li class="toctree-l1"><a class="reference internal" href="12_interpretabilidad.html">13. Interpretabilidad</a></li>
-<li class="toctree-l1"><a class="reference internal" href="13_modelo_original_hvrf.html">14. Modelo original — HVRF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="14_conclusiones_sustentacion.html">15. Conclusiones y sustentación</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../references.html">16. Referencias bibliográficas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="00_setup.html">Apéndice. Verificación del entorno</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_etl_eda.html">2. ETL y Análisis Exploratorio de Datos (EDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_features_targets.html">3. Features causales y targets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_benchmarks_econometricos.html">4. Benchmarks econométricos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_modelos_regresion.html">5. Modelos base de regresión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modelos_clasificacion.html">6. Modelos base de clasificación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_balanceo_clases.html">7. Balanceo de clases</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">8. Optimización de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_optimizacion_computacional.html">9. Optimización computacional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_residuos_diagnosticos.html">10. Análisis de residuos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_comparacion_estadistica.html">11. Comparación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_interpretabilidad.html">12. Interpretabilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_modelo_original_hvrf.html">13. Modelo original — HVRF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_conclusiones_sustentacion.html">14. Conclusiones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">15. Referencias bibliográficas</a></li>
 </ul>
 
     </div>
@@ -347,7 +345,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="optimizacion-de-hiperparametros">
 <h1>8. Optimización de hiperparámetros<a class="headerlink" href="#optimizacion-de-hiperparametros" title="Link to this heading">#</a></h1>
 <p>Este capítulo compara los <strong>cuatro métodos de optimización de
-hiperparámetros</strong> exigidos por la rúbrica sobre el mismo problema:</p>
+hiperparámetros</strong> considerados en el proyecto sobre el mismo problema:</p>
 <ol class="arabic simple">
 <li><p><strong>Grid Search</strong> — barrido exhaustivo de un grid discretizado.</p></li>
 <li><p><strong>Random Search</strong> — muestreo aleatorio del espacio.</p></li>
@@ -368,16 +366,13 @@ e interesante, y permite mostrar las diferencias entre métodos
 sin diluir la comparación entre múltiples modelos.</p></li>
 <li><p><strong>Misma métrica:</strong> RMSE promedio en validación cruzada temporal
 (<code class="docutils literal notranslate"><span class="pre">TimeSeriesSplit(5)</span></code> sobre <code class="docutils literal notranslate"><span class="pre">X_train</span></code>, <code class="docutils literal notranslate"><span class="pre">y_train</span></code>).</p></li>
-<li><p><strong>Espacios de búsqueda equivalentes</strong> (cuando es posible):</p>
-<ul>
+<li><p><strong>Espacios de búsqueda equivalentes</strong> (cuando es posible):</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">learning_rate</span></code> ∈ [10⁻², 3×10⁻¹] en escala logarítmica</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">max_depth</span></code> ∈ {3, 4, …, 10}</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">min_child_weight</span></code> ∈ {1, 2, …, 10}</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">subsample</span></code> ∈ [0.6, 1.0]</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">colsample_bytree</span></code> ∈ [0.6, 1.0]</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">reg_lambda</span></code> ∈ [10⁻³, 10] en escala logarítmica</p></li>
-</ul>
-</li>
 <li><p><strong>Presupuesto comparable</strong> ≈ 30 evaluaciones para los métodos no
 exhaustivos. Grid Search usa un grid de 2×3×2×2 = 24 puntos para
 estar en el mismo orden.</p></li>
@@ -1118,7 +1113,7 @@ influyentes.</p>
 <em>aprende</em> de las evaluaciones previas y propone configuraciones
 prometedoras. En espacios planos como el nuestro la ventaja es
 modesta, pero crece con el número de hiperparámetros y con la
-complejidad del paisaje. La rúbrica pide demostrar
+complejidad del paisaje. El proyecto considera demostrar
 «experimentalmente por qué Bayesiano o Genético pueden ser más
 eficientes que Grid/Random». Aquí la diferencia se manifiesta
 sobre todo en convergencia más temprana en la curva.</p>
@@ -1130,10 +1125,10 @@ que el nuestro, no en problemas con 6 hiperparámetros suaves.</p>
 <p><strong>Sobre RMSE en val/test del mejor modelo.</strong> Los cuatro métodos
 producen modelos finales cuyo RMSE en test es muy similar
 (diferencias del orden de 10⁻⁴, comparable al ruido entre re-runs).
-Esto refuerza una lección sobre la rúbrica que es importante
-entender: <strong>la rúbrica pide aplicar los cuatro métodos para mostrar
-que se saben usar</strong>, no necesariamente para esperar que uno sea
-dramáticamente mejor en cada dataset.</p>
+Esto refuerza una lección importante sobre la optimización:
+<strong>el objetivo es aplicar los cuatro métodos para conocer sus
+características y comportamiento</strong>, no necesariamente esperar que uno
+sea dramáticamente mejor en cada dataset.</p>
 <p><strong>Decisión para los capítulos siguientes.</strong> Tomamos el modelo del
 método con mejor RMSE en validation (es el criterio para no usar
 test en la selección). Lo usaremos como «XGBoost optimizado» en el

@@ -158,22 +158,20 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_contexto_y_datos.html">2. Contexto y dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_etl_eda.html">3. ETL y Análisis Exploratorio de Datos (EDA)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_features_targets.html">4. Features causales y targets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_benchmarks_econometricos.html">5. Benchmarks econométricos</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_modelos_regresion.html">6. Modelos base de regresión</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Modelos base de clasificación</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_balanceo_clases.html">8. Balanceo de clases</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_optimizacion_hiperparametros.html">9. Optimización de hiperparámetros</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_optimizacion_computacional.html">10. Optimización computacional</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_residuos_diagnosticos.html">11. Análisis de residuos</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_comparacion_estadistica.html">12. Comparación estadística</a></li>
-<li class="toctree-l1"><a class="reference internal" href="12_interpretabilidad.html">13. Interpretabilidad</a></li>
-<li class="toctree-l1"><a class="reference internal" href="13_modelo_original_hvrf.html">14. Modelo original — HVRF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="14_conclusiones_sustentacion.html">15. Conclusiones y sustentación</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../references.html">16. Referencias bibliográficas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="00_setup.html">Apéndice. Verificación del entorno</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_etl_eda.html">2. ETL y Análisis Exploratorio de Datos (EDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_features_targets.html">3. Features causales y targets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_benchmarks_econometricos.html">4. Benchmarks econométricos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_modelos_regresion.html">5. Modelos base de regresión</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Modelos base de clasificación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_balanceo_clases.html">7. Balanceo de clases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_optimizacion_hiperparametros.html">8. Optimización de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_optimizacion_computacional.html">9. Optimización computacional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_residuos_diagnosticos.html">10. Análisis de residuos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_comparacion_estadistica.html">11. Comparación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_interpretabilidad.html">12. Interpretabilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_modelo_original_hvrf.html">13. Modelo original — HVRF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_conclusiones_sustentacion.html">14. Conclusiones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">15. Referencias bibliográficas</a></li>
 </ul>
 
     </div>
@@ -319,7 +317,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#punto-importante-de-contexto-el-test-esta-desbalanceado">6.1 Punto importante de contexto: el test está desbalanceado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contexto-el-test-esta-desbalanceado">6.1 Contexto: el test está desbalanceado</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filosofia-metodologica">6.2 Filosofía metodológica</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-y-carga-de-datos">6.3 Setup y carga de datos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-helper-para-evaluacion-uniforme">6.4 Función helper para evaluación uniforme</a></li>
@@ -349,7 +347,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="modelos-base-de-clasificacion">
 <h1>6. Modelos base de clasificación<a class="headerlink" href="#modelos-base-de-clasificacion" title="Link to this heading">#</a></h1>
 <p>Este capítulo entrena los <strong>ocho modelos base de clasificación</strong>
-exigidos por la rúbrica sobre <code class="docutils literal notranslate"><span class="pre">target_regime</span></code>, la variable binaria
+considerados en el proyecto sobre <code class="docutils literal notranslate"><span class="pre">target_regime</span></code>, la variable binaria
 que indica si la volatilidad del día siguiente estará por encima o
 por debajo de la mediana histórica del conjunto de entrenamiento:</p>
 <ol class="arabic simple">
@@ -362,8 +360,8 @@ por debajo de la mediana histórica del conjunto de entrenamiento:</p>
 <li><p>Support Vector Machine (SVC con kernel RBF)</p></li>
 <li><p>XGBoost Classifier <span id="id2">[<a class="reference internal" href="../references.html#id9" title="Tianqi Chen and Carlos Guestrin. XGBoost: a scalable tree boosting system. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 785–794. 2016. doi:10.1145/2939672.2939785.">Chen and Guestrin, 2016</a>]</span> (<code class="docutils literal notranslate"><span class="pre">hist</span></code> + early stopping)</p></li>
 </ol>
-<section id="punto-importante-de-contexto-el-test-esta-desbalanceado">
-<h2>6.1 Punto importante de contexto: el test está desbalanceado<a class="headerlink" href="#punto-importante-de-contexto-el-test-esta-desbalanceado" title="Link to this heading">#</a></h2>
+<section id="contexto-el-test-esta-desbalanceado">
+<h2>6.1 Contexto: el test está desbalanceado<a class="headerlink" href="#contexto-el-test-esta-desbalanceado" title="Link to this heading">#</a></h2>
 <p>El umbral del régimen se calcula como la <strong>mediana de <code class="docutils literal notranslate"><span class="pre">target_vol</span></code>
 en train</strong> (período 1990-2009, que incluye crisis dotcom y 2008).
 Cuando se aplica ese mismo umbral a períodos posteriores
@@ -406,7 +404,7 @@ aprendido nada. No la usaremos como métrica principal.</p></li>
 <li><p><strong>AUC es robusto al desbalance</strong> porque integra el desempeño en
 todos los umbrales posibles. Es nuestra métrica principal.</p></li>
 </ul>
-<p>La rúbrica pide que justifiquemos explícitamente la elección de
+<p>El proyecto considera que justifiquemos explícitamente la elección de
 métrica principal. <strong>AUC</strong> porque (a) es robusta al desbalance,
 (b) es la métrica natural para evaluar la calidad del <em>score</em>
 probabilístico, (c) es la métrica que utiliza el test de DeLong
@@ -1140,7 +1138,7 @@ en <code class="docutils literal notranslate"><span class="pre">outputs/predicti
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#punto-importante-de-contexto-el-test-esta-desbalanceado">6.1 Punto importante de contexto: el test está desbalanceado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contexto-el-test-esta-desbalanceado">6.1 Contexto: el test está desbalanceado</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filosofia-metodologica">6.2 Filosofía metodológica</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-y-carga-de-datos">6.3 Setup y carga de datos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-helper-para-evaluacion-uniforme">6.4 Función helper para evaluación uniforme</a></li>

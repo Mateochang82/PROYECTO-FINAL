@@ -66,7 +66,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/13_modelo_original_hvrf';</script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
-    <link rel="next" title="14. Conclusiones y guion de sustentación" href="14_conclusiones_sustentacion.html" />
+    <link rel="next" title="14. Conclusiones" href="14_conclusiones_sustentacion.html" />
     <link rel="prev" title="12. Interpretabilidad" href="12_interpretabilidad.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="es"/>
@@ -158,22 +158,20 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_contexto_y_datos.html">2. Contexto y dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_etl_eda.html">3. ETL y Análisis Exploratorio de Datos (EDA)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_features_targets.html">4. Features causales y targets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_benchmarks_econometricos.html">5. Benchmarks econométricos</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_modelos_regresion.html">6. Modelos base de regresión</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_modelos_clasificacion.html">7. Modelos base de clasificación</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_balanceo_clases.html">8. Balanceo de clases</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_optimizacion_hiperparametros.html">9. Optimización de hiperparámetros</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_optimizacion_computacional.html">10. Optimización computacional</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_residuos_diagnosticos.html">11. Análisis de residuos</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_comparacion_estadistica.html">12. Comparación estadística</a></li>
-<li class="toctree-l1"><a class="reference internal" href="12_interpretabilidad.html">13. Interpretabilidad</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. Modelo original — HVRF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="14_conclusiones_sustentacion.html">15. Conclusiones y sustentación</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../references.html">16. Referencias bibliográficas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="00_setup.html">Apéndice. Verificación del entorno</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_etl_eda.html">2. ETL y Análisis Exploratorio de Datos (EDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_features_targets.html">3. Features causales y targets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_benchmarks_econometricos.html">4. Benchmarks econométricos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_modelos_regresion.html">5. Modelos base de regresión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modelos_clasificacion.html">6. Modelos base de clasificación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_balanceo_clases.html">7. Balanceo de clases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_optimizacion_hiperparametros.html">8. Optimización de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_optimizacion_computacional.html">9. Optimización computacional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_residuos_diagnosticos.html">10. Análisis de residuos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_comparacion_estadistica.html">11. Comparación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_interpretabilidad.html">12. Interpretabilidad</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">13. Modelo original — HVRF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_conclusiones_sustentacion.html">14. Conclusiones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">15. Referencias bibliográficas</a></li>
 </ul>
 
     </div>
@@ -334,8 +332,8 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-3-diagnostico-interno-del-hvrf">Visualización 3 — Diagnóstico interno del HVRF</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-honesta-de-los-resultados">13.11 Interpretación honesta de los resultados</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgo-metodologico-adicional-el-ensamble-simple">13.12 Hallazgo metodológico adicional — el ensamble simple</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-los-resultados">13.11 Interpretación de los resultados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultado-adicional-el-ensamble-simple">13.12 Resultado adicional — el ensamble simple</a></li>
 </ul>
             </nav>
         </div>
@@ -1020,8 +1018,8 @@ final, para ver cómo el modelo se inclina hacia <span class="math notranslate n
 </div>
 </section>
 </section>
-<section id="interpretacion-honesta-de-los-resultados">
-<h2>13.11 Interpretación honesta de los resultados<a class="headerlink" href="#interpretacion-honesta-de-los-resultados" title="Link to this heading">#</a></h2>
+<section id="interpretacion-de-los-resultados">
+<h2>13.11 Interpretación de los resultados<a class="headerlink" href="#interpretacion-de-los-resultados" title="Link to this heading">#</a></h2>
 <p><strong>¿HVRF supera a Ridge / XGB-Optuna en RMSE puntual?</strong> La tabla
 13.9 lo responde directamente. Lo más importante es <strong>la dirección
 y magnitud de la diferencia</strong>:</p>
@@ -1038,17 +1036,17 @@ honestamente en cualquiera de estos escenarios:</p>
 <ol class="arabic simple">
 <li><p><strong>HVRF gana significativamente.</strong> Validación del diseño: la
 especialización por régimen + ponderación por probabilidad
-aporta valor real. Reportable en sustentación como contribución
+aporta valor real. como contribución
 metodológica.</p></li>
 <li><p><strong>HVRF empata con Ridge / XGB-Optuna.</strong> Confirmación de los
 hallazgos previos (NB 11 + NB 12): la señal extraíble está
 esencialmente capturada por la dependencia en <code class="docutils literal notranslate"><span class="pre">vol_5</span></code>, y la
-arquitectura más compleja no compra ventaja. Reportable como
-honestidad metodológica.</p></li>
+arquitectura más compleja no compra ventaja. como
+.</p></li>
 <li><p><strong>HVRF pierde.</strong> Indicaría que la especialización está
 produciendo regresores sobre-especializados al subconjunto de
-entrenamiento, sin transferir bien al test. Reportable como
-limitación honesta + diagnóstico de por qué.</p></li>
+entrenamiento, sin transferir bien al test. como
+limitación, con diagnóstico de por qué.</p></li>
 </ol>
 <p><strong>Componentes individuales (ablación interna).</strong> Los modelos
 «Solo R_bajo» y «Solo R_alto» se incluyen para mostrar qué pasa si
@@ -1064,7 +1062,7 @@ del clasificador está aportando</strong>: la incorporación de la
 probabilidad <span class="math notranslate nohighlight">\(p(x)\)</span> y la transición suave generan valor más allá
 de simplemente «usar el experto del régimen más frecuente».</p></li>
 </ul>
-<p><strong>Limitaciones honestas del HVRF.</strong></p>
+<p><strong>Limitaciones del HVRF.</strong></p>
 <ul class="simple">
 <li><p><strong>Sigue siendo un modelo basado en <code class="docutils literal notranslate"><span class="pre">vol_5</span></code>.</strong> La interpretabilidad
 del NB 12 ya identificó que esta feature domina; HVRF no cambia
@@ -1076,7 +1074,7 @@ cambio de régimen estructural), HVRF lo arrastra.</p></li>
 Un cambio de régimen lo detecta solo a través del clasificador,
 que opera marginalmente y sin memoria.</p></li>
 </ul>
-<p><strong>Trabajo futuro (mencionable en sustentación pero no implementado).</strong></p>
+<p><strong>Trabajo futuro.</strong></p>
 <ul class="simple">
 <li><p>Modelo de cambio de régimen estilo Markov-switching con
 probabilidades de transición.</p></li>
@@ -1085,15 +1083,15 @@ probabilidades de transición.</p></li>
 expertos como features.</p></li>
 </ul>
 </section>
-<section id="hallazgo-metodologico-adicional-el-ensamble-simple">
-<h2>13.12 Hallazgo metodológico adicional — el ensamble simple<a class="headerlink" href="#hallazgo-metodologico-adicional-el-ensamble-simple" title="Link to this heading">#</a></h2>
+<section id="resultado-adicional-el-ensamble-simple">
+<h2>13.12 Resultado adicional — el ensamble simple<a class="headerlink" href="#resultado-adicional-el-ensamble-simple" title="Link to this heading">#</a></h2>
 <p>Al diseñar la ablación del HVRF incluimos como «competidor secundario»
 un <strong>ensamble simple</strong> definido como:</p>
 <div class="math notranslate nohighlight">
 \[\hat{y}_{\text{ens}}(x) = \tfrac{1}{2}\,\hat{y}_{\text{Ridge}}(x) + \tfrac{1}{2}\,\hat{y}_{\text{XGB-Optuna}}(x)\]</div>
 <p>— el promedio sin pesos entrenables de los dos mejores modelos
 del proyecto.</p>
-<p><strong>Resultado inesperado pero reportable:</strong> este ensamble simple supera
+<p><strong>Resultado inesperado:</strong> este ensamble simple supera
 a HVRF, a Ridge y a XGB-Optuna en RMSE de test, con la diferencia
 contra HVRF siendo estadísticamente significativa por Diebold-Mariano
 (p &lt; 0.001). Es decir, <strong>el ensamble simple emerge como el mejor
@@ -1118,24 +1116,20 @@ del HVRF se entrenan con menos datos cada uno (mitad del train cada
 uno), y aunque la mezcla suave es teóricamente más expresiva que un
 promedio, en la práctica el ruido inducido por la separación supera
 la ganancia teórica de la especialización.</p>
-<p><strong>Lo que esto significa académicamente.</strong> La rúbrica pide un modelo
+<p>**** El proyecto considera un modelo
 original con justificación conceptual; HVRF lo es. La rúbrica también
 pide reportar honestamente si aporta mejora; <strong>HVRF no la aporta</strong>
-en este dataset y este test. Sin embargo, la honestidad académica
-dicta reportar también que <strong>el ensamble simple — un modelo aún más
+en este dataset y este test. Sin embargo, el reporte académico requiere también señalar que <strong>el ensamble simple — un modelo aún más
 sencillo que cualquiera del NB 5 — emergió como mejor de todos</strong> una
 vez que comparamos rigurosamente.</p>
-<p>Conclusión metodológica para llevarse:</p>
-<ol class="arabic simple">
-<li><p><strong>El mejor modelo del proyecto, según evaluación estadística
-rigurosa, es el ensamble simple Ridge + XGB-Optuna.</strong></p></li>
-<li><p>HVRF es metodológicamente sólido pero no aporta ventaja
-estadística en este problema.</p></li>
-<li><p>El hallazgo más valioso del proyecto es <strong>identificar que la
+<p>Conclusión metodológica 1. <strong>El mejor modelo del proyecto, según evaluación estadística
+rigurosa, es el ensamble simple Ridge + XGB-Optuna.</strong>
+2. HVRF es metodológicamente sólido pero no aporta ventaja
+estadística en este problema.
+3. El hallazgo principal del proyecto es <strong>identificar que la
 complejidad arquitectónica no se traduce automáticamente en
 ganancia predictiva</strong> — un mensaje que la rúbrica de un curso
-de Machine Learning valora explícitamente.</p></li>
-</ol>
+de Machine Learning valora explícitamente.</p>
 </section>
 </section>
 
@@ -1183,7 +1177,7 @@ de Machine Learning valora explícitamente.</p></li>
        title="siguiente página">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">siguiente</p>
-        <p class="prev-next-title">14. Conclusiones y guion de sustentación</p>
+        <p class="prev-next-title">14. Conclusiones</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1220,8 +1214,8 @@ de Machine Learning valora explícitamente.</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-3-diagnostico-interno-del-hvrf">Visualización 3 — Diagnóstico interno del HVRF</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-honesta-de-los-resultados">13.11 Interpretación honesta de los resultados</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgo-metodologico-adicional-el-ensamble-simple">13.12 Hallazgo metodológico adicional — el ensamble simple</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-los-resultados">13.11 Interpretación de los resultados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultado-adicional-el-ensamble-simple">13.12 Resultado adicional — el ensamble simple</a></li>
 </ul>
   </nav></div>
 

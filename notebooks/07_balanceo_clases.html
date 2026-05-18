@@ -156,22 +156,20 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_contexto_y_datos.html">2. Contexto y dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_etl_eda.html">3. ETL y Análisis Exploratorio de Datos (EDA)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_features_targets.html">4. Features causales y targets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_benchmarks_econometricos.html">5. Benchmarks econométricos</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_modelos_regresion.html">6. Modelos base de regresión</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_modelos_clasificacion.html">7. Modelos base de clasificación</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">8. Balanceo de clases</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_optimizacion_hiperparametros.html">9. Optimización de hiperparámetros</a></li>
-<li class="toctree-l1"><a class="reference internal" href="09_optimizacion_computacional.html">10. Optimización computacional</a></li>
-<li class="toctree-l1"><a class="reference internal" href="10_residuos_diagnosticos.html">11. Análisis de residuos</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11_comparacion_estadistica.html">12. Comparación estadística</a></li>
-<li class="toctree-l1"><a class="reference internal" href="12_interpretabilidad.html">13. Interpretabilidad</a></li>
-<li class="toctree-l1"><a class="reference internal" href="13_modelo_original_hvrf.html">14. Modelo original — HVRF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="14_conclusiones_sustentacion.html">15. Conclusiones y sustentación</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../references.html">16. Referencias bibliográficas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="00_setup.html">Apéndice. Verificación del entorno</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_etl_eda.html">2. ETL y Análisis Exploratorio de Datos (EDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_features_targets.html">3. Features causales y targets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_benchmarks_econometricos.html">4. Benchmarks econométricos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_modelos_regresion.html">5. Modelos base de regresión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_modelos_clasificacion.html">6. Modelos base de clasificación</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Balanceo de clases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_optimizacion_hiperparametros.html">8. Optimización de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_optimizacion_computacional.html">9. Optimización computacional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_residuos_diagnosticos.html">10. Análisis de residuos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_comparacion_estadistica.html">11. Comparación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_interpretabilidad.html">12. Interpretabilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_modelo_original_hvrf.html">13. Modelo original — HVRF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_conclusiones_sustentacion.html">14. Conclusiones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">15. Referencias bibliográficas</a></li>
 </ul>
 
     </div>
@@ -317,9 +315,9 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#punto-importante-caracterizacion-del-desbalance-en-este-dataset">7.1 Punto importante: caracterización del desbalance en este dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caracterizacion-del-desbalance-en-este-dataset">7.1 Caracterización del desbalance en este dataset</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hipotesis-empirica-del-capitulo">7.2 Hipótesis empírica del capítulo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimento-extra-cuando-si-funciona-el-balanceo">7.3 Experimento extra: cuándo SÍ funciona el balanceo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimento-adicional-cuando-funciona-el-balanceo">7.3 Experimento adicional: cuándo funciona el balanceo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anti-leakage">7.4 Anti-leakage</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-y-carga">7.5 Setup y carga</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helpers">7.6 Helpers</a></li>
@@ -347,7 +345,7 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="balanceo-de-clases">
 <h1>7. Balanceo de clases<a class="headerlink" href="#balanceo-de-clases" title="Link to this heading">#</a></h1>
-<p>La rúbrica exige implementar y comparar tres estrategias de balanceo
+<p>El proyecto incluye implementar y comparar tres estrategias de balanceo
 sobre los modelos de clasificación:</p>
 <ul class="simple">
 <li><p><strong>SMOTE</strong> (Synthetic Minority Over-sampling Technique)
@@ -360,8 +358,8 @@ genera más muestras donde la clase minoritaria es «difícil»
 asigna pesos inversos a la frecuencia de cada clase en la función
 de pérdida.</p></li>
 </ul>
-<section id="punto-importante-caracterizacion-del-desbalance-en-este-dataset">
-<h2>7.1 Punto importante: caracterización del desbalance en este dataset<a class="headerlink" href="#punto-importante-caracterizacion-del-desbalance-en-este-dataset" title="Link to this heading">#</a></h2>
+<section id="caracterizacion-del-desbalance-en-este-dataset">
+<h2>7.1 Caracterización del desbalance en este dataset<a class="headerlink" href="#caracterizacion-del-desbalance-en-este-dataset" title="Link to this heading">#</a></h2>
 <p>Antes de aplicar las técnicas, conviene entender la naturaleza
 exacta del problema:</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -412,11 +410,11 @@ ser <strong>marginal</strong>. La hipótesis a contrastar es:</p>
 (sin balanceo, NB 06) y las tres variantes con balanceo, porque
 el train no requiere ser balanceado.</em></p>
 </div></blockquote>
-<p>Si se confirma, el hallazgo metodológico vale la pena: <strong>el
+<p>Si se confirma, el hallazgo vale la pena: <strong>el
 distribution shift no se corrige rebalanceando el train</strong>.</p>
 </section>
-<section id="experimento-extra-cuando-si-funciona-el-balanceo">
-<h2>7.3 Experimento extra: cuándo SÍ funciona el balanceo<a class="headerlink" href="#experimento-extra-cuando-si-funciona-el-balanceo" title="Link to this heading">#</a></h2>
+<section id="experimento-adicional-cuando-funciona-el-balanceo">
+<h2>7.3 Experimento adicional: cuándo funciona el balanceo<a class="headerlink" href="#experimento-adicional-cuando-funciona-el-balanceo" title="Link to this heading">#</a></h2>
 <p>Para demostrar que estas técnicas funcionan cuando se aplican al
 caso para el que fueron diseñadas, replicamos el experimento sobre
 un train artificialmente desbalanceado: sub-sampleo la clase 1 del
@@ -1310,7 +1308,7 @@ las pedidas por la rúbrica y queda como trabajo futuro.</p>
 y 13 (modelo original), usamos los <strong>modelos baseline sin balanceo</strong>
 de los Capítulos 5 y 6, dado que el balanceo no aportó valor neto.
 La justificación quedará registrada en el README y en el Capítulo 14.</p>
-<p><strong>Honestidad sobre el alcance.</strong> La rúbrica pide implementar y
+<p><strong>Alcance del experimento.</strong> El proyecto considera implementar y
 comparar las tres técnicas, lo cual hicimos rigurosamente. La pide
 también justificar la elección de métricas y discutir resultados,
 lo cual hicimos. Que el resultado no haya sido «el balanceo mejora
@@ -1385,9 +1383,9 @@ en el reporte académico exactamente como está.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#punto-importante-caracterizacion-del-desbalance-en-este-dataset">7.1 Punto importante: caracterización del desbalance en este dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caracterizacion-del-desbalance-en-este-dataset">7.1 Caracterización del desbalance en este dataset</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hipotesis-empirica-del-capitulo">7.2 Hipótesis empírica del capítulo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimento-extra-cuando-si-funciona-el-balanceo">7.3 Experimento extra: cuándo SÍ funciona el balanceo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimento-adicional-cuando-funciona-el-balanceo">7.3 Experimento adicional: cuándo funciona el balanceo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anti-leakage">7.4 Anti-leakage</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-y-carga">7.5 Setup y carga</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helpers">7.6 Helpers</a></li>

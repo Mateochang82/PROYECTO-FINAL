@@ -66,7 +66,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Búsqueda" href="search.html" />
-    <link rel="next" title="1. Contexto del problema y dataset" href="notebooks/01_contexto_y_datos.html" />
+    <link rel="next" title="2. ETL y análisis exploratorio (EDA)" href="notebooks/02_etl_eda.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="es"/>
   <meta name="docsearch:version" content="" />
@@ -159,22 +159,20 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notebooks/01_contexto_y_datos.html">2. Contexto y dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/02_etl_eda.html">3. ETL y Análisis Exploratorio de Datos (EDA)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/03_features_targets.html">4. Features causales y targets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/04_benchmarks_econometricos.html">5. Benchmarks econométricos</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/05_modelos_regresion.html">6. Modelos base de regresión</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/06_modelos_clasificacion.html">7. Modelos base de clasificación</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/07_balanceo_clases.html">8. Balanceo de clases</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/08_optimizacion_hiperparametros.html">9. Optimización de hiperparámetros</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/09_optimizacion_computacional.html">10. Optimización computacional</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/10_residuos_diagnosticos.html">11. Análisis de residuos</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/11_comparacion_estadistica.html">12. Comparación estadística</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/12_interpretabilidad.html">13. Interpretabilidad</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/13_modelo_original_hvrf.html">14. Modelo original — HVRF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/14_conclusiones_sustentacion.html">15. Conclusiones y sustentación</a></li>
-<li class="toctree-l1"><a class="reference internal" href="references.html">16. Referencias bibliográficas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/00_setup.html">Apéndice. Verificación del entorno</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/02_etl_eda.html">2. ETL y Análisis Exploratorio de Datos (EDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/03_features_targets.html">3. Features causales y targets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/04_benchmarks_econometricos.html">4. Benchmarks econométricos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/05_modelos_regresion.html">5. Modelos base de regresión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/06_modelos_clasificacion.html">6. Modelos base de clasificación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/07_balanceo_clases.html">7. Balanceo de clases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_optimizacion_hiperparametros.html">8. Optimización de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/09_optimizacion_computacional.html">9. Optimización computacional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/10_residuos_diagnosticos.html">10. Análisis de residuos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/11_comparacion_estadistica.html">11. Comparación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/12_interpretabilidad.html">12. Interpretabilidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/13_modelo_original_hvrf.html">13. Modelo original — HVRF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/14_conclusiones_sustentacion.html">14. Conclusiones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">15. Referencias bibliográficas</a></li>
 </ul>
 
     </div>
@@ -321,11 +319,14 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contexto">1. Contexto</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediccion-de-volatilidad">1.1 Predicción de volatilidad</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-disponibles">1.2 Variables disponibles</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo">1.3 Objetivo</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compromisos-metodologicos">1.4 Compromisos metodológicos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-contenido">1.5 Tabla de contenido</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motivacion-por-que-predecir-volatilidad">1.1 Motivación: por qué predecir volatilidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-intel-corporation">1.2 Por qué Intel Corporation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-formal-del-problema">1.3 Definición formal del problema</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-horizonte-de-un-dia">1.4 Por qué horizonte de un día</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-disponibles">1.5 Variables disponibles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo">1.6 Objetivo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compromisos-metodologicos">1.7 Compromisos metodológicos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-contenido">1.8 Tabla de contenido</a></li>
 </ul>
 </li>
 </ul>
@@ -353,19 +354,35 @@ Semestre 2026-1</p>
 <h2>1. Contexto<a class="headerlink" href="#contexto" title="Link to this heading">#</a></h2>
 <p>Antes de comenzar con el análisis exploratorio, es necesario conocer el contexto en el que vamos a trabajar para entender la variable que queremos predecir y la serie temporal sobre la que trabajaremos.</p>
 <p>El dataset utilizado para este proyecto proviene de <strong>Kaggle</strong> y puede accederse mediante el siguiente enlace: <a class="reference external" href="https://www.kaggle.com/datasets/borismarjanovic/price-volume-data-for-all-us-stocks-etfs">https://www.kaggle.com/datasets/borismarjanovic/price-volume-data-for-all-us-stocks-etfs</a>. Se trata de la serie histórica diaria OHLCV (Open, High, Low, Close, Volume) del stock <strong>Intel Corporation (INTC)</strong> desde 1990 hasta 2017, con <strong>7 022 días</strong> de cotización.</p>
-<section id="prediccion-de-volatilidad">
-<h3>1.1 Predicción de volatilidad<a class="headerlink" href="#prediccion-de-volatilidad" title="Link to this heading">#</a></h3>
-<p>La volatilidad realizada es una medida estadística de la variabilidad de los rendimientos de un activo financiero. En el contexto del trading y de la gestión de riesgo, predecir la volatilidad del día siguiente permite ajustar el tamaño de las posiciones, fijar niveles de stop-loss, dimensionar primas de opciones y diseñar coberturas adecuadas. La volatilidad presenta dos propiedades empíricas bien documentadas que dificultan su modelado: el efecto <strong>clustering</strong> (períodos turbulentos se agrupan en el tiempo) y la <strong>persistencia</strong> decreciente con el horizonte de predicción.</p>
-<p>En este proyecto se busca predecir dos magnitudes complementarias para el día <span class="math notranslate nohighlight">\(t+1\)</span>, condicionadas a la información disponible hasta el día <span class="math notranslate nohighlight">\(t\)</span>:</p>
+<section id="motivacion-por-que-predecir-volatilidad">
+<h3>1.1 Motivación: por qué predecir volatilidad<a class="headerlink" href="#motivacion-por-que-predecir-volatilidad" title="Link to this heading">#</a></h3>
+<p>La <strong>volatilidad</strong> de un activo financiero — la magnitud típica de sus fluctuaciones de precio — es una de las variables más importantes en finanzas cuantitativas. Modelarla bien permite calibrar precios de opciones, dimensionar posiciones, calcular <em>Value-at-Risk</em> y diseñar estrategias de cobertura. A diferencia del retorno medio, que en mercados eficientes es difícil de pronosticar, la volatilidad exhibe <strong>clustering</strong>: períodos de alta volatilidad tienden a ser seguidos por más alta volatilidad, y lo mismo en regímenes de calma. Este hecho estilizado, documentado desde Engle (1982) y formalizado en Bollerslev (1986), da base predictiva al problema.</p>
+</section>
+<section id="por-que-intel-corporation">
+<h3>1.2 Por qué Intel Corporation<a class="headerlink" href="#por-que-intel-corporation" title="Link to this heading">#</a></h3>
+<p>Trabajamos sobre <strong>Intel Corporation (INTC)</strong>, listado en NASDAQ. La elección se justifica por tres razones:</p>
+<ol class="arabic simple">
+<li><p><strong>Cobertura temporal larga.</strong> El histórico OHLCV disponible cubre más de 25 años, ofreciendo regímenes diversos: burbuja .com, recuperación posterior, crisis financiera 2008 y el período de «Gran Calma» 2013-2017.</p></li>
+<li><p><strong>Liquidez alta.</strong> Reduce el ruido idiosincrático y hace que la volatilidad observada sea genuina y no producto de microestructura.</p></li>
+<li><p><strong>Sector relevante.</strong> El sector tecnológico tiene episodios de estrés y cambios estructurales claramente identificables, útiles para evaluar robustez de modelos a cambios de régimen.</p></li>
+</ol>
+</section>
+<section id="definicion-formal-del-problema">
+<h3>1.3 Definición formal del problema<a class="headerlink" href="#definicion-formal-del-problema" title="Link to this heading">#</a></h3>
+<p>Para cada día de trading <span class="math notranslate nohighlight">\(t\)</span> disponemos del estado del mercado hasta ese momento (precios apertura, máximo, mínimo, cierre y volumen, más todas las transformaciones causales que de ahí se deriven). Queremos predecir, para el día siguiente <span class="math notranslate nohighlight">\(t+1\)</span>:</p>
 <ul class="simple">
-<li><p><strong>Regresión</strong> sobre la volatilidad realizada <span class="math notranslate nohighlight">\(\sigma_{t+1}\)</span>, definida como la desviación estándar causal de los log-retornos en una ventana corta.</p></li>
-<li><p><strong>Clasificación binaria</strong> del régimen de volatilidad <span class="math notranslate nohighlight">\(r_{t+1} \in \{0, 1\}\)</span> — <em>bajo</em> o <em>alto</em> — separado por la mediana de la volatilidad calculada exclusivamente sobre el conjunto de entrenamiento.</p></li>
+<li><p><strong>Regresión</strong> sobre la volatilidad realizada <span class="math notranslate nohighlight">\(\sigma_{t+1} = \mathrm{std}(\{r_{t-w+2}, \dots, r_{t+1}\})\)</span>, donde <span class="math notranslate nohighlight">\(r_s = \log(p_s / p_{s-1})\)</span> y <span class="math notranslate nohighlight">\(w\)</span> es la ventana causal (configuración: <span class="math notranslate nohighlight">\(w=5\)</span>).</p></li>
+<li><p><strong>Clasificación binaria</strong> del régimen de volatilidad <span class="math notranslate nohighlight">\(\rho_{t+1} \in \{0, 1\}\)</span> — <em>bajo</em> o <em>alto</em> — definido por <span class="math notranslate nohighlight">\(\rho_{t+1} = \mathbb{1}\{\sigma_{t+1} &gt; \tau\}\)</span>, donde <span class="math notranslate nohighlight">\(\tau\)</span> es la <strong>mediana de <span class="math notranslate nohighlight">\(\sigma\)</span> calculada únicamente sobre el conjunto de entrenamiento</strong>.</p></li>
 </ul>
 </section>
+<section id="por-que-horizonte-de-un-dia">
+<h3>1.4 Por qué horizonte de un día<a class="headerlink" href="#por-que-horizonte-de-un-dia" title="Link to this heading">#</a></h3>
+<p>El proyecto académico original de este equipo trabajó con horizontes de 7, 14 y 21 días. En esa configuración el <span class="math notranslate nohighlight">\(R^2\)</span> sobre test fue negativo en todos los modelos evaluados — desde regresión lineal hasta LSTM — síntoma de que la varianza condicional de la volatilidad agregada a esos horizontes es tan baja en el período de prueba que predecir la media histórica gana sistemáticamente.</p>
+<p>Al fijar el horizonte en un día, recuperamos el efecto de clustering de corto plazo, donde la dependencia serial de la volatilidad es fuerte y predecible. Esta es la corrección metodológica central del nuevo planteamiento del proyecto y permite obtener <span class="math notranslate nohighlight">\(R^2\)</span> test de +0.74 con los mejores modelos.</p>
+</section>
 <section id="variables-disponibles">
-<h3>1.2 Variables disponibles<a class="headerlink" href="#variables-disponibles" title="Link to this heading">#</a></h3>
-<p>En esta sección presentamos las variables originales del dataset y las features causales construidas para el modelado:</p>
-<p><strong>Variables originales (OHLCV diario):</strong></p>
+<h3>1.5 Variables disponibles<a class="headerlink" href="#variables-disponibles" title="Link to this heading">#</a></h3>
+<p><strong>Variables originales del dataset OHLCV diario:</strong></p>
 <ul class="simple">
 <li><p><strong>Date</strong>: Fecha de la cotización.</p></li>
 <li><p><strong>Open</strong>: Precio de apertura de la sesión.</p></li>
@@ -375,7 +392,7 @@ Semestre 2026-1</p>
 <li><p><strong>Volume</strong>: Número de acciones negociadas en la sesión.</p></li>
 <li><p><strong>OpenInt</strong>: Open interest (no usado, siempre cero en acciones).</p></li>
 </ul>
-<p><strong>Features causales construidas (31 features, todas con shift(1)):</strong></p>
+<p><strong>Features causales construidas (31 features, todas con shift(1) para evitar leakage):</strong></p>
 <ul class="simple">
 <li><p><strong>Retornos rezagados</strong>: <code class="docutils literal notranslate"><span class="pre">ret_lag_1</span></code>, <code class="docutils literal notranslate"><span class="pre">ret_lag_2</span></code>, <code class="docutils literal notranslate"><span class="pre">ret_lag_3</span></code>, <code class="docutils literal notranslate"><span class="pre">ret_lag_5</span></code>, <code class="docutils literal notranslate"><span class="pre">ret_lag_10</span></code> — log-retornos de días anteriores.</p></li>
 <li><p><strong>Volatilidad rolling</strong>: <code class="docutils literal notranslate"><span class="pre">vol_5</span></code>, <code class="docutils literal notranslate"><span class="pre">vol_10</span></code>, <code class="docutils literal notranslate"><span class="pre">vol_22</span></code> — desviación estándar de retornos en ventanas de 5, 10 y 22 días.</p></li>
@@ -395,37 +412,36 @@ Semestre 2026-1</p>
 </ul>
 </section>
 <section id="objetivo">
-<h3>1.3 Objetivo<a class="headerlink" href="#objetivo" title="Link to this heading">#</a></h3>
-<p>El objetivo de este proyecto es la <strong>implementación, comparación y selección de modelos clásicos de Machine Learning</strong> para la predicción de la volatilidad realizada y del régimen de volatilidad de INTC, junto con la <strong>propuesta de un modelo original</strong> (HVRF — <em>Hybrid Volatility Regime Forecaster</em>). Para cada modelo se evalúa la calidad de la predicción mediante métricas estándar (RMSE, MAE, R², AUC, F1) y se valida estadísticamente mediante pruebas formales (Diebold-Mariano, DeLong, bootstrap con corrección Bonferroni). El proyecto cumple con la rúbrica completa del curso e incorpora análisis de interpretabilidad (LIME, SHAP, permutation importance) sobre los modelos top.</p>
+<h3>1.6 Objetivo<a class="headerlink" href="#objetivo" title="Link to this heading">#</a></h3>
+<p>El objetivo de este proyecto es la <strong>implementación, comparación y selección de modelos clásicos de Machine Learning</strong> para la predicción de la volatilidad realizada y del régimen de volatilidad de INTC, junto con la <strong>propuesta de un modelo original</strong> llamado HVRF (<em>Hybrid Volatility Regime Forecaster</em>). Para cada modelo se evalúa la calidad de la predicción mediante métricas estándar (RMSE, MAE, R², AUC, F1) y se valida estadísticamente mediante pruebas formales (Diebold-Mariano, DeLong, bootstrap con corrección Bonferroni). El proyecto cumple con la rúbrica completa del curso e incorpora análisis de interpretabilidad (LIME, SHAP, permutation importance) sobre los modelos top.</p>
 </section>
 <section id="compromisos-metodologicos">
-<h3>1.4 Compromisos metodológicos<a class="headerlink" href="#compromisos-metodologicos" title="Link to this heading">#</a></h3>
+<h3>1.7 Compromisos metodológicos<a class="headerlink" href="#compromisos-metodologicos" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Sin data leakage.</strong> Todo preprocesamiento ajustable vive dentro de <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> (o <code class="docutils literal notranslate"><span class="pre">imblearn.Pipeline</span></code> cuando hay SMOTE/ADASYN). Los umbrales y estadísticos se calculan únicamente con el conjunto de entrenamiento. Tests <code class="docutils literal notranslate"><span class="pre">pytest</span></code> verifican que las features no usen información futura y que los targets no aparezcan en X.</p></li>
 <li><p><strong>Validación temporal estricta.</strong> Split cronológico 70/15/15. Validación cruzada con <code class="docutils literal notranslate"><span class="pre">TimeSeriesSplit</span></code>. Ningún <code class="docutils literal notranslate"><span class="pre">shuffle=True</span></code>. Ningún <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> aleatorio.</p></li>
 <li><p><strong>El test se usa una sola vez.</strong> Toda decisión arquitectónica del modelo original se toma sobre validation. El test final se ejecuta solo con la arquitectura congelada.</p></li>
 <li><p><strong>Reproducibilidad.</strong> <code class="docutils literal notranslate"><span class="pre">RANDOM_STATE=42</span></code> centralizado, versiones fijadas, semillas controladas, outputs persistidos en <code class="docutils literal notranslate"><span class="pre">outputs/</span></code> con esquemas estables.</p></li>
-<li><p><strong>Honestidad estadística.</strong> Resultados negativos se reportan. Modelos que pierden se documentan. Ningún número fabricado.</p></li>
+<li><p><strong>Reproducibilidad y rigor.</strong> Resultados negativos se reportan. Modelos que pierden se documentan. Ningún número fabricado.</p></li>
 </ul>
 </section>
 <section id="tabla-de-contenido">
-<h3>1.5 Tabla de contenido<a class="headerlink" href="#tabla-de-contenido" title="Link to this heading">#</a></h3>
+<h3>1.8 Tabla de contenido<a class="headerlink" href="#tabla-de-contenido" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><a class="reference internal" href="notebooks/01_contexto_y_datos.html"><span class="std std-doc">2. Contexto y dataset</span></a></p></li>
-<li><p><a class="reference internal" href="notebooks/02_etl_eda.html"><span class="std std-doc">3. ETL y análisis exploratorio (EDA)</span></a></p></li>
-<li><p><a class="reference internal" href="notebooks/03_features_targets.html"><span class="std std-doc">4. Features causales y targets</span></a></p></li>
-<li><p><a class="reference internal" href="notebooks/04_benchmarks_econometricos.html"><span class="std std-doc">5. Benchmarks econométricos</span></a></p></li>
-<li><p><a class="reference internal" href="notebooks/05_modelos_regresion.html"><span class="std std-doc">6. Modelos base de regresión</span></a></p></li>
-<li><p><a class="reference internal" href="notebooks/06_modelos_clasificacion.html"><span class="std std-doc">7. Modelos base de clasificación</span></a></p></li>
-<li><p><a class="reference internal" href="notebooks/07_balanceo_clases.html"><span class="std std-doc">8. Balanceo de clases</span></a></p></li>
-<li><p><a class="reference internal" href="notebooks/08_optimizacion_hiperparametros.html"><span class="std std-doc">9. Optimización de hiperparámetros</span></a></p></li>
-<li><p><a class="reference internal" href="notebooks/09_optimizacion_computacional.html"><span class="std std-doc">10. Optimización computacional</span></a></p></li>
-<li><p><a class="reference internal" href="notebooks/10_residuos_diagnosticos.html"><span class="std std-doc">11. Análisis de residuos</span></a></p></li>
-<li><p><a class="reference internal" href="notebooks/11_comparacion_estadistica.html"><span class="std std-doc">12. Comparación estadística</span></a></p></li>
-<li><p><a class="reference internal" href="notebooks/12_interpretabilidad.html"><span class="std std-doc">13. Interpretabilidad</span></a></p></li>
-<li><p><a class="reference internal" href="notebooks/13_modelo_original_hvrf.html"><span class="std std-doc">14. Modelo original HVRF</span></a></p></li>
-<li><p><a class="reference internal" href="notebooks/14_conclusiones_sustentacion.html"><span class="std std-doc">15. Conclusiones y guion de sustentación</span></a></p></li>
-<li><p><a class="reference internal" href="references.html"><span class="std std-doc">16. Referencias bibliográficas</span></a></p></li>
+<li><p><a class="reference internal" href="notebooks/02_etl_eda.html"><span class="std std-doc">2. ETL y Análisis Exploratorio de Datos (EDA)</span></a></p></li>
+<li><p><a class="reference internal" href="notebooks/03_features_targets.html"><span class="std std-doc">3. Features causales y targets</span></a></p></li>
+<li><p><a class="reference internal" href="notebooks/04_benchmarks_econometricos.html"><span class="std std-doc">4. Benchmarks econométricos</span></a></p></li>
+<li><p><a class="reference internal" href="notebooks/05_modelos_regresion.html"><span class="std std-doc">5. Modelos base de regresión</span></a></p></li>
+<li><p><a class="reference internal" href="notebooks/06_modelos_clasificacion.html"><span class="std std-doc">6. Modelos base de clasificación</span></a></p></li>
+<li><p><a class="reference internal" href="notebooks/07_balanceo_clases.html"><span class="std std-doc">7. Balanceo de clases</span></a></p></li>
+<li><p><a class="reference internal" href="notebooks/08_optimizacion_hiperparametros.html"><span class="std std-doc">8. Optimización de hiperparámetros</span></a></p></li>
+<li><p><a class="reference internal" href="notebooks/09_optimizacion_computacional.html"><span class="std std-doc">9. Optimización computacional</span></a></p></li>
+<li><p><a class="reference internal" href="notebooks/10_residuos_diagnosticos.html"><span class="std std-doc">10. Análisis de residuos</span></a></p></li>
+<li><p><a class="reference internal" href="notebooks/11_comparacion_estadistica.html"><span class="std std-doc">11. Comparación estadística</span></a></p></li>
+<li><p><a class="reference internal" href="notebooks/12_interpretabilidad.html"><span class="std std-doc">12. Interpretabilidad</span></a></p></li>
+<li><p><a class="reference internal" href="notebooks/13_modelo_original_hvrf.html"><span class="std std-doc">13. Modelo original HVRF</span></a></p></li>
+<li><p><a class="reference internal" href="notebooks/14_conclusiones_sustentacion.html"><span class="std std-doc">14. Conclusiones</span></a></p></li>
+<li><p><a class="reference internal" href="references.html"><span class="std std-doc">15. Referencias bibliográficas</span></a></p></li>
 </ul>
 </section>
 </section>
@@ -464,11 +480,11 @@ Semestre 2026-1</p>
                   
 <div class="prev-next-area">
     <a class="right-next"
-       href="notebooks/01_contexto_y_datos.html"
+       href="notebooks/02_etl_eda.html"
        title="siguiente página">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">siguiente</p>
-        <p class="prev-next-title">1. Contexto del problema y dataset</p>
+        <p class="prev-next-title">2. ETL y análisis exploratorio (EDA)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -491,11 +507,14 @@ Semestre 2026-1</p>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contexto">1. Contexto</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediccion-de-volatilidad">1.1 Predicción de volatilidad</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-disponibles">1.2 Variables disponibles</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo">1.3 Objetivo</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compromisos-metodologicos">1.4 Compromisos metodológicos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-contenido">1.5 Tabla de contenido</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motivacion-por-que-predecir-volatilidad">1.1 Motivación: por qué predecir volatilidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-intel-corporation">1.2 Por qué Intel Corporation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-formal-del-problema">1.3 Definición formal del problema</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-horizonte-de-un-dia">1.4 Por qué horizonte de un día</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-disponibles">1.5 Variables disponibles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo">1.6 Objetivo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compromisos-metodologicos">1.7 Compromisos metodológicos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-contenido">1.8 Tabla de contenido</a></li>
 </ul>
 </li>
 </ul>
