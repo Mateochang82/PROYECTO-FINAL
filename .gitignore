@@ -1,0 +1,58 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+build/
+dist/
+.installed.cfg
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# --- Entornos ---
+.venv/
+venv/
+env/
+.env
+.conda/
+
+# --- Jupyter Book build ---
+_build/
+.jupyter_cache/
+
+# --- Datos: solo el raw se commitea si es pequeño ---
+data/interim/*
+data/processed/*
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+
+# --- Outputs: los modelos pesados NO van al repo ---
+outputs/models/*.joblib
+outputs/models/*.pkl
+outputs/predictions/*.parquet
+!outputs/figures/.gitkeep
+!outputs/metrics/.gitkeep
+!outputs/models/.gitkeep
+!outputs/predictions/.gitkeep
+!outputs/tables/.gitkeep
+
+# --- IDEs ---
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# --- Logs ---
+*.log
+catboost_info/
+
+# --- Empaquetado del book ---
+*.zip

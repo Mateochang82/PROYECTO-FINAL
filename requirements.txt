@@ -1,0 +1,48 @@
+# =====================================================================
+#  INTC-Vol-ML — requirements.txt
+#  Versiones fijadas para reproducibilidad.
+# =====================================================================
+
+# --- Core ---
+numpy==1.26.4
+pandas==2.2.2
+scipy==1.13.0
+matplotlib==3.8.4
+seaborn==0.13.2
+
+# --- Almacenamiento ---
+pyarrow==16.1.0
+joblib==1.4.2
+
+# --- ML clásico ---
+scikit-learn==1.4.2
+xgboost==2.0.3
+imbalanced-learn==0.12.2
+
+# --- Series temporales / econometría ---
+statsmodels==0.14.2
+arch==7.0.0
+
+# --- Descarga de datos (fallback) ---
+yfinance==0.2.40
+
+# --- Optimización de hiperparámetros ---
+optuna==3.6.1
+deap==1.4.1
+
+# --- Interpretabilidad ---
+lime==0.2.0.1
+shap==0.45.1
+
+# --- Tests ---
+pytest==8.2.0
+
+# --- Jupyter Book ---
+jupyter-book==1.0.0
+sphinx-togglebutton==0.3.2
+sphinxcontrib-bibtex==2.6.2
+nbformat==5.10.4
+
+# --- Notebook ---
+ipykernel==6.29.4
+jupyter==1.0.0

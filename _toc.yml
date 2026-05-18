@@ -1,0 +1,36 @@
+# =====================================================================
+#  INTC-Vol-ML — Tabla de contenidos del Jupyter Book
+#  Estructura plana de capítulos numerados (estilo académico clásico)
+# =====================================================================
+format: jb-book
+root: intro
+
+chapters:
+  - file: notebooks/02_etl_eda
+    title: "2. ETL y Análisis Exploratorio de Datos (EDA)"
+  - file: notebooks/03_features_targets
+    title: "3. Features causales y targets"
+  - file: notebooks/04_benchmarks_econometricos
+    title: "4. Benchmarks econométricos"
+  - file: notebooks/05_modelos_regresion
+    title: "5. Modelos base de regresión"
+  - file: notebooks/06_modelos_clasificacion
+    title: "6. Modelos base de clasificación"
+  - file: notebooks/07_balanceo_clases
+    title: "7. Balanceo de clases"
+  - file: notebooks/08_optimizacion_hiperparametros
+    title: "8. Optimización de hiperparámetros"
+  - file: notebooks/09_optimizacion_computacional
+    title: "9. Optimización computacional"
+  - file: notebooks/10_residuos_diagnosticos
+    title: "10. Análisis de residuos"
+  - file: notebooks/11_comparacion_estadistica
+    title: "11. Comparación estadística"
+  - file: notebooks/12_interpretabilidad
+    title: "12. Interpretabilidad"
+  - file: notebooks/13_modelo_original_hvrf
+    title: "13. Modelo original — HVRF"
+  - file: notebooks/14_conclusiones_sustentacion
+    title: "14. Conclusiones"
+  - file: references
+    title: "15. Referencias bibliográficas"

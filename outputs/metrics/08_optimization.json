@@ -1,0 +1,68 @@
+{
+  "grid": {
+    "best_params": {
+      "colsample_bytree": 0.9,
+      "learning_rate": 0.1,
+      "max_depth": 4,
+      "subsample": 0.9
+    },
+    "rmse_cv": 0.007505866054399028,
+    "rmse_val": 0.003588451048867501,
+    "rmse_test": 0.003977695023077072,
+    "best_iteration": 144,
+    "model_path": "/home/claude/INTC-Vol-ML/outputs/models/08_xgb_grid.joblib",
+    "time_s": 59.86551380157471,
+    "n_evals": 24
+  },
+  "random": {
+    "best_params": {
+      "colsample_bytree": 0.9768807022739411,
+      "learning_rate": 0.06792740114629246,
+      "max_depth": 4,
+      "min_child_weight": 9,
+      "reg_lambda": 0.001158417231054399,
+      "subsample": 0.6923575302488596
+    },
+    "rmse_cv": 0.007399189546548061,
+    "rmse_val": 0.0035141306670204296,
+    "rmse_test": 0.003987338023420454,
+    "best_iteration": 184,
+    "model_path": "/home/claude/INTC-Vol-ML/outputs/models/08_xgb_random.joblib",
+    "time_s": 55.16422176361084,
+    "n_evals": 20
+  },
+  "optuna": {
+    "best_params": {
+      "learning_rate": 0.06420330336297862,
+      "max_depth": 4,
+      "min_child_weight": 10,
+      "subsample": 0.9100531293444458,
+      "colsample_bytree": 0.9757995766256756,
+      "reg_lambda": 3.7958531426706403
+    },
+    "rmse_cv": 0.007422506559425543,
+    "rmse_val": 0.0034215903657952387,
+    "rmse_test": 0.0038159654001367078,
+    "best_iteration": 348,
+    "model_path": "/home/claude/INTC-Vol-ML/outputs/models/08_xgb_optuna.joblib",
+    "time_s": 45.35649609565735,
+    "n_evals": 20
+  },
+  "deap": {
+    "best_params": {
+      "learning_rate": 0.11141333200844086,
+      "max_depth": 4,
+      "min_child_weight": 4,
+      "subsample": 0.7605456296123145,
+      "colsample_bytree": 0.6,
+      "reg_lambda": 0.014479449571952135
+    },
+    "rmse_cv": 0.007276881291302654,
+    "rmse_val": 0.003523096913363449,
+    "rmse_test": 0.004049962052836926,
+    "best_iteration": 154,
+    "model_path": "/home/claude/INTC-Vol-ML/outputs/models/08_xgb_deap.joblib",
+    "time_s": 35.8244845867157,
+    "n_evals": 22
+  }
+}

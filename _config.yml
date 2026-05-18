@@ -1,0 +1,65 @@
+# =====================================================================
+#  INTC-Vol-ML — Jupyter Book config
+# =====================================================================
+
+title: "INTC-Vol-ML"
+author: "Juan Camilo Conrado · Sergio Cadavid · Mateo Chang"
+copyright: "2026"
+logo: ""
+
+execute:
+  execute_notebooks: "off"   # los notebooks se ejecutan manualmente; el book solo renderiza
+  timeout: 600
+
+parse:
+  myst_enable_extensions:
+    - colon_fence
+    - dollarmath
+    - amsmath
+    - linkify
+    - substitution
+
+html:
+  favicon: ""
+  use_issues_button: true
+  use_repository_button: true
+  use_edit_page_button: false
+  baseurl: ""
+  extra_navbar: |
+    <div>INTC-Vol-ML — Universidad del Norte · Ciencia de Datos · ML 2026</div>
+
+repository:
+  url: https://github.com/usuario/INTC-Vol-ML
+  branch: main
+
+latex:
+  latex_documents:
+    targetname: book.tex
+  latex_engine: pdflatex
+
+bibtex_bibfiles:
+  - refs.bib
+
+sphinx:
+  extra_extensions:
+    - sphinx_togglebutton
+    - sphinx.ext.viewcode
+    - sphinxcontrib.bibtex
+  config:
+    language: es
+    bibtex_bibfiles:
+      - refs.bib
+    bibtex_reference_style: author_year
+    html_theme_options:
+      navigation_with_keys: false
+    exclude_patterns:
+      - '.conda/**'
+      - '.pytest_cache/**'
+      - '_build/**'
+      - '**/__pycache__/**'
+      - 'README.md'
+      - 'data/**'
+      - 'outputs/**'
+      - 'tests/**'
+      - 'scripts/**'
+      - 'src/**'

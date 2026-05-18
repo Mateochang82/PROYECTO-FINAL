@@ -1,0 +1,7 @@
+group,speedup,metric_change_pct,metric,base,fast
+KNN,1726103500.0046833,0.0,auc,brute,faiss_flat
+Ridge,1.0,-0.0,rmse,default (auto),default (auto)
+Lasso,1.0,-0.0,rmse,cd (default),cd (default)
+NaiveBayes,1.0,0.0,auc,fit (completo),fit (completo)
+XGBoost,8.737750257409672,19.377630965776106,rmse,exact (no early stop),hist + early stop
+SVM,40.47755489365568,3.3129492543718455,auc,SVC RBF (estándar),LinearSVC + Platt
