@@ -351,13 +351,13 @@
 entrena los <strong>siete modelos base de regresión</strong> exigidos por la
 rúbrica:</p>
 <ol class="arabic simple">
-<li><p>Ridge <span id="id1">[<a class="reference internal" href="../references.html#id6" title="Arthur E. Hoerl and Robert W. Kennard. Ridge regression: biased estimation for nonorthogonal problems. Technometrics, 12(1):55–67, 1970. doi:10.1080/00401706.1970.10488634.">Hoerl and Kennard, 1970</a>]</span></p></li>
-<li><p>Lasso <span id="id2">[<a class="reference internal" href="../references.html#id7" title="Robert Tibshirani. Regression shrinkage and selection via the lasso. Journal of the Royal Statistical Society, Series B, 58(1):267–288, 1996. URL: https://www.jstor.org/stable/2346178.">Tibshirani, 1996</a>]</span></p></li>
+<li><p>Ridge <span class="bibtex-citation" id="id1">[<a class="reference internal" href="../references.html#id6" title="Arthur E. Hoerl and Robert W. Kennard. Ridge regression: biased estimation for nonorthogonal problems. Technometrics, 12(1):55–67, 1970. doi:10.1080/00401706.1970.10488634.">Hoerl and Kennard, 1970</a>]</span></p></li>
+<li><p>Lasso <span class="bibtex-citation" id="id2">[<a class="reference internal" href="../references.html#id7" title="Robert Tibshirani. Regression shrinkage and selection via the lasso. Journal of the Royal Statistical Society, Series B, 58(1):267–288, 1996. URL: https://www.jstor.org/stable/2346178.">Tibshirani, 1996</a>]</span></p></li>
 <li><p>K-Nearest Neighbors Regressor</p></li>
 <li><p>Decision Tree Regressor</p></li>
-<li><p>Random Forest Regressor <span id="id3">[<a class="reference internal" href="../references.html#id8" title="Leo Breiman. Random forests. Machine Learning, 45(1):5–32, 2001. doi:10.1023/A:1010933404324.">Breiman, 2001</a>]</span></p></li>
+<li><p>Random Forest Regressor <span class="bibtex-citation" id="id3">[<a class="reference internal" href="../references.html#id8" title="Leo Breiman. Random forests. Machine Learning, 45(1):5–32, 2001. doi:10.1023/A:1010933404324.">Breiman, 2001</a>]</span></p></li>
 <li><p>Support Vector Regression</p></li>
-<li><p>XGBoost <span id="id4">[<a class="reference internal" href="../references.html#id9" title="Tianqi Chen and Carlos Guestrin. XGBoost: a scalable tree boosting system. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 785–794. 2016. doi:10.1145/2939672.2939785.">Chen and Guestrin, 2016</a>]</span></p></li>
+<li><p>XGBoost <span class="bibtex-citation" id="id4">[<a class="reference internal" href="../references.html#id9" title="Tianqi Chen and Carlos Guestrin. XGBoost: a scalable tree boosting system. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 785–794. 2016. doi:10.1145/2939672.2939785.">Chen and Guestrin, 2016</a>]</span></p></li>
 </ol>
 <section id="filosofia-del-capitulo">
 <h2>5.1 Filosofía del capítulo<a class="headerlink" href="#filosofia-del-capitulo" title="Link to this heading">#</a></h2>
@@ -405,7 +405,7 @@ desde el inicio:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">tree_method=&quot;hist&quot;</span></code> — discretiza features en histogramas, reduce
 complejidad por nodo de <span class="math notranslate nohighlight">\(O(n_{\text{features}} \cdot n_{\text{samples}})\)</span>
 a <span class="math notranslate nohighlight">\(O(n_{\text{bins}})\)</span> y acelera significativamente sin pérdida de
-precisión <span id="id5">[<a class="reference internal" href="../references.html#id9" title="Tianqi Chen and Carlos Guestrin. XGBoost: a scalable tree boosting system. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 785–794. 2016. doi:10.1145/2939672.2939785.">Chen and Guestrin, 2016</a>]</span>.</p></li>
+precisión <span class="bibtex-citation" id="id5">[<a class="reference internal" href="../references.html#id9" title="Tianqi Chen and Carlos Guestrin. XGBoost: a scalable tree boosting system. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 785–794. 2016. doi:10.1145/2939672.2939785.">Chen and Guestrin, 2016</a>]</span>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">early_stopping_rounds=20</span></code> con <code class="docutils literal notranslate"><span class="pre">eval_set=val</span></code> — detiene la
 construcción de árboles cuando el RMSE en validation deja de
 mejorar por 20 iteraciones consecutivas. Funciona como
@@ -542,9 +542,9 @@ cada modelo.</p>
 </section>
 <section id="ridge-y-lasso">
 <h2>5.6 Ridge y Lasso<a class="headerlink" href="#ridge-y-lasso" title="Link to this heading">#</a></h2>
-<p>Regresión lineal regularizada. Mientras Ridge <span id="id6">[<a class="reference internal" href="../references.html#id6" title="Arthur E. Hoerl and Robert W. Kennard. Ridge regression: biased estimation for nonorthogonal problems. Technometrics, 12(1):55–67, 1970. doi:10.1080/00401706.1970.10488634.">Hoerl and Kennard, 1970</a>]</span>
+<p>Regresión lineal regularizada. Mientras Ridge <span class="bibtex-citation" id="id6">[<a class="reference internal" href="../references.html#id6" title="Arthur E. Hoerl and Robert W. Kennard. Ridge regression: biased estimation for nonorthogonal problems. Technometrics, 12(1):55–67, 1970. doi:10.1080/00401706.1970.10488634.">Hoerl and Kennard, 1970</a>]</span>
 penaliza el cuadrado de los coeficientes (<span class="math notranslate nohighlight">\(L_2\)</span>), Lasso
-<span id="id7">[<a class="reference internal" href="../references.html#id7" title="Robert Tibshirani. Regression shrinkage and selection via the lasso. Journal of the Royal Statistical Society, Series B, 58(1):267–288, 1996. URL: https://www.jstor.org/stable/2346178.">Tibshirani, 1996</a>]</span> penaliza el valor absoluto (<span class="math notranslate nohighlight">\(L_1\)</span>)
+<span class="bibtex-citation" id="id7">[<a class="reference internal" href="../references.html#id7" title="Robert Tibshirani. Regression shrinkage and selection via the lasso. Journal of the Royal Statistical Society, Series B, 58(1):267–288, 1996. URL: https://www.jstor.org/stable/2346178.">Tibshirani, 1996</a>]</span> penaliza el valor absoluto (<span class="math notranslate nohighlight">\(L_1\)</span>)
 e induce esparsidad — algunos coeficientes se vuelven exactamente
 cero.</p>
 <p>En nuestro problema:</p>
@@ -632,7 +632,7 @@ uniforme. Un <span class="math notranslate nohighlight">\(k\)</span> moderadamen
 <h2>5.8 Decision Tree y Random Forest<a class="headerlink" href="#decision-tree-y-random-forest" title="Link to this heading">#</a></h2>
 <p>Los árboles particionan recursivamente el espacio de features
 maximizando la reducción de varianza en el target. Random Forest
-<span id="id8">[<a class="reference internal" href="../references.html#id8" title="Leo Breiman. Random forests. Machine Learning, 45(1):5–32, 2001. doi:10.1023/A:1010933404324.">Breiman, 2001</a>]</span> agrega muchos árboles entrenados con
+<span class="bibtex-citation" id="id8">[<a class="reference internal" href="../references.html#id8" title="Leo Breiman. Random forests. Machine Learning, 45(1):5–32, 2001. doi:10.1023/A:1010933404324.">Breiman, 2001</a>]</span> agrega muchos árboles entrenados con
 bootstrap + subsampling de features, reduciendo varianza a cambio de
 una pequeña pérdida de interpretabilidad.</p>
 <p>En finanzas, los ensambles de árboles son resistentes a outliers,
@@ -721,7 +721,7 @@ se aborda en el Capítulo 9.</p>
 </section>
 <section id="xgboost-tree-method-hist-early-stopping">
 <h2>5.10 XGBoost — <code class="docutils literal notranslate"><span class="pre">tree_method=&quot;hist&quot;</span></code> + early stopping<a class="headerlink" href="#xgboost-tree-method-hist-early-stopping" title="Link to this heading">#</a></h2>
-<p>XGBoost <span id="id9">[<a class="reference internal" href="../references.html#id9" title="Tianqi Chen and Carlos Guestrin. XGBoost: a scalable tree boosting system. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 785–794. 2016. doi:10.1145/2939672.2939785.">Chen and Guestrin, 2016</a>]</span> es el algoritmo dominante en
+<p>XGBoost <span class="bibtex-citation" id="id9">[<a class="reference internal" href="../references.html#id9" title="Tianqi Chen and Carlos Guestrin. XGBoost: a scalable tree boosting system. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 785–794. 2016. doi:10.1145/2939672.2939785.">Chen and Guestrin, 2016</a>]</span> es el algoritmo dominante en
 competencias de Machine Learning sobre datos tabulares. Combina
 boosting con regularización <span class="math notranslate nohighlight">\(L_1, L_2\)</span> y aprendizaje del gradiente
 de segundo orden.</p>

@@ -349,7 +349,7 @@
 sobre los modelos de clasificación:</p>
 <ul class="simple">
 <li><p><strong>SMOTE</strong> (Synthetic Minority Over-sampling Technique)
-<span id="id1">[<a class="reference internal" href="../references.html#id16" title="Nitesh V. Chawla, Kevin W. Bowyer, Lawrence O. Hall, and W. Philip Kegelmeyer. SMOTE: synthetic minority over-sampling technique. Journal of Artificial Intelligence Research, 16:321–357, 2002. doi:10.1613/jair.953.">Chawla <em>et al.</em>, 2002</a>]</span> — genera ejemplos sintéticos de la clase
+<span class="bibtex-citation" id="id1">[<a class="reference internal" href="../references.html#id16" title="Nitesh V. Chawla, Kevin W. Bowyer, Lawrence O. Hall, and W. Philip Kegelmeyer. SMOTE: synthetic minority over-sampling technique. Journal of Artificial Intelligence Research, 16:321–357, 2002. doi:10.1613/jair.953.">Chawla <em>et al.</em>, 2002</a>]</span> — genera ejemplos sintéticos de la clase
 minoritaria interpolando entre vecinos.</p></li>
 <li><p><strong>ADASYN</strong> (Adaptive Synthetic Sampling) — variante de SMOTE que
 genera más muestras donde la clase minoritaria es «difícil»
@@ -558,6 +558,7 @@ estimador y una técnica de balanceo, el pipeline correspondiente.</p>
 </div>
 </div>
 </div>
+<p><em>Nota: esta celda <strong>define las funciones auxiliares</strong> del capítulo: <code class="docutils literal notranslate"><span class="pre">metrics_5()</span></code> (calcula AUC, F1, Recall, Precision, Accuracy), <code class="docutils literal notranslate"><span class="pre">fit_and_eval()</span></code> (ajusta un pipeline y evalúa sobre val/test) y los estimadores base. No produce output porque solo declara código reutilizable que se usa en los experimentos siguientes (7.7 a 7.10).</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Diccionario base de estimadores. class_weight se aplica donde aplica.</span>
@@ -597,6 +598,7 @@ estimador y una técnica de balanceo, el pipeline correspondiente.</p>
 </div>
 </div>
 </div>
+<p><em>Nota: esta celda <strong>define el diccionario <code class="docutils literal notranslate"><span class="pre">make_estimators()</span></code></strong> que crea las instancias de los 7 clasificadores (KNN, NB, LogReg L1/L2, árbol, RF, SVM) con sus parámetros base. Tampoco produce output visible; se usa internamente en los experimentos siguientes.</em></p>
 </section>
 <section id="experimento-1-train-balanceado-real-50-50">
 <h2>7.7 Experimento 1 — Train balanceado real (50/50)<a class="headerlink" href="#experimento-1-train-balanceado-real-50-50" title="Link to this heading">#</a></h2>
@@ -625,6 +627,7 @@ y ADASYN.</p>
 <div class="cell_output docutils container">
 </div>
 </div>
+<p><em>Nota: esta celda ejecuta el experimento baseline (sin balanceo) sobre los 7 modelos. Los logs de progreso se silencian por limpieza visual; los resultados consolidados se muestran en la <strong>tabla resumen del Experimento 1</strong> (sección 7.8 más abajo).</em></p>
 <div class="cell tag_remove-stdout docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># (2) SMOTE</span>
@@ -643,6 +646,7 @@ y ADASYN.</p>
 <div class="cell_output docutils container">
 </div>
 </div>
+<p><em>Nota: esta celda aplica SMOTE a los mismos 7 modelos. Los resultados consolidados aparecen en la <strong>tabla resumen del Experimento 1</strong> (sección 7.8).</em></p>
 <div class="cell tag_remove-stdout docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># (3) ADASYN</span>
@@ -666,6 +670,7 @@ y ADASYN.</p>
 <div class="cell_output docutils container">
 </div>
 </div>
+<p><em>Nota: esta celda intenta aplicar ADASYN. En algunos modelos ADASYN falla porque la clase minoritaria no tiene suficientes muestras «difíciles» — este es un comportamiento conocido y esperado de la técnica. Los modelos donde ADASYN funcionó se muestran en la <strong>tabla resumen del Experimento 1</strong> (sección 7.8).</em></p>
 <div class="cell tag_remove-stdout docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># (4) class_weight=&#39;balanced&#39; (solo para modelos que lo soportan)</span>
@@ -686,6 +691,7 @@ y ADASYN.</p>
 <div class="cell_output docutils container">
 </div>
 </div>
+<p><em>Nota: esta celda aplica <code class="docutils literal notranslate"><span class="pre">class_weight='balanced'</span></code> a los modelos que lo soportan (KNN y Naive Bayes no lo soportan y se omiten). Los resultados se muestran en la <strong>tabla resumen del Experimento 1</strong> (sección 7.8).</em></p>
 <div class="cell tag_remove-stdout docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># (5) XGBoost — manejo manual por early stopping</span>
@@ -762,6 +768,7 @@ y ADASYN.</p>
 <div class="cell_output docutils container">
 </div>
 </div>
+<p><em>Nota: esta celda corre XGBoost en sus 4 variantes (baseline, SMOTE, ADASYN, scale_pos_weight) usando manejo manual con early stopping. Los resultados aparecen en la <strong>tabla resumen del Experimento 1</strong> (sección 7.8).</em></p>
 </section>
 <section id="tabla-resumen-del-experimento-1">
 <h2>7.8 Tabla resumen del experimento 1<a class="headerlink" href="#tabla-resumen-del-experimento-1" title="Link to this heading">#</a></h2>
@@ -973,6 +980,7 @@ técnicas funcionan donde fueron diseñadas.</p>
 <div class="cell_output docutils container">
 </div>
 </div>
+<p><em>Nota: esta celda corre el Experimento 2 sobre el train artificialmente desbalanceado (90/10) usando los mismos modelos del Experimento 1. Los resultados consolidados aparecen en la <strong>tabla resumen del Experimento 2</strong> (sección 7.10 más abajo).</em></p>
 <div class="cell tag_remove-stdout docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># XGBoost manual sobre train sub-sampleado</span>
@@ -1018,6 +1026,7 @@ técnicas funcionan donde fueron diseñadas.</p>
 <div class="cell_output docutils container">
 </div>
 </div>
+<p><em>Nota: esta celda completa el Experimento 2 corriendo XGBoost manual. Los resultados se muestran en la <strong>tabla resumen del Experimento 2</strong> (sección 7.10).</em></p>
 </section>
 <section id="comparacion-entre-exp-1-y-exp-2">
 <h2>7.10 Comparación entre Exp 1 y Exp 2<a class="headerlink" href="#comparacion-entre-exp-1-y-exp-2" title="Link to this heading">#</a></h2>

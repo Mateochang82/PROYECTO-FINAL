@@ -356,9 +356,9 @@ por debajo de la mediana histórica del conjunto de entrenamiento:</p>
 <li><p>Logistic Regression con regularización <span class="math notranslate nohighlight">\(L_1\)</span></p></li>
 <li><p>Logistic Regression con regularización <span class="math notranslate nohighlight">\(L_2\)</span></p></li>
 <li><p>Decision Tree Classifier</p></li>
-<li><p>Random Forest Classifier <span id="id1">[<a class="reference internal" href="../references.html#id8" title="Leo Breiman. Random forests. Machine Learning, 45(1):5–32, 2001. doi:10.1023/A:1010933404324.">Breiman, 2001</a>]</span></p></li>
+<li><p>Random Forest Classifier <span class="bibtex-citation" id="id1">[<a class="reference internal" href="../references.html#id8" title="Leo Breiman. Random forests. Machine Learning, 45(1):5–32, 2001. doi:10.1023/A:1010933404324.">Breiman, 2001</a>]</span></p></li>
 <li><p>Support Vector Machine (SVC con kernel RBF)</p></li>
-<li><p>XGBoost Classifier <span id="id2">[<a class="reference internal" href="../references.html#id9" title="Tianqi Chen and Carlos Guestrin. XGBoost: a scalable tree boosting system. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 785–794. 2016. doi:10.1145/2939672.2939785.">Chen and Guestrin, 2016</a>]</span> (<code class="docutils literal notranslate"><span class="pre">hist</span></code> + early stopping)</p></li>
+<li><p>XGBoost Classifier <span class="bibtex-citation" id="id2">[<a class="reference internal" href="../references.html#id9" title="Tianqi Chen and Carlos Guestrin. XGBoost: a scalable tree boosting system. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 785–794. 2016. doi:10.1145/2939672.2939785.">Chen and Guestrin, 2016</a>]</span> (<code class="docutils literal notranslate"><span class="pre">hist</span></code> + early stopping)</p></li>
 </ol>
 <section id="contexto-el-test-esta-desbalanceado">
 <h2>6.1 Contexto: el test está desbalanceado<a class="headerlink" href="#contexto-el-test-esta-desbalanceado" title="Link to this heading">#</a></h2>
@@ -408,7 +408,7 @@ todos los umbrales posibles. Es nuestra métrica principal.</p></li>
 métrica principal. <strong>AUC</strong> porque (a) es robusta al desbalance,
 (b) es la métrica natural para evaluar la calidad del <em>score</em>
 probabilístico, (c) es la métrica que utiliza el test de DeLong
-<span id="id3">[<a class="reference internal" href="../references.html#id11" title="Elizabeth R. DeLong, David M. DeLong, and Daniel L. Clarke-Pearson. Comparing the areas under two or more correlated receiver operating characteristic curves: a nonparametric approach. Biometrics, 44(3):837–845, 1988. doi:10.2307/2531595.">DeLong <em>et al.</em>, 1988</a>]</span> que aplicaremos en el Capítulo 11.</p>
+<span class="bibtex-citation" id="id3">[<a class="reference internal" href="../references.html#id11" title="Elizabeth R. DeLong, David M. DeLong, and Daniel L. Clarke-Pearson. Comparing the areas under two or more correlated receiver operating characteristic curves: a nonparametric approach. Biometrics, 44(3):837–845, 1988. doi:10.2307/2531595.">DeLong <em>et al.</em>, 1988</a>]</span> que aplicaremos en el Capítulo 11.</p>
 <p>Como métrica secundaria reportamos <strong>F1</strong> sobre la clase positiva
 (régimen alto, la clase minoritaria del test) porque para un
 operador financiero el costo asimétrico es claro: confundir alta

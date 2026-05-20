@@ -510,7 +510,7 @@ ajuste, y es el benchmark a batir.</p>
 <p>En series con clustering de volatilidad fuerte, este modelo es
 sorprendentemente competitivo: si <span class="math notranslate nohighlight">\(\rho_1(\sigma) \approx 0.9\)</span>,
 predecir el valor más reciente acota inferiormente el error de
-predicción a cerca del óptimo lineal <span id="id1">[<a class="reference internal" href="../references.html#id5" title="Torben G. Andersen, Tim Bollerslev, Francis X. Diebold, and Paul Labys. Modeling and forecasting realized volatility. Econometrica, 71(2):579–625, 2003. doi:10.1111/1468-0262.00418.">Andersen <em>et al.</em>, 2003</a>]</span>.</p>
+predicción a cerca del óptimo lineal <span class="bibtex-citation" id="id1">[<a class="reference internal" href="../references.html#id5" title="Torben G. Andersen, Tim Bollerslev, Francis X. Diebold, and Paul Labys. Modeling and forecasting realized volatility. Econometrica, 71(2):579–625, 2003. doi:10.1111/1468-0262.00418.">Andersen <em>et al.</em>, 2003</a>]</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="p">{}</span>
@@ -563,7 +563,7 @@ competitivo.</p>
 </div>
 </section>
 <section id="ewma-riskmetrics-bollerslev1986generalized">
-<h2>4.6 EWMA (RiskMetrics) <span id="id2">[<a class="reference internal" href="../references.html#id2" title="Tim Bollerslev. Generalized autoregressive conditional heteroskedasticity. Journal of Econometrics, 31(3):307–327, 1986. doi:10.1016/0304-4076(86)90063-1.">Bollerslev, 1986</a>]</span><a class="headerlink" href="#ewma-riskmetrics-bollerslev1986generalized" title="Link to this heading">#</a></h2>
+<h2>4.6 EWMA (RiskMetrics) <span class="bibtex-citation" id="id2">[<a class="reference internal" href="../references.html#id2" title="Tim Bollerslev. Generalized autoregressive conditional heteroskedasticity. Journal of Econometrics, 31(3):307–327, 1986. doi:10.1016/0304-4076(86)90063-1.">Bollerslev, 1986</a>]</span><a class="headerlink" href="#ewma-riskmetrics-bollerslev1986generalized" title="Link to this heading">#</a></h2>
 <p>El estándar industrial introducido por J.P. Morgan en 1996 modela la
 varianza condicional como una media móvil exponencialmente ponderada
 de retornos cuadráticos:</p>
@@ -596,7 +596,7 @@ La predicción de la volatilidad es <span class="math notranslate nohighlight">\
 </div>
 </section>
 <section id="arimabollerslev1986generalized">
-<h2>4.7 ARIMA<span id="id3">[<a class="reference internal" href="../references.html#id2" title="Tim Bollerslev. Generalized autoregressive conditional heteroskedasticity. Journal of Econometrics, 31(3):307–327, 1986. doi:10.1016/0304-4076(86)90063-1.">Bollerslev, 1986</a>]</span><a class="headerlink" href="#arimabollerslev1986generalized" title="Link to this heading">#</a></h2>
+<h2>4.7 ARIMA<span class="bibtex-citation" id="id3">[<a class="reference internal" href="../references.html#id2" title="Tim Bollerslev. Generalized autoregressive conditional heteroskedasticity. Journal of Econometrics, 31(3):307–327, 1986. doi:10.1016/0304-4076(86)90063-1.">Bollerslev, 1986</a>]</span><a class="headerlink" href="#arimabollerslev1986generalized" title="Link to this heading">#</a></h2>
 <p>El modelo lineal clásico para series temporales:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -632,7 +632,7 @@ y es una decisión documentada.</p>
 </div>
 </section>
 <section id="garch-1-1-bollerslev-1986-bollerslev1986generalized">
-<h2>4.8 GARCH(1, 1) — Bollerslev 1986 <span id="id4">[<a class="reference internal" href="../references.html#id2" title="Tim Bollerslev. Generalized autoregressive conditional heteroskedasticity. Journal of Econometrics, 31(3):307–327, 1986. doi:10.1016/0304-4076(86)90063-1.">Bollerslev, 1986</a>]</span><a class="headerlink" href="#garch-1-1-bollerslev-1986-bollerslev1986generalized" title="Link to this heading">#</a></h2>
+<h2>4.8 GARCH(1, 1) — Bollerslev 1986 <span class="bibtex-citation" id="id4">[<a class="reference internal" href="../references.html#id2" title="Tim Bollerslev. Generalized autoregressive conditional heteroskedasticity. Journal of Econometrics, 31(3):307–327, 1986. doi:10.1016/0304-4076(86)90063-1.">Bollerslev, 1986</a>]</span><a class="headerlink" href="#garch-1-1-bollerslev-1986-bollerslev1986generalized" title="Link to this heading">#</a></h2>
 <p>El benchmark canónico para volatilidad condicional. Modela <span class="math notranslate nohighlight">\(\sigma^2_t\)</span>
 explícitamente como una función de la innovación pasada y la varianza
 pasada:</p>
@@ -646,7 +646,7 @@ Para estacionariedad se requiere <span class="math notranslate nohighlight">\(\a
 de la varianza, y <span class="math notranslate nohighlight">\(\omega\)</span> la varianza incondicional desescalada por
 <span class="math notranslate nohighlight">\(1 - \alpha - \beta\)</span>.</p>
 <p>La estimación se hace por MLE con la implementación de la librería
-<code class="docutils literal notranslate"><span class="pre">arch</span></code><span id="id5">[<a class="reference internal" href="../references.html#id2" title="Tim Bollerslev. Generalized autoregressive conditional heteroskedasticity. Journal of Econometrics, 31(3):307–327, 1986. doi:10.1016/0304-4076(86)90063-1.">Bollerslev, 1986</a>]</span>. Para evitar problemas de escala
+<code class="docutils literal notranslate"><span class="pre">arch</span></code><span class="bibtex-citation" id="id5">[<a class="reference internal" href="../references.html#id2" title="Tim Bollerslev. Generalized autoregressive conditional heteroskedasticity. Journal of Econometrics, 31(3):307–327, 1986. doi:10.1016/0304-4076(86)90063-1.">Bollerslev, 1986</a>]</span>. Para evitar problemas de escala
 en la optimización, los retornos se reescalan internamente por 100, y
 las predicciones se des-escalan al final.</p>
 <p><strong>Limitación importante:</strong> GARCH predice <span class="math notranslate nohighlight">\(\sigma_{t+1}\)</span> instantánea
@@ -676,7 +676,7 @@ en niveles absolutos).</p>
 </div>
 </section>
 <section id="har-rv-corsi-2009-corsi2009simple">
-<h2>4.9 HAR-RV — Corsi 2009 <span id="id6">[<a class="reference internal" href="../references.html#id3" title="Fulvio Corsi. A simple approximate long-memory model of realized volatility. Journal of Financial Econometrics, 7(2):174–196, 2009. doi:10.1093/jjfinec/nbp001.">Corsi, 2009</a>]</span><a class="headerlink" href="#har-rv-corsi-2009-corsi2009simple" title="Link to this heading">#</a></h2>
+<h2>4.9 HAR-RV — Corsi 2009 <span class="bibtex-citation" id="id6">[<a class="reference internal" href="../references.html#id3" title="Fulvio Corsi. A simple approximate long-memory model of realized volatility. Journal of Financial Econometrics, 7(2):174–196, 2009. doi:10.1093/jjfinec/nbp001.">Corsi, 2009</a>]</span><a class="headerlink" href="#har-rv-corsi-2009-corsi2009simple" title="Link to this heading">#</a></h2>
 <p>El modelo Heterogeneous Autoregressive of Realized Volatility captura
 la <em>memoria heterogénea</em> del mercado: distintos tipos de participantes
 operan con distintos horizontes y dejan huellas diferenciables en la
@@ -694,7 +694,7 @@ información hasta <span class="math notranslate nohighlight">\(t-1\)</span>.</p
 <p>La estimación es por OLS, lo que lo hace trivial computacionalmente y
 estable. Pese a su simplicidad, HAR-RV es <strong>el modelo estándar moderno
 para forecasting de volatilidad realizada</strong> y suele batir a GARCH en
-estudios comparativos <span id="id7">[<a class="reference internal" href="../references.html#id3" title="Fulvio Corsi. A simple approximate long-memory model of realized volatility. Journal of Financial Econometrics, 7(2):174–196, 2009. doi:10.1093/jjfinec/nbp001.">Corsi, 2009</a>]</span><span id="id8">[<a class="reference internal" href="../references.html#id5" title="Torben G. Andersen, Tim Bollerslev, Francis X. Diebold, and Paul Labys. Modeling and forecasting realized volatility. Econometrica, 71(2):579–625, 2003. doi:10.1111/1468-0262.00418.">Andersen <em>et al.</em>, 2003</a>]</span>.</p>
+estudios comparativos <span class="bibtex-citation" id="id7">[<a class="reference internal" href="../references.html#id3" title="Fulvio Corsi. A simple approximate long-memory model of realized volatility. Journal of Financial Econometrics, 7(2):174–196, 2009. doi:10.1093/jjfinec/nbp001.">Corsi, 2009</a>]</span><span class="bibtex-citation" id="id8">[<a class="reference internal" href="../references.html#id5" title="Torben G. Andersen, Tim Bollerslev, Francis X. Diebold, and Paul Labys. Modeling and forecasting realized volatility. Econometrica, 71(2):579–625, 2003. doi:10.1111/1468-0262.00418.">Andersen <em>et al.</em>, 2003</a>]</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
@@ -910,7 +910,7 @@ Este hallazgo es consistente con la literatura sobre forecasting de
 volatilidad de corto plazo: la autocorrelación de orden 1 de la
 volatilidad realizada en horizonte diario es típicamente superior a
 0.85, lo que deja muy poca varianza marginal para modelos más
-sofisticados <span id="id9">[<a class="reference internal" href="../references.html#id5" title="Torben G. Andersen, Tim Bollerslev, Francis X. Diebold, and Paul Labys. Modeling and forecasting realized volatility. Econometrica, 71(2):579–625, 2003. doi:10.1111/1468-0262.00418.">Andersen <em>et al.</em>, 2003</a>]</span><span id="id10">[<a class="reference internal" href="../references.html#id3" title="Fulvio Corsi. A simple approximate long-memory model of realized volatility. Journal of Financial Econometrics, 7(2):174–196, 2009. doi:10.1093/jjfinec/nbp001.">Corsi, 2009</a>]</span>. Para
+sofisticados <span class="bibtex-citation" id="id9">[<a class="reference internal" href="../references.html#id5" title="Torben G. Andersen, Tim Bollerslev, Francis X. Diebold, and Paul Labys. Modeling and forecasting realized volatility. Econometrica, 71(2):579–625, 2003. doi:10.1111/1468-0262.00418.">Andersen <em>et al.</em>, 2003</a>]</span><span class="bibtex-citation" id="id10">[<a class="reference internal" href="../references.html#id3" title="Fulvio Corsi. A simple approximate long-memory model of realized volatility. Journal of Financial Econometrics, 7(2):174–196, 2009. doi:10.1093/jjfinec/nbp001.">Corsi, 2009</a>]</span>. Para
 que un modelo más complejo aporte valor, debe capturar señales
 <em>ortogonales</em> a la persistencia.</p>
 <p><strong>HAR-RV es el segundo mejor.</strong> El modelo de Corsi obtiene el segundo
